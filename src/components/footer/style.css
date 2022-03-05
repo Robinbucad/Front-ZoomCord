@@ -1,0 +1,36 @@
+
+.footer-home{
+    background-color: #23272A;
+    color: white;
+    padding: 2rem;
+    
+}
+
+.part1-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.part2-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-footer{
+    color: #5865F2;
+    font-weight: bold;
+}
+
+.my-name{
+    color: #5865F2;
+}
+
+.btn-login-footer{
+    padding: 1rem;
+    width: 100%;
+    border-radius: 30px;
+    border: none;
+    background-color: #7983F5;
+    color: white;
+    font-weight: bold;
+}

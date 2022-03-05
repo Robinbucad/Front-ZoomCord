@@ -1,21 +1,22 @@
-import './style.css'
+import React from "react"
+import HomePart1 from "../../components/home1"
+import Part2Home from "../../components/home2/part2Home"
+import HomePart3 from "../../components/home3/part3Home"
+import HomePart4 from "../../components/home4"
+import HomePart5 from "../../components/home5"
+import HomeFooter from "../../components/footer"
 
 function HomePage() {
     return (
-        <section className="home-part1-container">
-            <div>
-                <div>
-                    <header>
-                        <h2>Aqui el header</h2>
-                    </header>
-                </div>
-                <div >
-                    <div>
-                        <h1>IMAGINA UN LUGAR...</h1>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <React.Fragment>
+            <HomePart1></HomePart1>
+            <Part2Home></Part2Home>
+            <HomePart3></HomePart3>
+            <HomePart4></HomePart4>
+            <HomePart5></HomePart5>
+            <HomeFooter></HomeFooter>
+        </React.Fragment>
+
     )
 }
 
