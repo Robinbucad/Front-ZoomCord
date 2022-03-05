@@ -1,0 +1,93 @@
+.signUp-container{
+    background-image: url('../../assets/img/signup.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+
+.header-login-card{
+    text-align: center;
+}
+
+.title-login{
+    font-size: 1.7rem;
+}
+
+.card-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    color: white;
+  
+}
+
+.signUp-card{
+    gap: 1rem;
+    background-color:#36393F;
+    height: 65%;
+    width: 25%;
+    padding: 1.5rem;
+    border-radius: 5px;
+}
+
+.input-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-div > label{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.font-card-sign{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.input-signup{
+    padding: 0.35rem;
+    border-radius: 4px;
+    border: #15151a 1px solid;
+    background-color: #313339;
+}
+
+
+.form-card{
+   display: flex;
+   flex-direction: column;
+    gap: 1.2rem;
+   height: 100%;
+}
+
+.div-selects{
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-date-signup{
+    padding: 0.35rem;
+    border-radius: 4px;
+    border: #15151a 1px solid;
+    background-color: #313339;
+    color: white;
+}
+
+.div-check-privacy{
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.privacy-login{
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-privacy-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
