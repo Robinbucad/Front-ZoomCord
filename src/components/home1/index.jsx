@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 function HomePart1() {
 
 
-
     return (
         <React.Fragment>
             <section className="home-part1-container">

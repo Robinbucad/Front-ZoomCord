@@ -1,4 +1,5 @@
 import { Button, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import './style.css'
 
 function LoginPage() {
@@ -25,11 +26,11 @@ function LoginPage() {
 
 
                         <div>
-                            <Button style={{ width: '100%' }} variant="primary" size="lg">Continuar</Button>
+                            <Link to='/discord'><Button style={{ width: '100%' }} variant="primary" size="lg">Continuar</Button></Link>
                         </div>
 
                         <footer>
-                            <p className='font-acc-sign'>¿Aun no tienes una cuenta?</p>
+                            <Link to='/signUp'><p className='font-acc-sign'>¿Aun no tienes una cuenta?</p></Link>
                         </footer>
 
 
