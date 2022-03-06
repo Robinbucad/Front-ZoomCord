@@ -27,7 +27,7 @@
 
 .btn-login-footer{
     padding: 1rem;
-    width: 100%;
+    width: 7rem;
     border-radius: 30px;
     border: none;
     background-color: #7983F5;
@@ -35,3 +35,17 @@
     font-weight: bold;
 }
 
+.select-lng{
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.opt-select{
+    color: black;
+}
+
+.img-flag{
+    width: 20px;
+}

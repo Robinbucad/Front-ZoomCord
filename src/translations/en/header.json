@@ -1,0 +1,10 @@
+{
+    "header":{
+        "download": "Download",
+        "security": "Security",
+        "technical support":"Technical support",
+        "blog": "Blog",
+        "employees": "Employees",
+        "login": "Login"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "home":{
+        "titleH1": "IMAGINE IN A PLACE",
+        "textH1":"... where you can be part of a school club, a gaming group or a global art community. Where you can spend time with a few friends. A place that makes it easy to talk every day and have fun more often.",
+        "downloadWin": "Download for Windows",
+        "openOnNav": "Open discord in your browser", 
+
+        "titleH2": "Create a members-only place where you fit in", 
+        "textH2": "Discord servers are organised into channels sorted by topic where you can collaborate, share, or just talk about your day without monopolising a group chat",
+
+        "titleH3": "Where it's easy to hang out.", 
+        "textH3": "Join a voice channel when you're free. Friends on your server will be able to see that you're online and join instantly to talk without having to call in",
+
+        "titleH4": "From a few fans to a lot.", 
+        "textH4": "Set up any community with moderation tools and custom member access. Grant them special powers, create private channels and more.", 
+
+        "titleH5": "A TECHNOLOGY TO KEEP IN TOUCH",
+        "textH5": "Thanks to voice and low latency video, it feels like you're in the same room. Say hello to the camera, access your friends' game streams, or get together and enjoy a screen-sharing drawing session",
+        "text2H5": "All set to begin your journey?", 
+        "downloadWinFooter": "Download for Windows",
+
+        "footerTitle":"IMAGINE IN A PLACE",
+        "signup":"Sign Up",
+        "author":"By Robin Bucad Villanueva, student at NEOLAND"
+    }
+}
+

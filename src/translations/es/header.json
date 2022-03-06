@@ -1,0 +1,10 @@
+{
+    "header":{
+        "download":"Descargar",
+        "security":"Seguridad",
+        "technical support":"Soporte técnico",
+        "blog":"Blog",
+        "employees":"Empleados",
+        "login":"Iniciar Sesión"
+    }
+}

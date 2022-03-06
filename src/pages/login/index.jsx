@@ -1,8 +1,12 @@
 import { Button, Form } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import './style.css'
 
 function LoginPage() {
+
+    const [t] = useTranslation("registerLogin")
+
     return (
         <section className="signUp-container">
 
@@ -18,19 +22,19 @@ function LoginPage() {
 
 
                         <div className='input-div'>
-                            <label htmlFor="email">PASSWORD</label>
+                            <label htmlFor="email">{t("registerLogin.password")}</label>
                             <input type='password' className='input-signup' name="password"></input>
-                            <p>¿Olvidaste la contraseña?</p>
+                            <p>{t("registerLogin.forgot")}</p>
                         </div>
 
 
 
                         <div>
-                            <Link to='/discord'><Button style={{ width: '100%' }} variant="primary" size="lg">Continuar</Button></Link>
+                            <Link to='/discord'><Button style={{ width: '100%' }} variant="primary" size="lg">{t("registerLogin.btn")}</Button></Link>
                         </div>
 
                         <footer>
-                            <Link to='/signUp'><p className='font-acc-sign'>¿Aun no tienes una cuenta?</p></Link>
+                            <Link to='/signUp'><p className='font-acc-sign'>{t("registerLogin.acc")}</p></Link>
                         </footer>
 
 
