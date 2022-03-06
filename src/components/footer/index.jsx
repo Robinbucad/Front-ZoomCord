@@ -9,7 +9,7 @@ import KY from '../../assets/img/KY.svg'
 
 function HomeFooter() {
 
-    const [flag,updateFlag] = useState('')
+    const [flag,updateFlag] = useState(ES)
 
 
     const [t, i18n] = useTranslation("header")
@@ -43,7 +43,6 @@ function HomeFooter() {
                         <select className='select-lng' onChange={handleChange}>
                             <option className='opt-select' value='es'> Español</option>
                             <option className='opt-select' value='en'> English</option>
-                            <option className='opt-select'>Français</option>
                         </select>
                     </div>
 
