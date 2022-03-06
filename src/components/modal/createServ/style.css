@@ -1,0 +1,78 @@
+.div-modal{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+    background-color: white;
+    border-color: #E2E3E4;
+}
+
+.div-modal:hover{
+    background-color: #F4F5F6;
+}
+
+.container-opts-modal{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.opt-modal{
+    font-size: 20px;
+}
+
+.btn-back-modal{
+    background: none;
+    border: none;
+}
+
+.div-upload-photo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    border-style: dashed;
+}
+
+.footer-modal{
+    display: flex;
+    justify-content: space-between;
+    background-color: #F6F6F7;
+}
+
+.upload-container{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-modal-create{
+    width: 23%;
+    padding: 0.5rem;
+}
+
+.input-name-serv{
+    width: 100%;
+    padding: 10px;
+    background-color:#FCFCFC;
+    border: 0.5px solid lightgray;
+    border-radius: 8px;
+}
+
+.text-conditions-serv{
+    font-size: 10px;
+    color: gray;
+}
+
+.name-serv{
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+#contained-modal-title-vcenter{
+    font-weight: bold;
+}

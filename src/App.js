@@ -5,6 +5,7 @@ import LoginPage from './pages/login';
 import { BrowserRouter, Router, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/home';
 import DiscordApp from './components/discordApp';
+import CreateServModal from './components/modal/createServ';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/discord' element={<DiscordApp></DiscordApp>}></Route>
         </Routes>
       </BrowserRouter>
+      
     </div>
   );
 }
