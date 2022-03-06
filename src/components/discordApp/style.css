@@ -10,20 +10,21 @@
 /*LIST SERVERS*/
 
 .icon-serv{
-
-    height: 5%;
+    border: none;
+    height: 4rem;
     border-radius: 100%;
-    width: 100%;
+    width: 4rem;
 }
 
 .img-serv{
     width: 100%;
+  
 }
 
 .icon-serv-add{
-    height: 5%;
+    height: 4rem;
     border-radius: 100%;
-    width: 100%;
+    width: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,6 +38,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -98,6 +100,7 @@
 .card-div{
     height: 2.9rem;
     display: flex;
+    gap: 1rem;
 }
 
 .info-friend{
@@ -132,8 +135,8 @@
 
 .img-user-friend{
     border-radius: 100%;
-    width: 20%;
-    height: 90%;
+    width: 3rem;
+    height: 2.5rem;
     background-color: red;
 }
 
@@ -167,8 +170,8 @@
 .user-footer-img{
     background-color: red;
     border-radius: 100%;
-    height: 80%;
-    width: 100%;
+    height: 3rem;
+    width: 4rem;
 }
 
 .friend-list-search{
@@ -196,8 +199,8 @@
 .card-user-info-list{
     color: white;
     display: flex;
-    width: 30%;
-    height: 10%;
+    width: 20rem;
+    height: 5rem;
     align-items: center;
     gap: 1rem;
 }

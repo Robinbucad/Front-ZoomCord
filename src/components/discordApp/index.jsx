@@ -3,6 +3,7 @@ import './style.css'
 import logo from '../../assets/img/discord-logo-serv.png'
 import CreateServModal from '../modal/createServ'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function DiscordApp() {
 
@@ -12,9 +13,9 @@ function DiscordApp() {
         <section className="div-app-discord">
             <CreateServModal show={modalServShow} onHide={() => setServModalShow(false)} ></CreateServModal>
             <div className='icons-div'>
-                <div className='icon-serv'>
+               <Link to='/discord'> <button className='icon-serv'>
                     <img className='img-serv' src={logo}></img>
-                </div>
+                </button></Link>
 
                 <div className='icon-serv'>
                     <img className='img-serv' src={logo}></img>
@@ -142,7 +143,7 @@ function DiscordApp() {
                             <div className='card-list-connected'>
                                 <div className='card-user-info-list'>
                                     <div className='img-user-div-list'>
-                                        <p>Hola</p>
+                                       
                                     </div>
                                     <div>
                                         <p className='friend'>Alno</p>
@@ -161,7 +162,7 @@ function DiscordApp() {
                             <div className='card-list-connected'>
                                 <div className='card-user-info-list'>
                                     <div className='img-user-div-list'>
-                                        <p>Hola</p>
+                                      
                                     </div>
                                     <div>
                                         <p className='friend'>Alno</p>
