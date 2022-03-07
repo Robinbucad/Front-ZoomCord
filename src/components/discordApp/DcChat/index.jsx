@@ -1,10 +1,21 @@
 
+import { useParams } from 'react-router-dom'
 import './style.css'
+import DivFriend from '../DCmdList'
+import DivServs from '../DCdivServ'
+
+function Chat() {
+
+    let { id } = useParams()
+    console.log(id)
 
 
-function ServerChat() {
     return (
-        <section className='chat-container'>
+
+        <section className="div-app-discord">
+            <DivServs></DivServs>
+            <DivFriend></DivFriend>
+             <section className='chat-container'>
             <header className="header-chat">
                     <p>Name Chat</p>
                 <div className='group-header-chat'>
@@ -25,7 +36,9 @@ function ServerChat() {
                     </footer>
             </section>
         </section>
+        </section>
+       
     )
 }
 
-export default ServerChat
+export default Chat

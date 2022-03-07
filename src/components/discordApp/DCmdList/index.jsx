@@ -1,12 +1,20 @@
 
-import React from "react"
+import React, { useEffect } from "react"
 import UserSettings from "../../modal/settings"
 import { useState } from "react";
+import UserSettingsFooter from "../footerUserSettings";
+import FriendList from "../DCfriendList";
+import { Link } from "react-router-dom";
+import { useFriends } from "../../hook-friendList";
+
 
 function DivFriend() {
 
     const [fullscreen] = useState(true);
     const [show, setShow] = useState(false);
+    const friends = useFriends()
+
+    console.log(friends)
 
     function handleShow () {
         if(show === false){
@@ -16,6 +24,9 @@ function DivFriend() {
             setShow(false)
         }
     }
+
+  
+
 
     return (
 
@@ -41,77 +52,28 @@ function DivFriend() {
                         <button>+</button>
                     </header>
 
-
-
-
-
-                    <div className='info-friend'>
-                        <div className='card-div'>
+                    <div  className='info-friend'>
+                
+                        {friends.map((f) =><Link to={`/@me/${f.id}`}> <div  className='card-div'>
                             <div className='img-user-friend'>
 
                             </div>
 
-                            <div className='info-friend'>
-                                <p className='friend'>Tyles.</p>
+                            <div className='info-friend-user'>
+                                <p className='friend'>{f.username}</p>
                                 <p>Jugando a fortnite</p>
                             </div>
 
-                        </div>
+                        </div></Link>)}
 
-                        <div className='card-div'>
-                            <div className='img-user-friend'>
+                      
 
-                            </div>
-
-                            <div className='info-friend'>
-                                <p className='friend'>Tyles.</p>
-                                <p>Jugando a fortnite</p>
-                            </div>
-
-                        </div>
-
-                        <div className='card-div'>
-                            <div className='img-user-friend'>
-
-                            </div>
-
-                            <div className='info-friend'>
-                                <p className='friend'>Tyles.</p>
-                                <p>Jugando a fortnite</p>
-                            </div>
-
-                        </div>
-
-                        <div className='card-div'>
-                            <div className='img-user-friend'>
-
-                            </div>
-
-                            <div className='info-friend'>
-                                <p className='friend'>Tyles.</p>
-                                <p>Jugando a fortnite</p>
-                            </div>
-
-                        </div>
                     </div>
 
-                    <footer className='footer-user'>
-                        <div className='user-footer-img'>
-                            <p>HOLA</p>
-                        </div>
-                        <div className='user-info-footer'>
-                            <p className='user-name'>BeZzK</p>
-                            <p>#3616</p>
-                        </div>
-                        <div className='user-info-opts'>
-                            <p>M</p>
-                            <p>E</p>
-                            <button onClick={handleShow}>Set</button>
-                        </div>
-                    </footer>
+                    <UserSettingsFooter handleShow={handleShow}></UserSettingsFooter>
+                  
 
-
-                </div>
+                </div>                
 
             </div>
         </React.Fragment>
