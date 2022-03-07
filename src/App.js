@@ -21,7 +21,7 @@ function App() {
             <Route path='/discord' element={<DcHome/>}></Route>
             <Route path='/server' element={<DiscServer></DiscServer>}></Route>   
             <Route path='/@me/:id' element={<Chat></Chat>}></Route>  
-            <Route path='/prueba'></Route>   
+             
         </Routes>
         
       </BrowserRouter>
