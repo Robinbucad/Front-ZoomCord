@@ -1,14 +1,14 @@
 
-import { useParams } from 'react-router-dom'
 import './style.css'
 import DivFriend from '../DCmdList'
 import DivServs from '../DCdivServ'
+import { Link } from 'react-router-dom'
+import { useUsername } from '../../../hooks/hook-name-user'
+import { useState } from 'react'
 
 function Chat() {
 
-    let { id } = useParams()
-    console.log(id)
-
+    const username = useUsername()
 
     return (
 
@@ -17,7 +17,7 @@ function Chat() {
             <DivFriend></DivFriend>
              <section className='chat-container'>
             <header className="header-chat">
-                    <p>Name Chat</p>
+                    <p>{username}</p>
                 <div className='group-header-chat'>
                     <p>Noti</p>
                     <p>Members</p>
@@ -30,6 +30,7 @@ function Chat() {
                     <div>
                         <p>Chat</p>
                     </div>
+                       
 
                     <footer className='div-input-chat'>
                         <input placeholder='Enviar mensaje a #general' className='input-chat' type="text" />

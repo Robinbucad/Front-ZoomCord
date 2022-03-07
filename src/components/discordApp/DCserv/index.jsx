@@ -7,6 +7,8 @@ import UserSettings from "../../modal/settings"
 import { useState } from "react"
 import ChatServ from "../DcChatServ"
 import CreateServChannel from "../../modal/createServChannel"
+import { GearFill } from 'react-bootstrap-icons'
+
 
 function DiscServer() {
 
@@ -80,48 +82,50 @@ function DiscServer() {
              <UserSettings show={show} fullscreen={fullscreen} setShow={() => handleShow(false)}></UserSettings>
             <DivServs></DivServs>
             <section className="management-channels">
-                <section >
+                <section className="container-channels-serv" >
 
                     <div className="header-title-serv">
-                        <p>Name of server</p>
+                        <p className="title-server">Name of server</p>
                     </div>
 
-                    <div>
+                   
                         <div className="text-channels-container">
                             <header className="header-text-channel">
-                                <p>TEXT CHANNELS</p>
-                                <button onClick={() => setModalShow(true)}>+</button>
+                                <p className='opt-title-serv'>TEXT CHANNELS</p>
+                                <button className="btn-add-chann" onClick={() => setModalShow(true)}>+</button>
                             </header>
-                           {listChannel.map((e) => (
+                            
+                        
+                            {listChannel.map((e) => (
                                 <div className="card-text">
-                                <p>{e.name}</p>
+                                <p>#{e.name}</p>
                                 <div className="opt-text-card">
-                                    <p>O1</p>
-                                    <p>02</p>
+                                <button className="gear-serv"><GearFill></GearFill></button>
                                 </div>
                             </div>
                            )) }
+                      
+                          
  
                     
 
                         </div>
                         <div className="voice-channels-container">
                             <header className="voice-channels">
-                                <p>VOICE CHANNELS</p>
-                                <button onClick={() => setModalShow(true)}>+</button>
+                                <p className='opt-title-serv'>VOICE CHANNELS</p>
+                                <button className="btn-add-chann" onClick={() => setModalShow(true)}>+</button>
                             </header>
                             
                             {listVoiceChannel.map((e) => (
                                 <div className="card-text">
                                 <p>{e.name}</p>
                                 <div className="opt-text-card">
-                                    <p>O1</p>
-                                    <p>02</p>
+                                    <button className="gear-serv"><GearFill></GearFill></button>
                                 </div>
                             </div>
                            )) }
                         </div>
-                    </div>
+                    
                 </section>
                 <CreateServChannel handlevalue={handlevalue} handleNameChannel={handleNameChannel} createChannel={createChannel} show={modalShow} onHide={updateModalShow}></CreateServChannel>
                 <UserSettingsFooter handleShow={handleShow}></UserSettingsFooter>

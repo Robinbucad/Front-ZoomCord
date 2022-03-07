@@ -1,4 +1,4 @@
-import logo from '../../../assets/img/discord-logo-serv.png'
+import logo from '../../../assets/img/discord-logo-serv.jpg'
 import { Link } from 'react-router-dom'
 import CreateServModal from '../../modal/createServ'
 import { useState } from 'react'
@@ -7,6 +7,10 @@ import { useState } from 'react'
 function DivServs() {
 
     const [modalServShow, setServModalShow] = useState(false)
+
+    const updateServName = e => {
+        console.log(e)
+    }
 
     return (
         <div className='icons-div'>

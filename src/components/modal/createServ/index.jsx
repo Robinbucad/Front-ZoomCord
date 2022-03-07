@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
 import './style.css'
@@ -10,7 +10,13 @@ function CreateServModal(props) {
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
 
     const [servName, updateServName] = useState('')
-    console.log(servName)
+    
+
+
+    const onSubmit = e => {
+        e.preventDefault()
+       console.log('hola')
+    }
 
     return (
         <React.Fragment>
@@ -118,13 +124,14 @@ function CreateServModal(props) {
                 </Modal.Body>
                 <Modal.Footer className="footer-modal">
                     <button className="btn-back-modal" onClick={() => updateChangeModalClub(false)}>Atras</button>
-                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
+                    <Button className="btn-modal-create"  disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
                 </Modal.Footer>
 
 
             </Modal>}
 
-            {changeModalFriend === false ? '' : <Modal
+            {changeModalFriend === false ? '' :
+                <Modal
                 {...props}
                 size="m"
                 aria-labelledby="contained-modal-title-vcenter"
@@ -149,20 +156,21 @@ function CreateServModal(props) {
                     </div>
 
 
-                    <div>
+                    <div >
                         <p className="name-serv">NOMBRE DEL SERVIDOR</p>
-                        <input className="input-name-serv" onChange={(e) => updateServName(e.target.value)}  type='text' placeholder='El servidor de user'></input>
+                        <input className="input-name-serv" name='nameServ'  type='text' placeholder='El servidor de user'></input>
                         <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
                     </div>
 
                 </Modal.Body>
                 <Modal.Footer className="footer-modal">
                     <button className="btn-back-modal" onClick={() => updateChangeModalFriend(false)}>Atras</button>
-                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
+                    <Button  type='submit' className="btn-modal-create"  disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
                 </Modal.Footer>
 
 
             </Modal>}
+          
         </React.Fragment>
     )
 }

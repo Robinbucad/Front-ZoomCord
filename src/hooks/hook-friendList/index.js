@@ -11,6 +11,6 @@ export function useFriends(){
     },[])
 
 
-    return (friends)
+    return friends
 
 }

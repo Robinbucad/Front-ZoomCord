@@ -3,9 +3,9 @@ import React, { useEffect } from "react"
 import UserSettings from "../../modal/settings"
 import { useState } from "react";
 import UserSettingsFooter from "../footerUserSettings";
-import FriendList from "../DCfriendList";
+
 import { Link } from "react-router-dom";
-import { useFriends } from "../../hook-friendList";
+import { useFriends } from '../../../hooks/hook-friendList/index'
 
 
 function DivFriend() {
@@ -14,18 +14,17 @@ function DivFriend() {
     const [show, setShow] = useState(false);
     const friends = useFriends()
 
-    console.log(friends)
 
-    function handleShow () {
-        if(show === false){
-            
+    function handleShow() {
+        if (show === false) {
+
             setShow(true)
-        }else{
+        } else {
             setShow(false)
         }
     }
 
-  
+
 
 
     return (
@@ -47,14 +46,15 @@ function DivFriend() {
                 </div>
 
                 <div className='friends-info-list'>
-                    <header className='header-list-friends'>
-                        <p>MENSAJES DIRECTOS</p>
-                        <button>+</button>
+                    <header className="header-text-channel">
+                        <p className='opt-title-serv'>MENSAJES DIRECTOS</p>
+                        <button className="btn-add-chann">+</button>
                     </header>
+                    
 
-                    <div  className='info-friend'>
-                
-                        {friends.map((f) =><Link to={`/@me/${f.id}`}> <div  className='card-div'>
+                    <div className='info-friend'>
+
+                    {friends.map((f,i) => <Link  key={i} style={{textDecoration:'none'}} to={`/@me/${f.id}`}> <div className='card-div'>
                             <div className='img-user-friend'>
 
                             </div>
@@ -66,14 +66,14 @@ function DivFriend() {
 
                         </div></Link>)}
 
-                      
+
 
                     </div>
 
                     <UserSettingsFooter handleShow={handleShow}></UserSettingsFooter>
-                  
 
-                </div>                
+
+                </div>
 
             </div>
         </React.Fragment>

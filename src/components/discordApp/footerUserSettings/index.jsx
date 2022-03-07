@@ -1,4 +1,6 @@
 
+import { GearFill, Headset, Mic } from 'react-bootstrap-icons/'
+
 
 function UserSettingsFooter(props){
     return(
@@ -11,9 +13,10 @@ function UserSettingsFooter(props){
             <p>#3616</p>
         </div>
         <div className='user-info-opts'>
-            <p>M</p>
-            <p>E</p>
-            <button onClick={props.handleShow}>Set</button>
+            <button className='btn-sett-footer' ><Mic></Mic></button>   
+            <button className='btn-sett-footer' ><Headset></Headset></button>
+            <button className='btn-sett-footer' onClick={props.handleShow}><GearFill ></GearFill></button>
+            
         </div>
     </footer>
 
