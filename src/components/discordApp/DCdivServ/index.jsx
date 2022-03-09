@@ -25,8 +25,7 @@ function DivServs() {
 
             <button onClick={() => setServModalShow(true)} className='icon-serv-add'>
                 <h1>+</h1>
-            </button>
-
+            </button>develop
         </div>
     )
 }
