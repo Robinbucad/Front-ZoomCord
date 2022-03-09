@@ -1,4 +1,4 @@
-
+import './style.css'
 import React, { useEffect } from "react"
 import UserSettings from "../../modal/settings"
 import { useState } from "react";

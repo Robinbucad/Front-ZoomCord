@@ -1,8 +1,8 @@
-
+import './style.css'
 
 function FriendList() {
     return (
-        <div >
+        <div className="container-friendList">
             <header>
                 <ul className='header-app-list'>
                     <li>Amigos</li>

@@ -1,24 +1,36 @@
+import { Col, Row } from 'react-bootstrap'
 
-import './style.css'
 
 
 
 import DivServs from '../DCdivServ'
 import DivFriend from '../DCmdList'
 import FriendList from '../DCfriendList'
+import { Container } from 'react-bootstrap'
 
 function DiscordApp() {
 
-   
+
 
     return (
-        <section className="div-app-discord">
-            
-            <DivServs></DivServs>
-            <DivFriend></DivFriend>
-            <FriendList></FriendList>
+        <Container fluid style={{minHeight:'100vh'}}>
+            <Row>
+                <Col lg={1} style={{minHeight:'100vh'}}>
+                    <DivServs></DivServs>
+                </Col>
+                <Col lg={2} style={{minHeight:'100vh'}}>
+                    <DivFriend></DivFriend>
+                </Col>
+                <Col lg={9} style={{minHeight:'100vh'}}>
+                    <FriendList></FriendList>
+                </Col>
 
-        </section>
+
+
+            </Row>
+
+
+        </Container>
     )
 }
 
