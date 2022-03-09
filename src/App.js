@@ -18,7 +18,7 @@ function App() {
             <Route path='/' element={<HomePage></HomePage>}></Route>
             <Route path='/signUp' element={<SignUp></SignUp>}></Route>
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
-            <Route path='/discord' element={<DcHome/>}></Route>
+            <Route path='/discord/' element={<DcHome/>}></Route>
             <Route path='/server' element={<DiscServer></DiscServer>}></Route>   
             <Route path='/@me/:id' element={<Chat></Chat>}></Route>  
              

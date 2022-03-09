@@ -1,10 +1,12 @@
 import './style.css'
 import { Button, Form } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 function SignUp() {
+
+    
 
     const [t] = useTranslation("registerLogin")
     console.log(t("registerLogin.username"))
@@ -27,7 +29,28 @@ function SignUp() {
 
     const onSubmit = e => {
         e.preventDefault()
-            fetch('http://localhost:4000/users', {
+        const userFormData = new FormData(e.target);
+        fetch('http://localhost:4000/users', {
+                method: 'POST',
+                body:JSON.stringify(Object.fromEntries(userFormData)), // From entries es todos los value de los inputs
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            .then(r => {
+                if(r.status === 409){
+                    alert('Usuario existente')
+                }else{
+                    
+                    navigate(`/discord/`)
+                }
+            })
+            
+        
+    }   
+
+    /**
+ *  fetch('http://localhost:4000/users', {
                 method: 'POST',
                 body: JSON.stringify({
                     email: e.target.email.value,
@@ -40,8 +63,8 @@ function SignUp() {
                 },
             })
             .then(r => r.json())
-            .then(d => navigate('/'))   
-    }
+            .then(d => console.log(d))   
+ */
 
     
 
@@ -104,3 +127,4 @@ function SignUp() {
 }
 
 export default SignUp
+
