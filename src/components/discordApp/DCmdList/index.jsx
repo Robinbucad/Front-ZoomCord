@@ -1,11 +1,11 @@
-import './style.css'
+
 import React, { useEffect } from "react"
 import UserSettings from "../../modal/settings"
 import { useState } from "react";
 import UserSettingsFooter from "../footerUserSettings";
-
 import { Link } from "react-router-dom";
 import { useFriends } from '../../../hooks/hook-friendList/index'
+import classes from './friendMd.module.scss'
 
 
 function DivFriend() {
@@ -31,30 +31,32 @@ function DivFriend() {
 
         <React.Fragment>
             <UserSettings show={show} fullscreen={fullscreen} setShow={() => handleShow(false)}></UserSettings>
-            <div className='div-friends'>
-                <div className='div-input-search-app'>
-                    <input className='input-search-listfriends' type='text' placeholder='Busca una conversación'></input>
-                </div>
-                <div className='friend-nitro'>
-                    <div className='card-div'>
-                        <p>Amigos</p>
-                    </div>
-
-                    <div className='card-div'>
-                        <p>Nitro</p>
-                    </div>
+            <div className={classes.containerMd} >
+                <div className={classes.inputDivMd}>
+                    <input className={classes.inputSearch} type='text' placeholder='Busca una conversación'></input>
                 </div>
 
-                <div className='friends-info-list'>
-                    <header className="header-text-channel">
-                        <p className='opt-title-serv'>MENSAJES DIRECTOS</p>
-                        <button className="btn-add-chann">+</button>
+                <section className={classes.mdList}>
+                    <div>
+                        <div >
+                            <p>Amigos</p>
+                        </div>
+
+                        <div >
+                            <p>Nitro</p>
+                        </div>
+                    </div>
+
+
+                    <header className={classes.headerMdList}>
+                        <p >MENSAJES DIRECTOS</p>
+                        <button className={classes.btnMd} >+</button>
                     </header>
-                    
 
-                    <div className='info-friend'>
 
-                    {friends.map((f,i) => <Link  key={i} style={{textDecoration:'none'}} to={`/@me/${f.id}`}> <div className='card-div'>
+                    <div >
+
+                        {friends.map((f, i) => <Link key={i} style={{ textDecoration: 'none' }} to={`/@me/${f.id}`}> <div className='card-div'>
                             <div className='img-user-friend'>
 
                             </div>
@@ -69,7 +71,9 @@ function DivFriend() {
 
 
                     </div>
+                </section>
 
+                <div className={classes.userSetts} >
                     <UserSettingsFooter handleShow={handleShow}></UserSettingsFooter>
 
 

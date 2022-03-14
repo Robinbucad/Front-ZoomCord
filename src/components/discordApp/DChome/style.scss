@@ -1,0 +1,30 @@
+@import '../../../sass/global.scss';
+
+
+
+.chat-container{
+    display: flex;
+    background-color:$PrimaryClaro;
+    width: 100%;
+}
+
+
+.div-serv{
+    background-color:$SecondaryOscuro;
+    width: $widthDivbServ;
+    height: $heightDiv;
+}
+
+.md-container{
+    background-color:$MDColor;
+    width: $widthDivMD;
+    height: $heightDiv;
+}
+
+.friend-container{
+    background-color: $PrimaryClaro;
+    width: $widthDivFri;
+    height: $heightDiv;
+}
+
+

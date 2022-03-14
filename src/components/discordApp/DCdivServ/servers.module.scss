@@ -1,0 +1,16 @@
+@import '../../../sass/global.scss';
+
+.imgServ{
+    @include servLog(55px, 50%,$HoverListFrMd,green)
+}
+
+.imgServ:hover{
+    transition: 0.4s;
+    border-radius: 35%;
+}
+
+.containerServ{
+    @include flexBox(flex,center, '','','','');
+    flex-direction: column;
+    padding: 10px;
+}

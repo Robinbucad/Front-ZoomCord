@@ -1,5 +1,5 @@
 import { Col, Row } from 'react-bootstrap'
-
+import './style.scss'
 
 
 
@@ -13,24 +13,26 @@ function DiscordApp() {
 
 
     return (
-        <Container fluid style={{minHeight:'100vh'}}>
-            <Row>
-                <Col lg={1} style={{minHeight:'100vh'}}>
-                    <DivServs></DivServs>
-                </Col>
-                <Col lg={2} style={{minHeight:'100vh'}}>
-                    <DivFriend></DivFriend>
-                </Col>
-                <Col lg={9} style={{minHeight:'100vh'}}>
-                    <FriendList></FriendList>
-                </Col>
+        <section className='chat-container' >
+
+            <div className='div-serv'>
+                <DivServs></DivServs>
+            </div>
+
+
+            <div  className='md-container'>
+                <DivFriend></DivFriend>
+            </div>
+            <div className='friend-container' >
+                <FriendList></FriendList>
+            </div>
 
 
 
-            </Row>
 
 
-        </Container>
+
+        </section>
     )
 }
 

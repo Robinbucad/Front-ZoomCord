@@ -1,51 +1,58 @@
-
-.footer-home{
-    background-color: #23272A;
-    color: white;
-    padding: 2rem;
-    
+.footer-home {
+  background-color: #23272A;
+  color: white;
+  padding: 2rem;
 }
 
-.part1-footer{
-    display: flex;
-    justify-content: space-between;
+.part1-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.part2-footer{
-    display: flex;
-    justify-content: space-between;
+.part2-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.title-footer{
-    color: #5865F2;
-    font-weight: bold;
+.title-footer {
+  color: #5865F2;
+  font-weight: bold;
 }
 
-.my-name{
-    color: #5865F2;
+.my-name {
+  color: #5865F2;
 }
 
-.btn-login-footer{
-    padding: 1rem;
-    width: 7rem;
-    border-radius: 30px;
-    border: none;
-    background-color: #7983F5;
-    color: white;
-    font-weight: bold;
+.btn-login-footer {
+  padding: 1rem;
+  width: 7rem;
+  border-radius: 30px;
+  border: none;
+  background-color: #7983F5;
+  color: white;
+  font-weight: bold;
 }
 
-.select-lng{
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+.select-lng {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
-.opt-select{
-    color: black;
+.opt-select {
+  color: black;
 }
 
-.img-flag{
-    width: 20px;
+.img-flag {
+  width: 20px;
 }
+/*# sourceMappingURL=style.css.map */

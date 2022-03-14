@@ -1,8 +1,8 @@
-
+import './style.css'
 
 function ChatServ(){
     return(
-        <section className='chat-container'>
+        <section>
         <header className="header-chat">
                 <p>Name Chat</p>
             <div className='group-header-chat'>
