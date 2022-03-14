@@ -1,24 +1,28 @@
 
 import { GearFill, Headset, Mic } from 'react-bootstrap-icons/'
+import classes from './footerSetts.module.scss'
 
+function UserSettingsFooter(props) {
+    return (
 
-function UserSettingsFooter(props){
-    return(
-        <footer className='footer-user'>
-        <div className='user-footer-img'>
-            <p>HOLA</p>
-        </div>
-        <div className='user-info-footer'>
-            <p className='user-name'>BeZzK</p>
-            <p>#3616</p>
-        </div>
-        <div className='user-info-opts'>
-            <button className='btn-sett-footer' ><Mic></Mic></button>   
-            <button className='btn-sett-footer' ><Headset></Headset></button>
-            <button className='btn-sett-footer' onClick={props.handleShow}><GearFill ></GearFill></button>
-            
-        </div>
-    </footer>
+        <footer className={classes.userSetts}>
+            <div className={classes.userInfoSetts}>
+                <div >
+                    <p>IMG</p>
+                </div>
+                <div className={classes.userNameSetts} >
+                    <p>BeZzK</p>
+                    <p>#3616</p>
+                </div>
+            </div>
+
+            <div className={classes.btnsSettsDiv}>
+                <button className={classes.btnOptsUser} ><Mic></Mic></button>
+                <button className={classes.btnOptsUser} ><Headset></Headset></button>
+                <button className={classes.btnOptsUser} onClick={props.handleShow}><GearFill ></GearFill></button>
+
+            </div>
+        </footer>
 
     )
 }

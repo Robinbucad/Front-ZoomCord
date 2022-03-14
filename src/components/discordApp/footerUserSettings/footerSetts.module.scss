@@ -1,0 +1,39 @@
+@import '../../../sass/global.scss';
+
+
+.userSetts{
+    background-color:$userSetts;
+
+    @include flexBox(flex, center, space-between,65px,'','')
+}
+
+.userInfoSetts{
+    @include flexBox(flex, center, space-between,'','',12px)
+}
+
+.userNameSetts{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.userNameSetts > p{
+    margin: 0;
+}
+
+.btnOptsUser{
+    @include btn(40px,40px,none, none);
+    color: white;
+}
+
+.btnOptsUser:hover{
+    background-color: $PrimaryClaro;
+    border-radius: 5px;
+}
+
+.btnsSettsDiv{
+    width: 45%;
+    @include flexBox(flex, center, space-between,'','','');
+    font-size:20px;
+    padding-right: 10px;
+
+}

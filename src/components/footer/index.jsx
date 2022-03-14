@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-import './style.css'
+import './style.scss'
 import { useTranslation } from 'react-i18next'
 import ES from '../../assets/img/ES.svg'
 import { useState } from 'react'

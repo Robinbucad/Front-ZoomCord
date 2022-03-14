@@ -1,9 +1,10 @@
-import logo from '../../../assets/img/discord-logo-serv.jpg'
+
 import { Link } from 'react-router-dom'
 import CreateServModal from '../../modal/createServ'
 import { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-
+import classes from './servers.module.scss'
+import logo from '../../../assets/img/discord/serv/servDisc.png'
 
 function DivServs() {
 
@@ -14,23 +15,20 @@ function DivServs() {
     }
 
     return (
-        <Container>
-            <Row>
-
-                <Col lg={6}>
+     
+                 <div className={classes.containerServ}>
                     <p>
-                        aqui duv
+                        <img className={classes.imgServ} src={logo}></img>
                     </p>
 
                     <CreateServModal show={modalServShow} onHide={() => setServModalShow(false)} ></CreateServModal>
                    
 
-                    <button onClick={() => setServModalShow(true)} className='icon-serv-add'>
+                    <button onClick={() => setServModalShow(true)} className={classes.imgServ}>
                         <h1>+</h1>
                     </button>
-                </Col>
-            </Row>
-        </Container>
+                </div>
+  
     )
 }
 

@@ -1,0 +1,67 @@
+
+@mixin header($media:480px){
+    @media screen and (max-width:$media) {
+        @content
+    }
+}
+
+
+
+$PrimaryClaro: #36393F;
+$HoverListFrMd:#3A3E44;
+$MDColor:#2F3136;
+$heightDiv:100vh;
+$userSetts:#292B2F;
+
+
+$SecondaryOscuro: #202225;
+
+
+
+$borderRadDivServ:50%;
+
+$widthDivbServ: 5%;
+$widthDivMD:13%;
+$widthDivFri:81%;
+
+
+
+@mixin  flexBox($flex, $align, $pos, $height, $color, $gap) {
+    display: $flex;
+    align-items: $align;
+    justify-content:$pos ;
+    height: $height;
+    color:$color ;
+    gap:$gap;
+}
+
+@mixin inputs($backgground,$color, $radius, $width, $padd,$margin){
+    background-color: $backgground;
+    color: $color;
+    border-radius: $radius;
+    width: $width;
+    border: none;
+    padding: $padd;
+    margin-bottom: $margin;
+}
+
+@mixin listFriend($margin, $colorHover){
+    margin: $margin;
+    color:$colorHover;
+}
+
+@mixin servLog($width, $radius, $color, $colorIn){
+    width: $width;
+    border-radius: $radius;
+    background-color: $color;
+    color:$colorIn;
+    border: none;
+}
+
+@mixin btn($width, $heigth, $background, $border){
+    width: $width;
+    height: $heigth;
+    background: $background;
+    border: $border;
+}
+
