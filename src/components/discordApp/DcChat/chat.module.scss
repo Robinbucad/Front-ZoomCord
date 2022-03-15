@@ -1,0 +1,64 @@
+@import '../../../sass/global.scss';
+
+.chatFriend{
+    display: flex;
+    background-color: green;
+}
+
+.chatContainer{
+    background-color:$PrimaryClaro;
+    width:100%
+}
+
+.inputChatSearch{
+    @include inputs($SecondaryOscuro, gray , 5px, 40%,2px,'');
+}
+
+.headerChat{
+    @include flexBox(flex, center , space-between,73px, white,'');
+    border-bottom: 1px solid gray;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color:$PrimaryClaro
+}
+
+.groupHeaderChat{
+    @include flexBox(flex,center,space-between,'','','');
+    width:40%
+}
+
+.chat{
+    height: 85%;
+    @include flexBox(flex,'',space-between,'','','');
+    flex-direction: column;
+    padding:1rem;
+}
+
+.inputChat{
+    background-color: $HoverListFrMd;
+    @include inputs(#40444B,gray, 5px, 100%,10px,'')
+}
+
+.divInputChat{
+    padding-top: 1rem;
+    @include flexBox(flex,center,center,'','','');
+}
+
+.conversation{
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    color: white;
+    gap: 1rem;
+}
+
+.msg{
+    @include flexBox(flex,center,'','','','');
+    gap: 1rem;
+    padding: 5px;
+}
+
+.msg:hover{
+    background-color: $hoverMsg;
+    border-radius: 10px;
+}

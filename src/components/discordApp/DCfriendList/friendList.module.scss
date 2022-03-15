@@ -18,7 +18,6 @@
 .header {
     @include flexBox(flex, center , space-between,73px, white,'');
     border-bottom: 1px solid gray;
-    padding-top: 15px
 }
 
 .headerList{
