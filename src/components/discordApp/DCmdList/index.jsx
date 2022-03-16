@@ -14,6 +14,11 @@ function DivFriend() {
     const [show, setShow] = useState(false);
     const friends = useFriends()
 
+    
+
+    console.log(friends)
+   
+
 
     function handleShow() {
         if (show === false) {
@@ -55,7 +60,7 @@ function DivFriend() {
                     <div >
 
                         {friends.map((f, i) => f.map((e,i) => (
-                            <Link key={i} style={{ textDecoration: 'none' }}  to={`/@me/${e._id}`}> <div key={i} className='card-div'>
+                            <Link key={i} style={{ textDecoration: 'none' }}   to={`/@me/${e._id}`}> <div key={i} className='card-div'>
                             <div className='img-user-friend'>
 
                             </div>

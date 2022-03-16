@@ -5,42 +5,29 @@ import { Link } from 'react-router-dom'
 import { useUsername } from '../../../hooks/hook-name-user'
 import { useState } from 'react'
 import classes from './chat.module.scss'
-import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-const socket = io.connect("http://localhost:3001")
+import { useParams } from 'react-router-dom'
+
 
 
 function Chat() {
+    const ENDPOINT = "http://localhost:3001";
 
     let {id} = useParams()
-
     const {idUser, userName} = useUsername()
 
     const [currentMsg, setCurrentMsg] = useState('')
     const [chat,setChat] = useState([])
 
-    const sendMsg = async (e) => {
-        if(e.key === 'Enter'){
-            const messageData = {
-                room:id,
-                author:userName,
-                message:currentMsg,
-                time:new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
-            };
-            await socket.emit("send_message", messageData)
-            setCurrentMsg('')
-        }        
-    }    
+        console.log(id)
 
     useEffect(() => {
-        socket.on("receive_message",data => {
-            setChat(list => [...list,data])
-            
-        })
-    },[socket])
+        const getConversations = async() => {
+            const res = await fetch('')
+        }
+    })
 
-
-    console.log(chat)
+    
 
    
     return (
@@ -62,8 +49,8 @@ function Chat() {
                 <section className={classes.chat}>
                     <div className={classes.conversation}>
                          
-                          {chat.map(e => (
-                               <div className={classes.msg}>
+                          {chat.map((e,i) => (
+                               <div key={i} className={classes.msg}>
                                <p>IMG</p>
                                <div>
                                    <p>{e.author}</p>
@@ -78,7 +65,7 @@ function Chat() {
                   
 
                     <footer className={classes.divInputChat}>
-                        <input placeholder='Enviar mensaje a #general' onKeyPress={sendMsg} onChange={e => setCurrentMsg(e.target.value)} className={classes.inputChat} type="text" />
+                        <input placeholder='Enviar mensaje a #general'  onChange={e => setCurrentMsg(e.target.value)} className={classes.inputChat} type="text" />
                     </footer>
                 </section>
             </section>

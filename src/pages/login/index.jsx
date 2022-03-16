@@ -14,7 +14,7 @@ function LoginPage() {
     const [user, updateUser] = useState()
     const [password, updatePassword] = useState()
     const {idUser} = useUsername()
-    
+
 
     const handleUsername = e => {
         updateUser(e.target.value)
@@ -44,6 +44,9 @@ function LoginPage() {
             console.log('mal')
         }
     }
+
+
+    
 
     return (
         <section className="signUp-container">
