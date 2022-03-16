@@ -4,13 +4,14 @@ import Message from "../message";
 import Conversation from "../conversation";
 import './style.css'
 
+
 function Messenger() {
     const token = sessionStorage.getItem('token')
     const [conversations, setConversations] = useState([])
     const { user } = useUsername()
     const [currentChat, setCurrentChat] = useState('')
     const [messages, setMessages] = useState([])
-
+    const [newMessage,setNewMessage] = useState('')
 
     useEffect(() => {
         const getConversations = async () => {
@@ -30,11 +31,10 @@ function Messenger() {
     }, [user])
 
 
-
     useEffect(() => {
         const getMessages = async () => {
             try{
-                const res = await fetch(`http://localhost:3001/message/62323d18a7fc5967ec9ce831`,{
+                const res = await fetch(`http://localhost:3001/message/${currentChat._id}`,{
                     method:'get',
                     headers:{
                         Authorization: `Bearer ${token}`
@@ -49,13 +49,41 @@ function Messenger() {
         };
         getMessages()
     },[currentChat])
+
+    console.log(user._id)
     
+    const handleSubmit =async (e) => {
+        e.preventDefault()
+        const message = {
+            senderId:user._id,
+            text:newMessage,
+            conversationId: currentChat._id
+        };
+        
+        try{
+            const res = await fetch('http://localhost:3001/message/',{
+                method:'post',
+                body: JSON.stringify(message),
+                headers:{
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                    
+                },
+            })
+            const dat = await res.json()
+            console.log(dat)
+            setMessages(m => [...m,message])
+        }catch(err){
+            console.log(err)
+        }
+    }
+
 
     return (
         <div className="container-msg">
             <div className="conversation">
                 {conversations.map((e, i) => (
-                    <div onClick={() => setCurrentChat(e)}>
+                    <div key={i} onClick={() => setCurrentChat(e)}>
                         <Conversation key={i} conversation={e} currentUser={user}></Conversation>
                     </div>
                 ))}
@@ -68,12 +96,12 @@ function Messenger() {
                     currentChat ?
                         <div>
 
-                            <Message></Message>
-                            <Message></Message>
-                            <Message></Message>
-                            <Message></Message>
+                            {messages.map(m => (
+                                <Message message={m}></Message>
+                            ))}
                             <div>
-                                <input type='text' placeholder='Escriba algo'></input>
+                                <textarea onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className="chatMessageInput" placeholder="Escriba algo"></textarea>
+                                <button onClick={handleSubmit}>Enviar</button>
                             </div>
                         </div> : <p>Open conversation to start a chat</p>
                 }

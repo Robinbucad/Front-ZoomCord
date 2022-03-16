@@ -1,13 +1,14 @@
 
 import './style.css'
 
-function Message() {
+function Message({message}) {
+
     return(
         <div className="message">
             <div className="messageTop">
                 <p>Img</p>
             </div>
-            <p>Hola este es mi mensaje</p>
+            {message.text}
             <div className="messageBottom">
                 <p>1 hour ago</p>
             </div>
