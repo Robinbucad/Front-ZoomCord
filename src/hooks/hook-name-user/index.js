@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 export function useUsername(){
     const [idUser, updateIdUser] = useState([])
-    const [userName,upadateUserName] = useState([])
+    const [user,upadateUser] = useState([])
     const token = sessionStorage.getItem('token')
  
 
@@ -17,12 +17,10 @@ export function useUsername(){
         .then(r => r.json())
         .then(d => {
 
-            updateIdUser(d._id)
-            upadateUserName(d.username)
+            upadateUser(d)
         })
-    })
+    },[])
 
-
-    return {idUser, userName}
+    return {user}
 
 }

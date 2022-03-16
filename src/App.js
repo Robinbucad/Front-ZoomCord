@@ -9,24 +9,26 @@ import DiscServer from './components/discordApp/DCserv';
 import Chat from './components/discordApp/DcChat';
 import CreateServChannel from './components/modal/createServChannel';
 import PrivateRoute from './components/private-route';
-
+import Messenger from './components/discordApp/messenger';
 
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+    {/* <BrowserRouter>
         <Routes>
-            <Route path='/' element={<HomePage></HomePage>}></Route>
+       <Route path='/' element={<HomePage></HomePage>}></Route>
             <Route path='/signUp' element={<SignUp></SignUp>}></Route>
-            <Route path='/login' element={<LoginPage></LoginPage>}></Route>
+            
             <Route path='/channels/@me/:id' element={<PrivateRoute><DcHome/></PrivateRoute>}></Route>
             <Route path='/server' element={<PrivateRoute><DiscServer/></PrivateRoute>}></Route>   
-            <Route path='/@me/:id' element={<PrivateRoute><Chat/></PrivateRoute>}></Route>  
-             
+            <Route path='/@me/:id' element={<PrivateRoute><Chat/></PrivateRoute>}></Route>   
+            <Route path='/login' element={<LoginPage></LoginPage>}></Route>
         </Routes>
         
-      </BrowserRouter>
+      </BrowserRouter>  */}
+      <Messenger></Messenger>
+
       
     </div>
   );

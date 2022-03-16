@@ -6,18 +6,21 @@ import UserSettingsFooter from "../footerUserSettings";
 import { Link } from "react-router-dom";
 import { useFriends } from '../../../hooks/hook-friendList/index'
 import classes from './friendMd.module.scss'
+import { useUsername } from "../../../hooks/hook-name-user";
 
 
 function DivFriend() {
-
+ 
     const [fullscreen] = useState(true);
     const [show, setShow] = useState(false);
     const friends = useFriends()
-
-    
-
     console.log(friends)
-   
+    const user = useUsername()
+
+
+    const [userChat,setUserChat] = useState(null)
+
+ 
 
 
     function handleShow() {
@@ -58,22 +61,7 @@ function DivFriend() {
 
 
                     <div >
-
-                        {friends.map((f, i) => f.map((e,i) => (
-                            <Link key={i} style={{ textDecoration: 'none' }}   to={`/@me/${e._id}`}> <div key={i} className='card-div'>
-                            <div className='img-user-friend'>
-
-                            </div>
-
-                            <div className='info-friend-user'>
-                                <p className='friend'>{e.username}</p>
-                               
-                                <p>Chilling</p>
-                            </div>
-
-                        </div></Link>)
-                        ))}
-
+                    {/**AQUI CONVERSACION */}
 
 
                     </div>

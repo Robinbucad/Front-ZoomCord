@@ -12,21 +12,33 @@ import { useParams } from 'react-router-dom'
 
 function Chat() {
     const ENDPOINT = "http://localhost:3001";
-
+    let token = sessionStorage.getItem('token')
     let {id} = useParams()
-    const {idUser, userName} = useUsername()
-
+    const [conversations,setConversations] = useState([])
+    const [currentChat,setCurrentChat] = useState(null)
+    const [messages,setMessages] = useState([])
     const [currentMsg, setCurrentMsg] = useState('')
-    const [chat,setChat] = useState([])
+    
+    
 
-        console.log(id)
-
-    useEffect(() => {
-        const getConversations = async() => {
-            const res = await fetch('')
-        }
-    })
-
+        useEffect(() => {
+            const getConversations = async() => {
+                try{
+                    const res = await fetch(`http://localhost:3001/users/${id}`,{
+                        method:'get',
+                        headers:{
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                    const dat = await res.json()
+                    setConversations(dat)
+                }catch(err){
+                    console.log(err)
+                }
+            }
+            getConversations()
+    
+        },[id])
     
 
    
@@ -37,7 +49,7 @@ function Chat() {
             <DivFriend></DivFriend>
             <section className={classes.chatContainer}>
                 <header className={classes.headerChat}>
-                   <p></p>
+                   <p>{conversations.username}</p>
                     <div className={classes.groupHeaderChat}>
                         <p>Noti</p>
                         <p>Members</p>
@@ -48,16 +60,18 @@ function Chat() {
 
                 <section className={classes.chat}>
                     <div className={classes.conversation}>
+                         {
+                             currentChat ?  currentChat.map((e,i) => (
+                                <div key={i} className={classes.msg}>
+                                <p>IMG</p>
+                                <div>
+                                    <p>{e.author}</p>
+                                    <p>{e.message}</p>
+                                </div>
+                            </div>
+                           )): <p>Escribe para comenzar el chat</p>
+                         }
                          
-                          {chat.map((e,i) => (
-                               <div key={i} className={classes.msg}>
-                               <p>IMG</p>
-                               <div>
-                                   <p>{e.author}</p>
-                                   <p>{e.message}</p>
-                               </div>
-                           </div>
-                          ))}
                          
                     
                     </div> 

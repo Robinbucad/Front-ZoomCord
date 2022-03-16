@@ -30,11 +30,6 @@ console.log(username)
                 <FriendList></FriendList>
             </div>
 
-
-
-
-
-
         </section>
     )
 }
