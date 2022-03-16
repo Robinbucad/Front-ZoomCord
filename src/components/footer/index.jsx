@@ -18,7 +18,7 @@ function HomeFooter() {
 
     const handleChange = e => {
         if (e.target.value === 'en') {
-            i18n.changeLanguage("en")
+            i18n.changeLanguage("en") // change language viene de la libreria, se usa para cambiar el idioma segun hayas puesto en el index.js
             setH.changeLanguage("en")
             setReg.changeLanguage("en")
             updateFlag(KY)

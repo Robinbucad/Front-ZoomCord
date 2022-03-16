@@ -30,7 +30,7 @@ function SignUp() {
     const onSubmit = e => {
         e.preventDefault()
         const userFormData = new FormData(e.target);
-        fetch('http://localhost:4000/users', {
+        fetch('http://localhost:3001/auth/register', {
                 method: 'POST',
                 body:JSON.stringify(Object.fromEntries(userFormData)), // From entries es todos los value de los inputs
                 headers: {
@@ -39,10 +39,11 @@ function SignUp() {
             })
             .then(r => {
                 if(r.status === 409){
+                    console.log(r)
                     alert('Usuario existente')
                 }else{
                     
-                    navigate(`/discord/`)
+                    navigate(`/`)
                 }
             })
             

@@ -1,17 +1,48 @@
-
-
+import io from 'socket.io-client'
 import DivFriend from '../DCmdList'
 import DivServs from '../DCdivServ'
 import { Link } from 'react-router-dom'
 import { useUsername } from '../../../hooks/hook-name-user'
 import { useState } from 'react'
 import classes from './chat.module.scss'
+import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+const socket = io.connect("http://localhost:3001")
+
 
 function Chat() {
 
-    const username = useUsername()
-    console.log(username)
+    let {id} = useParams()
 
+    const {idUser, userName} = useUsername()
+
+    const [currentMsg, setCurrentMsg] = useState('')
+    const [chat,setChat] = useState([])
+
+    const sendMsg = async (e) => {
+        if(e.key === 'Enter'){
+            const messageData = {
+                room:id,
+                author:userName,
+                message:currentMsg,
+                time:new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
+            };
+            await socket.emit("send_message", messageData)
+            setCurrentMsg('')
+        }        
+    }    
+
+    useEffect(() => {
+        socket.on("receive_message",data => {
+            setChat(list => [...list,data])
+            
+        })
+    },[socket])
+
+
+    console.log(chat)
+
+   
     return (
 
         <section className={classes.chatFriend}>
@@ -19,7 +50,7 @@ function Chat() {
             <DivFriend></DivFriend>
             <section className={classes.chatContainer}>
                 <header className={classes.headerChat}>
-                    <p>{username}</p>
+                   <p></p>
                     <div className={classes.groupHeaderChat}>
                         <p>Noti</p>
                         <p>Members</p>
@@ -30,37 +61,28 @@ function Chat() {
 
                 <section className={classes.chat}>
                     <div className={classes.conversation}>
-                        <div className={classes.msg}>
-                            <p>IMG</p>
-                            <div>
-                                <p>Robin</p>
-                                <p>Hola este es mi mensaje</p>
-                            </div>
-                        </div>
+                         
+                          {chat.map(e => (
+                               <div className={classes.msg}>
+                               <p>IMG</p>
+                               <div>
+                                   <p>{e.author}</p>
+                                   <p>{e.message}</p>
+                               </div>
+                           </div>
+                          ))}
+                         
+                    
+                    </div> 
 
-                        <div className={classes.msg}>
-                            <p>IMG</p>
-                            <div>
-                                <p>Paco</p>
-                                <p>Hola este es mi mensaje2</p>
-                            </div>
-                        </div>
-
-                        <div className={classes.msg}>
-                            <p>IMG</p>
-                            <div>
-                                <p>Robin</p>
-                                <p>Hola este es mi mensaje3</p>
-                            </div>
-                        </div>
-                    </div>
-
+                  
 
                     <footer className={classes.divInputChat}>
-                        <input placeholder='Enviar mensaje a #general' className={classes.inputChat} type="text" />
+                        <input placeholder='Enviar mensaje a #general' onKeyPress={sendMsg} onChange={e => setCurrentMsg(e.target.value)} className={classes.inputChat} type="text" />
                     </footer>
                 </section>
             </section>
+    
         </section>
 
     )

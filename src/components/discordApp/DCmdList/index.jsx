@@ -25,8 +25,6 @@ function DivFriend() {
     }
 
 
-
-
     return (
 
         <React.Fragment>
@@ -56,17 +54,20 @@ function DivFriend() {
 
                     <div >
 
-                        {friends.map((f, i) => <Link key={i} style={{ textDecoration: 'none' }} to={`/@me/${f.id}`}> <div className='card-div'>
+                        {friends.map((f, i) => f.map((e,i) => (
+                            <Link key={i} style={{ textDecoration: 'none' }}  to={`/@me/${e._id}`}> <div key={i} className='card-div'>
                             <div className='img-user-friend'>
 
                             </div>
 
                             <div className='info-friend-user'>
-                                <p className='friend'>{f.username}</p>
-                                <p>Jugando a fortnite</p>
+                                <p className='friend'>{e.username}</p>
+                               
+                                <p>Chilling</p>
                             </div>
 
-                        </div></Link>)}
+                        </div></Link>)
+                        ))}
 
 
 

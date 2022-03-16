@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useUsername } from '../../hooks/hook-name-user'
 import './style.css'
 
 function LoginPage() {
 
     const [t] = useTranslation("registerLogin")
+    let navigate = useNavigate()
 
-    const [user,updateUser] = useState()
+    const [user, updateUser] = useState()
     const [password, updatePassword] = useState()
+    const {idUser} = useUsername()
+    
 
-    const handleUsername  = e => {
+    const handleUsername = e => {
         updateUser(e.target.value)
     }
 
@@ -19,10 +24,25 @@ function LoginPage() {
         updatePassword(e.target.value)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
-        localStorage.setItem('username', user)
-        localStorage.setItem('password', password)
+        const userFormData = new FormData(e.target);
+        const d = await fetch('http://localhost:3001/auth/login', {
+            method: 'POST',
+            
+            body: JSON.stringify(Object.fromEntries(userFormData)), // From entries es todos los value de los inputs
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+        const r = await d.json()
+        if(r.access_token){
+            console.log('bien')
+            sessionStorage.setItem('token', r.access_token)
+            navigate(`/channels/@me/${idUser}`)
+        }else{
+            console.log('mal')
+        }
     }
 
     return (

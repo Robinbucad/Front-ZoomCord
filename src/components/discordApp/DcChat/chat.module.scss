@@ -47,9 +47,10 @@
 .conversation{
     height: 100%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     color: white;
     gap: 1rem;
+    justify-content: flex-end;
 }
 
 .msg{
