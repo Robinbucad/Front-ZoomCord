@@ -17,7 +17,7 @@
 
 .chat-box{
     background-color: green;
-    width: 33%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,5 +26,5 @@
 
 .user-active{
     background-color: yellow;
-    width: 33%;
+    width: 20%;
 }

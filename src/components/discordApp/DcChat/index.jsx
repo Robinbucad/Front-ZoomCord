@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import DivFriend from '../DCmdList'
+
 import DivServs from '../DCdivServ'
 import { Link } from 'react-router-dom'
 import { useUsername } from '../../../hooks/hook-name-user'
@@ -46,7 +46,6 @@ function Chat() {
 
         <section className={classes.chatFriend}>
             <DivServs></DivServs>
-            <DivFriend></DivFriend>
             <section className={classes.chatContainer}>
                 <header className={classes.headerChat}>
                    <p>{conversations.username}</p>

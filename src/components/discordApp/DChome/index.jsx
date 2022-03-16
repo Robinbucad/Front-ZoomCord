@@ -4,7 +4,6 @@ import './style.scss'
 
 
 import DivServs from '../DCdivServ'
-import DivFriend from '../DCmdList'
 import FriendList from '../DCfriendList'
 import { Container } from 'react-bootstrap'
 import { useUsername } from '../../../hooks/hook-name-user'
@@ -24,7 +23,7 @@ console.log(username)
 
 
             <div  className='md-container'>
-                <DivFriend></DivFriend>
+                
             </div>
             <div className='friend-container' >
                 <FriendList></FriendList>

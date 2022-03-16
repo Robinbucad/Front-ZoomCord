@@ -1,5 +1,5 @@
 import DivServs from "../DCdivServ"
-import DivFriend from "../DCmdList"
+
 import './style.css'
 import Chat from "../DcChat"
 import UserSettingsFooter from "../footerUserSettings"
