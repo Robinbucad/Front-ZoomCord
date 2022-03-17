@@ -1,15 +1,16 @@
 
-import './style.css'
+import classes from './message.module.scss';
 
 function Message({message}) {
 
     return(
-        <div className="message">
-            <div className="messageTop">
+        <div className={classes.msg}>
+            <div>
                 <p>Img</p>
             </div>
+            
+            <div>
             {message.text}
-            <div className="messageBottom">
                 <p>1 hour ago</p>
             </div>
         </div>

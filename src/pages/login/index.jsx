@@ -13,7 +13,7 @@ function LoginPage() {
 
     const [user, updateUser] = useState()
     const [password, updatePassword] = useState()
-    const {idUser} = useUsername()
+   
 
 
     const handleUsername = e => {
@@ -39,7 +39,7 @@ function LoginPage() {
         if(r.access_token){
             console.log('bien')
             sessionStorage.setItem('token', r.access_token)
-            navigate(`/channels/@me/${idUser}`)
+            navigate(`/`)
         }else{
             console.log('mal')
         }

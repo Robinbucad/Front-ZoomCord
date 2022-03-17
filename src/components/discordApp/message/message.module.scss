@@ -1,0 +1,12 @@
+@import '../../../sass/global.scss';
+
+.msg{
+    @include flexBox(flex,center,'','','','');
+    gap: 1rem;
+    padding: 5px;
+}
+
+.msg:hover{
+    background-color: $hoverMsg;
+    border-radius: 10px;
+}

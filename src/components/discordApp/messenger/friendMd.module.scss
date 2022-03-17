@@ -1,6 +1,9 @@
 
 @import '../../../sass/global.scss';
 
+.containerApp{
+    display: flex
+}
 
 .containerMd{
     @include flexBox(flex, '' , space-between,60px, white,'');
@@ -11,10 +14,16 @@
     background: $MDColor;
 }
 
+.containerConversations{
+    padding: 10px;
+    @include flexBox(flex,'','','','',1rem);
+    flex-direction: column;
+}
+
 .inputDivMd{
     padding-top: 10px;
     border-bottom: 1px solid gray;
-    padding: 10px
+    padding: 10px;
 }
 
 .inputSearch{
@@ -40,7 +49,72 @@
     font-size: 25px;
 }
 
+.chatBox{
+    overflow-y: auto;
+}
+
+
 .userSetts{
 
     margin-top: auto;
 }
+
+.activeUsersDiv{
+    width: 25%;
+    background-color: $PrimaryClaro;
+}
+
+// CHAT MD SETTINGS
+
+
+.chatFriend{
+    display: flex;
+    background-color: green;
+}
+
+.chatContainer{
+    background-color:$PrimaryClaro;
+    width:100%;
+    padding: 20px;
+    overflow: auto
+}
+
+
+.inputChatSearch{
+    @include inputs($SecondaryOscuro, gray , 5px, 40%,2px,'');
+}
+
+.headerChat{
+    @include flexBox(flex, center , space-between,73px, white,'');
+    border-bottom: 1px solid gray;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color:$PrimaryClaro
+}
+
+.groupHeaderChat{
+    @include flexBox(flex,center,space-between,'','','');
+    width:40%
+}
+
+.inputChat{
+    background-color: $HoverListFrMd;
+    @include inputs(#40444B,gray, 5px, 100%,10px,'')
+}
+
+.divInputChat{
+    padding-top: 1rem;
+    @include flexBox(flex,center,center,'','','');
+}
+
+.conversation{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 1rem;
+    justify-content: flex-end;
+    overflow: auto;
+}
+
+
