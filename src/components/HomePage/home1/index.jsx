@@ -9,7 +9,7 @@ function HomePart1() {
     const [t] = useTranslation("header")
     const [h] = useTranslation("home")
     
-    console.log(h("home.titleH1"))
+
     return (
         <React.Fragment>
             <section className="home-part1-container">

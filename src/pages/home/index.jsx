@@ -1,10 +1,10 @@
 import React from "react"
-import HomePart1 from "../../components/home1"
-import Part2Home from "../../components/home2/part2Home"
-import HomePart3 from "../../components/home3/part3Home"
-import HomePart4 from "../../components/home4"
-import HomePart5 from "../../components/home5"
-import HomeFooter from "../../components/footer"
+import HomePart1 from "../../components/HomePage/home1"
+import Part2Home from "../../components/HomePage/home2/part2Home"
+import HomePart3 from '../../components/HomePage/home3/part3Home'
+import HomePart4 from "../../components/HomePage/home4"
+import HomePart5 from "../../components/HomePage/home5"
+import HomeFooter from "../../components/HomePage/footer"
 
 function HomePage() {
     return (

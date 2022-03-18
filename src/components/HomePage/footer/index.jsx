@@ -2,9 +2,9 @@
 import { Link } from 'react-router-dom'
 import './style.scss'
 import { useTranslation } from 'react-i18next'
-import ES from '../../assets/img/ES.svg'
+import ES from '../../../assets/img/ES.svg'
 import { useState } from 'react'
-import KY from '../../assets/img/KY.svg'
+import KY from '../../../assets/img/KY.svg'
 
 
 function HomeFooter() {

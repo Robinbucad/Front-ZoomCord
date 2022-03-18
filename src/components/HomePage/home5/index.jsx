@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import home5img from '../../assets/img/home5.svg'
+import home5img from '../../../assets/img/home5.svg'
 
 function HomePart5(){
 

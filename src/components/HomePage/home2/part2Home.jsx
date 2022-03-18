@@ -1,4 +1,4 @@
-import imgHome2 from '../../assets/img/part2home.svg'
+import imgHome2 from '../../../assets/img/part2home.svg'
 import { useTranslation } from 'react-i18next'
 
 function Part2Home() {

@@ -1,8 +1,10 @@
+import { useContext } from 'react'
 import { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../../context/user/user.context'
 import { useUsername } from '../../hooks/hook-name-user'
 import './style.css'
 
@@ -11,13 +13,16 @@ function LoginPage() {
     const [t] = useTranslation("registerLogin")
     let navigate = useNavigate()
 
-    const [user, updateUser] = useState()
+    const [userName, updateUserName] = useState()
     const [password, updatePassword] = useState()
    
-
+    const {user,updateUser} = useUsername()
+    const [userId,updateUserId] = useContext(UserContext)
+    console.log(userId)
 
     const handleUsername = e => {
-        updateUser(e.target.value)
+       
+        updateUserName(e.target.value)
     }
 
     const handlePassword = e => {
@@ -37,9 +42,9 @@ function LoginPage() {
         })
         const r = await d.json()
         if(r.access_token){
-            console.log('bien')
+            console.log(r.access_token)
             sessionStorage.setItem('token', r.access_token)
-            navigate(`/`)
+            navigate(`/discord/${userId}`)
         }else{
             console.log('mal')
         }

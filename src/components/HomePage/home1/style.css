@@ -1,7 +1,7 @@
 /*PART 1 OF HOME PAGE*/
 .home-part1-container {
   height: 70vh;
-  background-image: url("../../assets//img/prueba.png");
+  background-image: url("../../../assets/img/prueba.png");
   background-repeat: no-repeat;
   background-size: cover;
 }

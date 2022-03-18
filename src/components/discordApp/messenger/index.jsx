@@ -6,7 +6,7 @@ import DivServs from "../DCdivServ";
 import UserSettings from "../../modal/settings";
 import UserSettingsFooter from "../footerUserSettings";
 import classes from './friendMd.module.scss'
-import {io} from 'socket.io-client'
+import { io } from 'socket.io-client'
 import { useRef } from "react";
 
 function Messenger() {
@@ -19,42 +19,44 @@ function Messenger() {
     const [fullscreen] = useState(true);
     const [show, setShow] = useState(false);
     const socket = useRef()
-    const [arrivalMessage, setArrivalMessage] = useState(null)
+ 
 
-useEffect(() => {
-    socket.current = io("ws://localhost:4000")
-    socket.current.on("getMessage",data => {
-        setArrivalMessage(
-            console.log(data)
-        )
-    })
-},[])
-
-useEffect(() => { // CONTROLO EL MENSAJE LLEGUE AL DESTINATARIO, Y ACTUALIZE EL USEEFFECT PARA QUE LLEGUE AL MOMENTO
-    arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) &&
-    setMessages(prev =>[...prev,arrivalMessage]) 
-},[arrivalMessage,currentChat])
-    
-
-   useEffect(() => {
-       socket.current.emit("addUser", user._id);
-       socket.current.on("getUsers",users => {
-           //console.log(users)
-       })
-   },[user])
     
 
     useEffect(() => {
-        const getConversations = async () => {
+        socket.current = io("ws://localhost:4000")
+      
+    }, [])
 
-            const res = await fetch('http://localhost:3001/conversation', {
-                method: 'get',
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            const dat = await res.json()
-            setConversations(dat)
+    useEffect(() => {
+        socket.current.on("getMessage", (data) => {
+            setMessages([...messages,data])
+        })
+
+    },[messages])
+
+    useEffect(() => {
+        socket.current.emit("addUser", user._id);
+        //  socket.current.on("getUsers", users => {
+
+        //  })
+    }, [user])
+
+
+    useEffect(() => {
+        const getConversations = async () => {
+            try {
+                const res = await fetch(`http://localhost:3001/conversation/${user._id}`, {
+                    method: 'get',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                const dat = await res.json()
+                setConversations(dat)
+            } catch (err) {
+                console.log(err)
+            }
 
 
         }
@@ -73,10 +75,13 @@ useEffect(() => { // CONTROLO EL MENSAJE LLEGUE AL DESTINATARIO, Y ACTUALIZE EL 
                 })
                 const dat = await res.json()
                 setMessages(dat)
-          
+
+
+
             } catch (err) {
                 console.log('error')
             }
+            await socket.current.emit("join_chat", currentChat._id)
         };
         getMessages()
     }, [currentChat])
@@ -88,16 +93,10 @@ useEffect(() => { // CONTROLO EL MENSAJE LLEGUE AL DESTINATARIO, Y ACTUALIZE EL 
         const message = {
             senderId: user._id,
             text: newMessage,
-            conversationId: currentChat._id
+            conversationId: currentChat._id,
         };
 
-        const receiverId = currentChat.members.find(m => m !== user._id)
-
-        socket.current.emit("sendMessage", {
-            senderId: user._id,
-            receiverId,
-            text:newMessage,
-        })
+         socket.current.emit("sendMessage",message)
 
         try {
             const res = await fetch('http://localhost:3001/message/', {
@@ -105,19 +104,18 @@ useEffect(() => { // CONTROLO EL MENSAJE LLEGUE AL DESTINATARIO, Y ACTUALIZE EL 
                 body: JSON.stringify(message),
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`
 
                 },
             })
             const dat = await res.json()
-            console.log(dat)
-            setMessages(m => [...m, message])
+            setMessages([...messages, dat])
             setNewMessage('')
         } catch (err) {
             console.log(err)
         }
     }
-
+    console.log(conversations)
 
     function handleShow() {
         if (show === false) {
@@ -127,6 +125,8 @@ useEffect(() => { // CONTROLO EL MENSAJE LLEGUE AL DESTINATARIO, Y ACTUALIZE EL 
             setShow(false)
         }
     }
+
+
 
 
     return (
@@ -170,6 +170,15 @@ useEffect(() => { // CONTROLO EL MENSAJE LLEGUE AL DESTINATARIO, Y ACTUALIZE EL 
                 </div>
             </div>
             <div className={classes.chatContainer}>
+                <header className={classes.headerChat}>
+                    <p>NAME USER</p>
+                    <div className={classes.settingsChat}>
+                        <p>Call</p>
+                        <p>Videocall</p>
+                        <input placeholder="Buscar" className={classes.inputSearchMsgChat} type='text'></input>
+                    
+                    </div>
+                </header>
 
                 {
 
