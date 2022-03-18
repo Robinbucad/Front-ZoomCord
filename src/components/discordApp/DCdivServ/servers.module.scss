@@ -1,7 +1,8 @@
 @import '../../../sass/global.scss';
 
 .imgServ{
-    @include servLog(55px, 50%,$HoverListFrMd,green)
+    @include servLog(55px, 50%,$HoverListFrMd,green);
+    height: 55px;
 }
 
 .imgServ:hover{
@@ -10,7 +11,7 @@
 }
 
 .containerServ{
-    @include flexBox(flex,center, '','','','');
+    @include flexBox(flex,center, '','','',1rem);
     flex-direction: column;
     padding: 10px;
     background-color: $SecondaryOscuro;

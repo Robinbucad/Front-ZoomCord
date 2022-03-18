@@ -2,21 +2,36 @@ import './style.scss'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-
+import { FaSun, FaMoon } from 'react-icons/fa'
+import { useState } from 'react'
 
 function HomePart1() {
 
     const [t] = useTranslation("header")
     const [h] = useTranslation("home")
-    
+    const [theme, updateTheme] = useState(false)
+    const [btn,setBtn] = useState(false)
 
+    const handleClick = e => {    
+            document.body.classList.toggle('dark')    
+            document.body.classList.toggle('light')
+        if(btn === false){
+            setBtn('active')
+            console.log('hola')
+        }else{
+            setBtn(false)
+            console.log('adios')
+        }
+    }
+
+    console.log(btn)
     return (
         <React.Fragment>
             <section className="home-part1-container">
                 <div>
                     <div>
                         <header className='header-homepage'>
-                            
+
                             <p>Imagen dsicord</p>
                             <ul className='nav-list'>
                                 <li>{t("header.download")}</li>
@@ -26,7 +41,11 @@ function HomePart1() {
                                 <li>{t("header.blog")}</li>
                                 <li>{t("header.employees")}</li>
                             </ul>
-                           <Link to='/login'> <button className='btn-homepage-login'>{t("header.login")}</button></Link>
+                            <button onClick={handleClick} className='switch' id={btn} >
+                                <span><FaSun></FaSun></span>
+                                <span><FaMoon></FaMoon></span>
+                            </button>
+                            <Link to='/login'> <button className='btn-homepage-login'>{t("header.login")}</button></Link>
                         </header>
                     </div>
                     <div className='container-p1'>

@@ -8,6 +8,7 @@ import PrivateRoute from './components/private-route';
 import Messenger from './components/discordApp/messenger';
 import ValidateEmail from './pages/validation';
 import UserProvider from './context/user/user.provider';
+import ServerMessenger from './pages/serverMessenger';
 function App() {
 
 
@@ -23,7 +24,8 @@ function App() {
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/validate' element={<ValidateEmail></ValidateEmail>}></Route>
             <Route path='/discord/:id' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
-
+            <Route path='/:id/' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
+            <Route path='/server/:id' element={<ServerMessenger></ServerMessenger>}></Route>
           </Routes>
 
         </BrowserRouter>

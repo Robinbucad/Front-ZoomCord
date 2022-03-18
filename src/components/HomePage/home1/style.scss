@@ -1,13 +1,31 @@
-
+@import '../../../sass/global.scss';
+@import '../../../sass/mediaquery.scss';
 
 /*PART 1 OF HOME PAGE*/
+
+body{
+    background-color: white;
+        &.dark{
+            background-color: '';
+            transition: .3s ease all;
+        }
+        &.light{
+            background-color: '';
+            transition: .3s ease all;
+        }
+     
+}
 
 .home-part1-container{
     height: 70vh;
     background-image: url('../../../assets//img/prueba.png');
     background-repeat: no-repeat;
     background-size: cover;
+
 }
+
+
+
 
 .header-homepage{
     color: white;
@@ -16,6 +34,10 @@
     padding: 1.5rem;
     align-items: center;
     font-weight: bold;
+    @include breakpoint(md){
+        font-size: 14px;   
+    }
+
 }
 
 .nav-list{
@@ -23,6 +45,13 @@
     list-style: none;
     width: 32%;
     justify-content: space-between;
+
+    @include breakpoint(md){
+        display: flex;
+        justify-content: space-around;
+        width: 100%;     
+    }
+   
 }
 
 .btn-homepage-login{
@@ -31,6 +60,16 @@
     border-radius: 30px;
     border: none;
     font-size: 15px;
+
+    
+    body.dark & {
+        background-color:$SecondaryOscuro;
+        transition: .3s ease all;   
+        color: white;  
+    }
+    @include breakpoint(md){ 
+        padding: 8px; 
+    }
 }
 
 .homepage1-container{
@@ -40,22 +79,34 @@
     justify-content: center;
     width: 39%;
     align-items: center;
+    @include breakpoint(md){ 
+        width: 89%;   
+    }
 }
 
 .title-homepage{
     font-weight: bold;
     font-size: 3.95rem;
+    @include breakpoint(md){ 
+        font-size: 3rem;
+        text-align: center;
+        width: 100%;
+    }
 }
 
 .container-p1{
     display: flex;
     justify-content: center;
     padding: 6rem;
-
+   
 }
 
 .text-homepage{
     text-align: center;
+    @include breakpoint(md){ 
+        font-size: 20px;
+        margin-top: 10px;
+    }
 }
 
 .div-btns-home{
@@ -63,6 +114,12 @@
     display: flex;
     justify-content: space-around;
     padding: 0 2rem;
+
+    @include breakpoint(md){ 
+        font-size: 20px;
+        width: 60%;
+        font-size: 15px;
+    }
 }
 
 .btn-dnWindows{
@@ -71,6 +128,12 @@
     border-radius: 30px;
     border: none;
     font-weight: bold;
+    body.dark & {
+        background-color:$SecondaryOscuro;
+        transition: .3s ease all;   
+        color: white;  
+    }
+
 }
 
 .bnt-openOnNav{
@@ -81,6 +144,12 @@
     background-color: #36393F;
     color: white;
     font-weight: bold;
+
+    body.dark & {
+        background-color:gray;
+        transition: .3s ease all;   
+        color: black;  
+    }
 }
 
 /*PART 2 OF HOME PAGE*/
@@ -90,6 +159,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: .3s ease all;
+
+    body.dark & {
+        background-color:$SecondaryOscuro;
+        transition: .3s ease all;
+        color: white;
+    }
+
+    
 }
 
 .info-home2-container{
@@ -98,15 +176,22 @@
     justify-content: space-between;
     align-items: center;
     gap: 8%;
+
 }
 
 .img-home2{
     width: 100%;
+   
 }
 
 .title-home2{
     font-size: 3rem;
     font-weight: bold;
+    @include breakpoint(md){ 
+        font-size: 30px;
+        width: 350px;  
+        align-items: flex-start;   
+    }
 }
 
 .div-info-home2{
@@ -124,6 +209,13 @@
     justify-content: center;
     align-items: center;
     background-color: #F6F6F6;
+
+    body.dark & {
+        background-color:$PrimaryClaro;
+        color: white;
+    }
+   
+  
 }
 
 /*PART 4 HOME*/
@@ -134,6 +226,12 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    body.dark & {
+        background-color: $SecondaryOscuro;
+        color: white;
+    }
+
+   
 }
 
 /*PART 5 HOME*/
@@ -147,6 +245,15 @@
     background-color:#F6F6F6;
     padding-bottom: 10%;
     padding-top: 10%;
+    body.dark & {
+        background-color: $PrimaryClaro;
+        color: white;
+    }
+
+    @include breakpoint(md){ 
+ 
+        height: 100%;
+    }
 }
 
 .div-info-home5{
@@ -187,3 +294,50 @@
     padding: 1rem;
     border-radius: 30px;
 }
+
+/* MULTITHEMING*/
+
+.switch{
+    background-color:#343D5B ;
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+    &::after{
+        content: '';
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        background: #f1f1f1;
+        top: 0;
+        left: 0; //SE VARIA ENTRE LEFT Y RIGHT PARA LA ANIMACION DEL BOTON
+        right: unset; 
+        border-radius: 100px;
+        transition: .3s ease all;
+        box-shadow: 0px 0px 2px 2px rgba (0,0,0,.2);
+    }
+    &#active{
+        background: gray;
+        color:black;
+        &::after{ // LOS DOBLES PUNTOS ES COMO UNA CONDICION
+            right: 0;
+            left: unset;
+        }
+    }
+    span{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        background: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+

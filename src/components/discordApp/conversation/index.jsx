@@ -1,10 +1,11 @@
 import { useEffect } from "react"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import './style.css'
 
 function Conversation({ conversation, currentUser }) {
-    const [user, setUser] = useState('')
+    const [user, setUser] = useState([])
     const token = sessionStorage.getItem('token')
     const currentUserId = currentUser._id
 
@@ -22,7 +23,8 @@ function Conversation({ conversation, currentUser }) {
                     },
                 })
                 const dat = await res.json()
-                setUser(dat)
+                setUser([dat])
+                console.log(dat)
                 console.log(dat)
             } catch (err) {
                 console.log(err)
@@ -32,15 +34,26 @@ function Conversation({ conversation, currentUser }) {
         getUser()
     }, [currentUser, conversation])
 
+    console.log(user)
 
 
     return (
         <div>
-            <div className="conver">
-                <img className="profile-default" src={user?.img} />
-                <p>{user?.username}</p>
-            </div>
+            {user.length===0 ? '' : user.map(e => (
+                <Link to={`/${e._id}`}>
+                    <div>
+                        <div className="conver">
+                            <img className="profile-default" src={e.img} />
+                            <p>{e.username}</p>
+                        </div>
+                    </div>
+                </Link>
+            ))}
+
         </div>
+
+
+
 
     )
 }

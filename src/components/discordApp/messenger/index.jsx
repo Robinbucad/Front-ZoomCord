@@ -9,6 +9,7 @@ import classes from './friendMd.module.scss'
 import { io } from 'socket.io-client'
 import { useRef } from "react";
 
+
 function Messenger() {
     const token = sessionStorage.getItem('token')
     const [conversations, setConversations] = useState([])
@@ -115,7 +116,7 @@ function Messenger() {
             console.log(err)
         }
     }
-    console.log(conversations)
+
 
     function handleShow() {
         if (show === false) {
@@ -158,7 +159,7 @@ function Messenger() {
                 <section className={classes.containerConversations}>
                     {conversations.map((e, i) => (
                         <div key={i} onClick={() => setCurrentChat(e)}>
-                            <Conversation key={i} conversation={e} currentUser={user}></Conversation>
+                          <Conversation key={i} conversation={e} currentUser={user}></Conversation>
                         </div>
                     ))}
                 </section>
