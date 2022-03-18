@@ -16,9 +16,11 @@ function LoginPage() {
     const [userName, updateUserName] = useState()
     const [password, updatePassword] = useState()
    
-    const {user,updateUser} = useUsername()
-    const [userId,updateUserId] = useContext(UserContext)
-    console.log(userId)
+   // const {user,updateUser} = useUsername()
+   // const [userId,updateUserId] = useContext(UserContext)
+
+    const {user} = useUsername()
+    console.log(user)
 
     const handleUsername = e => {
        
@@ -28,6 +30,8 @@ function LoginPage() {
     const handlePassword = e => {
         updatePassword(e.target.value)
     }
+
+ 
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -41,13 +45,25 @@ function LoginPage() {
             },
         })
         const r = await d.json()
+        
         if(r.access_token){
             console.log(r.access_token)
             sessionStorage.setItem('token', r.access_token)
-            navigate(`/discord/${userId}`)
+            fetch(`http://localhost:3001/users`,{
+                method:'get',
+                headers:{
+                    Authorization: `Bearer ${r.access_token}`
+                }
+            })
+            .then(r => r.json())
+            .then(d => {
+                navigate(`/discord/${d._id}`)
+            })
+            // navigate(`/discord/${user._id}`)
         }else{
             console.log('mal')
         }
+
     }
 
 

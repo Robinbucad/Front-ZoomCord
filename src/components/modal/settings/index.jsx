@@ -2,12 +2,15 @@ import { Modal, Button } from 'react-bootstrap'
 import { useState } from 'react';
 import './style.css'
 import UserProfileSettings from './profile';
+import DeleteUser from './delete.modal';
+import { useNavigate } from 'react-router-dom';
 
 
 function UserSettings(props) {
-
+    let navigate = useNavigate()
     const [accounteSettings, updateAccountSettings] = useState(true)
     const [userProfileSettings, updateUserProfileSettings] = useState(false)
+    const [modalShow, setModalShow] = useState(false)
 
     const handleClickAcc = e => {
         e.preventDefault()
@@ -28,6 +31,12 @@ function UserSettings(props) {
  
         }
     }
+
+    const handleCloseSession = () => {
+        sessionStorage.removeItem('token')
+        navigate('/')
+    }
+    
 
     return (
         
@@ -115,8 +124,8 @@ function UserSettings(props) {
                          <p>SUPRESIÓN DE CUENTA</p>
                          <p>Puedes recuperar la cuenta en cualquier momento después de dehabilitarla</p>
                          <div className='div-btns-remove'>
-                             <Button variant="danger">Deshabilitar Cuenta</Button>
-                             <Button variant="outline-danger">Eliminar cuenta</Button>
+                             <Button onClick={handleCloseSession} variant="danger">Cerrar Sesion</Button>
+                             <Button onClick={() => setModalShow(true)} variant="outline-danger">Eliminar cuenta</Button>
                          </div>
 
                      </section>
@@ -134,6 +143,7 @@ function UserSettings(props) {
             {userProfileSettings === false ? '' : <UserProfileSettings handleClickAcc={handleClickAcc}></UserProfileSettings>}
                
             </Modal>
+            <DeleteUser show={modalShow} onHide={() => setModalShow(false)}></DeleteUser>
         </section>
 
 
