@@ -52,7 +52,7 @@ function DivServs(props) {
 
             {conversations.map((e,i) => (
                 <Link key={i} to={`/server/${e._id}`}>
-                    <div onClick={() => props.handleCurrentServ(e.name)}>
+                    <div onClick={() => props.handleCurrentServ(e)}>
                         <img className={classes.imgServ} src={e.img}></img>
                     </div>
                 </Link>

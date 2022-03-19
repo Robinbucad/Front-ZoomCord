@@ -18,6 +18,10 @@ function ServerMessenger() {
     const [show, setShow] = useState(false);
     const { user } = useUsername()
     const [currentServ, updateCurrentServ] = useState('')
+    const [currentServId,updateCurrentServId] = useState('')
+    const [messages,setMessages] = useState([])
+    const [newMessage,setNewMessage] = useState('')
+    const socket = useRef()
 
     function handleShow() {
         if (show === false) {
@@ -27,14 +31,69 @@ function ServerMessenger() {
             setShow(false)
         }
     }
-    const handleCurrentServ = name => {
-        updateCurrentServ(name)
+    const handleCurrentServ = serv => {
+        updateCurrentServ(serv.name)
+        updateCurrentServId(serv._id)
     }
-   
-  
-   
 
 
+    useEffect(() => {
+        socket.current = io("ws://localhost:4000")
+    },[])
+
+    useEffect(() => {
+        socket.current.on("getServMsg",(data) => {
+            setMessages([...messages,data])
+        })
+    },[messages])
+   
+    useEffect(() => {
+        const getServMsg = async() => {
+            try{
+                const res = await fetch(`http://localhost:3001/servMsg/${currentServId}`,{
+                    method:'get',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                })
+                const dat = await res.json()
+                setMessages(dat)
+            }catch(err){
+                console.log(err)
+            }
+             socket.current.emit("join_serv", currentServId)
+        }
+        getServMsg()
+    },[currentServId])
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        const message = {
+            senderId:user._id,
+            text:newMessage,
+            conversationId:currentServId
+        }
+
+        socket.current.emit("sendServMsg", message)
+
+        try{
+            const res = await fetch('http://localhost:3001/servMsg/',{
+                method:'post',
+                body:JSON.stringify(message),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+
+                },
+            })
+            const dat = await res.json()
+            setNewMessage('')
+            setMessages([...messages, dat])
+            
+        }catch(err){
+            console.log(err)
+        }
+    }
 
     return (
         <div className={classes.containerApp}>
@@ -89,11 +148,13 @@ function ServerMessenger() {
 
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
-                        <MessageServer></MessageServer>
+                       {messages.map(m => (
+                            <MessageServer message={m}></MessageServer>
+                       ))}
                     </div>
                     <div className={classes.divInputChat}>
-                        <input type='text' className={classes.inputChat} placeholder="Escriba algo"></input>
-                        <button >Enviar</button>
+                        <input value={newMessage} type='text' className={classes.inputChat} onChange={(e) => setNewMessage(e.target.value)} placeholder="Escriba algo"></input>
+                        <button onClick={handleSubmit} >Enviar</button>
                     </div>
                 </div>
 
