@@ -3,15 +3,21 @@ import { useState } from 'react';
 import UserSettingsFooter from '../../components/discordApp/footerUserSettings';
 import UserSettings from '../../components/modal/settings';
 import DivServs from '../../components/discordApp/DCdivServ';
-import {io} from 'socket.io-client'
-import {useRef} from 'react'
+import { io } from 'socket.io-client'
+import { useRef } from 'react'
 import { useEffect } from 'react';
-
+import MessageServer from '../../components/discordApp/messageServ';
+import { useUsername } from '../../hooks/hook-name-user';
+import {Link} from 'react-router-dom'
+import logo from '../../assets/img/discord/serv/servDisc.png'
+import CreateServModal from '../../components/modal/createServ';
 
 function ServerMessenger() {
     const token = sessionStorage.getItem('token')
     const [fullscreen] = useState(true);
     const [show, setShow] = useState(false);
+    const { user } = useUsername()
+    const [currentServ, updateCurrentServ] = useState('')
 
     function handleShow() {
         if (show === false) {
@@ -21,26 +27,26 @@ function ServerMessenger() {
             setShow(false)
         }
     }
+    const handleCurrentServ = name => {
+        updateCurrentServ(name)
+    }
+   
+  
+   
 
-
-    // useEffect(() => {
-    //     socket.current = io("ws://localhost:4000")
-      
-    // }, [])
-
-     
 
 
     return (
         <div className={classes.containerApp}>
 
             <UserSettings show={show} fullscreen={fullscreen} setShow={() => handleShow(false)}></UserSettings>
-            <DivServs></DivServs>
+          <DivServs handleCurrentServ={handleCurrentServ}  ></DivServs> 
+   
             <div className={classes.containerMd}>
 
 
                 <div className={classes.DivServList}>
-                    <h4>Nombre serv</h4>
+                    <h4>{currentServ}</h4>
 
                 </div>
                 <section>
@@ -72,7 +78,7 @@ function ServerMessenger() {
             </div>
             <div className={classes.chatContainer}>
                 <header className={classes.headerChat}>
-                    <p>NAME USER</p>
+                    <p>NAME CHANNEL</p>
                     <div className={classes.settingsChat}>
                         <p>Call</p>
                         <p>Videocall</p>
@@ -82,14 +88,14 @@ function ServerMessenger() {
                 </header>
 
                 <div className={classes.conversation}>
-                            <div className={classes.chatBox}>
-                              
-                            </div>
-                            <div className={classes.divInputChat}>
-                                <input type='text' className={classes.inputChat} placeholder="Escriba algo"></input>
-                                <button >Enviar</button>
-                            </div>
-                        </div> 
+                    <div className={classes.chatBox}>
+                        <MessageServer></MessageServer>
+                    </div>
+                    <div className={classes.divInputChat}>
+                        <input type='text' className={classes.inputChat} placeholder="Escriba algo"></input>
+                        <button >Enviar</button>
+                    </div>
+                </div>
 
             </div>
 

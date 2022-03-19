@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from 'react-router-dom'
-import { UserContext } from "../../context/user/user.context";
+import {useEffect, useState } from "react";
+
 
 export function useUsername(){
     const [idUser, updateIdUser] = useState([])

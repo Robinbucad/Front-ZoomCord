@@ -36,6 +36,8 @@ function Messenger() {
 
     },[messages])
 
+
+
     useEffect(() => {
         socket.current.emit("addUser", user._id);
         //  socket.current.on("getUsers", users => {
@@ -87,7 +89,7 @@ function Messenger() {
         getMessages()
     }, [currentChat])
 
-
+ 
 
     const handleSubmit = async (e) => {
         e.preventDefault()

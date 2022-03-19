@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { useUsername } from "../../../hooks/hook-name-user"
 import './style.css'
 
 function CreateServModal(props) {
@@ -12,9 +13,9 @@ function CreateServModal(props) {
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
     const [servName, updateServName] = useState('')
     const [servImg,updateImg] = useState('')
+    const {user} = useUsername()
 
-
-
+    console.log([user._id])
 
 
     const onSubmit = async e => {
@@ -22,7 +23,8 @@ function CreateServModal(props) {
 
         const server = {
             name: servName,
-            img: servImg
+            img: servImg,
+            userId:user._id
         }
 
         const res = await fetch('http://localhost:3001/servers', {
