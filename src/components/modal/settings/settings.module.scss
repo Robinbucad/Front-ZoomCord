@@ -19,6 +19,12 @@
     justify-content: flex-end;
     padding: 6rem;
     color: white;
+    transition: .3s ease all;
+
+    body.dark & {
+        background-color: white;
+        transition: .3s ease all;
+    }
 }
 
 .divBtnSetts{
@@ -35,6 +41,11 @@
     display: flex;
     flex-direction: column;
     gap: 2srem;
+
+    body.dark & {
+        background-color:$LightSecondary;
+        transition: .3s ease all;
+    }
 }
 
 /*CARD USER SETTINGS*/
@@ -97,7 +108,3 @@
    @include flexBox(flex,center,space-between,'','','')
 }
 
-.optDiv{
-    display: flex;
-    gap: 10px;
-}

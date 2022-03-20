@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import './style.css'
+import classes from '../messenger/friendMd.module.scss'
 
 function Conversation({ conversation, currentUser }) {
     const [user, setUser] = useState([])
@@ -35,8 +35,8 @@ function Conversation({ conversation, currentUser }) {
             {user.length===0 ? '' : user.map((e,i) => (
                 <Link key={i} to={`/@me/${e._id}`}>
                     <div>
-                        <div className="conver">
-                            <img className="profile-default" src={e.img} />
+                        <div className={classes.conver}>
+                            <img className={classes.profileDefault} src={e.img} />
                             <p>{e.username}</p>
                         </div>
                     </div>

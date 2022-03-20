@@ -1,6 +1,7 @@
 
 import { GearFill, Headset, Mic } from 'react-bootstrap-icons/'
-import classes from './footerSetts.module.scss'
+//import classes from './footerSetts.module.scss'
+import classes from '../messenger/friendMd.module.scss'
 
 function UserSettingsFooter(props) {
     return (

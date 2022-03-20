@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import CreateServModal from '../../modal/createServ'
 import { useState } from 'react'
-import classes from './servers.module.scss'
+import classes from '../messenger/friendMd.module.scss'
 import logo from '../../../assets/img/discord/serv/servDisc.png'
 import { useEffect } from 'react'
 import { useUsername } from '../../../hooks/hook-name-user'

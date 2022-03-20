@@ -1,5 +1,5 @@
 
-import classes from './message.module.scss';
+import classes from '../messenger/friendMd.module.scss';
 
 function Message({ message}) {
     return (
