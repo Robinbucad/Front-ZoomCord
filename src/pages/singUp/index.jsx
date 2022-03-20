@@ -1,7 +1,7 @@
 import './style.css'
 import { Button, Form } from 'react-bootstrap'
-import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 function SignUp() {
@@ -50,24 +50,6 @@ function SignUp() {
         
     }   
 
-    /**
- *  fetch('http://localhost:4000/users', {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: e.target.email.value,
-                    username: e.target.username.value,
-                    password: e.target.password.value,
-                    date: e.target.date.value
-                }),
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-            .then(r => r.json())
-            .then(d => console.log(d))   
- */
-
-    
 
 
     return (

@@ -5,7 +5,10 @@ export function useFriends(){
     const [friends, updateFriends] = useState([])
     const token = sessionStorage.getItem('token')
 
+
+
     useEffect(() => {
+        
         fetch('http://localhost:3001/users/friends',{
             method:'get',
             headers:{
@@ -13,10 +16,10 @@ export function useFriends(){
             }
         })
         .then(r => r.json())
-        .then(d => updateFriends([d]))
+        .then(d => updateFriends(d))
     },[])
 
 
-    return friends
+    return {friends}
 
 }

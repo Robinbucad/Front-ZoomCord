@@ -8,14 +8,12 @@
 .containerMd{
     @include flexBox(flex, '' , space-between,60px, white,'');
     padding-top: 11px;
-    gap: 2rem;
     flex-direction:column;
     height: 100vh;
     background: $MDColor;
 }
 
 .containerConversations{
-    padding: 10px;
     @include flexBox(flex,'','','','',1rem);
     flex-direction: column;
 }
@@ -31,17 +29,26 @@
     margin-bottom:10px
 }
 
-.mdList{
- padding: 10px
+.secFriends{
+    padding: 10px;
 }
+
+
 
 .headerMdList{
     @include flexBox(flex, center,space-between, '','','');
 }
 
-.headerMdList > p{
-    padding-top: 20px;
+.divFriend{
+    padding: 4px;
 }
+
+.divFriend:hover{
+    background-color: $HoverListFrMd;
+    border-radius: 5px;
+}
+
+
 
 .btnMd{
     @include btn('','',none, none);
@@ -49,9 +56,6 @@
     font-size: 25px;
 }
 
-.chatBox{
-    overflow-y: auto;
-}
 
 
 .userSetts{
@@ -66,6 +70,10 @@
 
 // CHAT MD SETTINGS
 
+.chatBox{
+    overflow-y: auto;
+}
+
 
 .chatFriend{
     display: flex;
@@ -75,7 +83,6 @@
 .chatContainer{
     background-color:$PrimaryClaro;
     width:100%;
-    overflow: auto;
     color: white;
 }
 
@@ -92,7 +99,7 @@
 
 .settingsChat{
     @include flexBox(flex,center,space-between,'',white,'');
-    width: 25%
+    width: 10%
 }
 
 .inputSearchMsgChat{
@@ -115,14 +122,20 @@
 }
 
 .conversation{
-    height: 93%;
+    height: 91%;
     display: flex;
     flex-direction: column;
     color: white;
     gap: 1rem;
     justify-content: flex-end;
     overflow: auto;
-    padding: 20px;
+    padding:30px;
+    width: 60%;
+    position:fixed;
+}
+
+.msgContainer{
+    background-color: red;
 }
 
 //SERVER CSS
@@ -150,3 +163,44 @@
     background-color: $SecondaryOscuro;
 }
 
+
+::-webkit-scrollbar{
+
+    background-color:$MDColor;
+    border-radius: 50px;
+    width: 7px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+ 
+}
+
+
+
+::-webkit-scrollbar-thumb{
+    height: 1rem;
+    background: $SecondaryOscuro;
+    border-radius:12px;
+    cursor: pointer;
+  
+
+}
+
+.userBtn{
+    display: flex;
+    gap: 5rem;
+}
+
+.divInviteFriend{
+    padding: 10px
+}
+.inputInviteFriend{
+   @include inputs($SecondaryOscuro,gray,5px,100%,3px,'')
+}
+
+.bodyModal{
+    background-color: $PrimaryClaro;
+    color: white;
+}

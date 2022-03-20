@@ -7,14 +7,15 @@ import HomePage from './pages/home';
 import PrivateRoute from './components/private-route';
 import Messenger from './components/discordApp/messenger';
 import ValidateEmail from './pages/validation';
-import UserProvider from './context/user/user.provider';
+import InvitationPage from './pages/inviteServ/indes';
+
 import ServerMessenger from './pages/serverMessenger';
 function App() {
 
 
 
   return (
-    <UserProvider>
+
       <div className="App">
         <BrowserRouter>
           <Routes>
@@ -23,9 +24,10 @@ function App() {
             <Route path='/signUp' element={<SignUp></SignUp>}></Route>
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/validate' element={<ValidateEmail></ValidateEmail>}></Route>
-            <Route path='/discord/:id' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
-            <Route path='/:id/' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
-            <Route path='/server/:id' element={<ServerMessenger></ServerMessenger>}></Route>
+            <Route path='/discord/@me/:id' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
+            <Route path='/@me/:id/' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
+            <Route path='/discord/:id' element={<PrivateRoute><ServerMessenger></ServerMessenger></PrivateRoute>}></Route>
+            <Route path='/invite/:id' element={<InvitationPage></InvitationPage>}></Route>
           </Routes>
 
         </BrowserRouter>
@@ -33,7 +35,7 @@ function App() {
 
 
       </div>
-    </UserProvider>
+
 
 
   );

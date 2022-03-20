@@ -1,0 +1,34 @@
+@import '../../../sass/global.scss';
+
+.modalContainer{
+    @include flexBox(flex,'',space-between,20rem,white,'');
+    background-color: $PrimaryClaro;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.inputAdduser{
+    @include inputs($SecondaryOscuro,gray,5px,80%,4px,'');
+
+}
+
+.inputDiv{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.addUserImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.divInfoUserAdd{
+    @include flexBox(flex,center,'','','',10px)
+}
+
+.divAddUser{
+   @include flexBox(flex,center, space-between,'','',10px)
+}

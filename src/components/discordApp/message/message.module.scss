@@ -10,3 +10,24 @@
     background-color: $hoverMsg;
     border-radius: 10px;
 }
+
+.imgMsg{
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.dateMsg{
+    font-size: 10px;
+    color: gray;
+}
+
+.usernameMsg{
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.msgText{
+    font-size: 13px;
+}

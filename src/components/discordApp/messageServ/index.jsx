@@ -2,16 +2,21 @@
 import classes from '../message/message.module.scss';
 
 function MessageServer({message}) {
-    console.log(message)
-    return(
+
+
+    return (
         <div className={classes.msg}>
             <div>
-                <p>Img</p>
+                <img className={classes.imgMsg} src={message.img}></img>
             </div>
-            
+
             <div>
-                <p>{message.text}</p>
-                <p>1 hour ago</p>
+                <div className={classes.usernameMsg}>
+                    <p>{message.username}</p>
+                    <p className={classes.dateMsg}>{message.date}</p>                 
+                </div>
+
+                <p className={classes.msgText}>{message.text}</p>
             </div>
         </div>
     )

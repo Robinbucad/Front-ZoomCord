@@ -5,13 +5,13 @@ export function useUsername(){
     const [idUser, updateIdUser] = useState([])
     const [user,upadateUser] = useState([])
     const token = sessionStorage.getItem('token')
-
+    const tokenLocal = localStorage.getItem('token')
 
     useEffect(() => {
         fetch(`http://localhost:3001/users`,{
             method:'get',
             headers:{
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token || tokenLocal}`
             }
         })
         .then(r => r.json())

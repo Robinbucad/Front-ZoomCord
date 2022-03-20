@@ -9,14 +9,13 @@ function CreateServModal(props) {
 
     const token = sessionStorage.getItem('token')
     const [changeModa, updateChangeModal] = useState(false)
+    const [modalShow, setModalShow] = useState(false);
     const [changeModalClub, updateChangeModalClub] = useState(false)
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
     const [servName, updateServName] = useState('')
     const [servImg,updateImg] = useState('')
     const {user} = useUsername()
-
-    console.log([user._id])
-
+    let navigate = useNavigate()
 
     const onSubmit = async e => {
 
@@ -26,7 +25,6 @@ function CreateServModal(props) {
             img: servImg,
             userId:user._id
         }
-
         const res = await fetch('http://localhost:3001/servers', {
             method: 'post',
             headers: {
@@ -36,7 +34,6 @@ function CreateServModal(props) {
             body: JSON.stringify(server)
         })
         const dat = await res.json()
-
     }
 
 

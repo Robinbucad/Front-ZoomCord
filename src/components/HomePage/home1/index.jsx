@@ -9,7 +9,6 @@ function HomePart1() {
 
     const [t] = useTranslation("header")
     const [h] = useTranslation("home")
-    const [theme, updateTheme] = useState(false)
     const [btn,setBtn] = useState(false)
 
     const handleClick = e => {    
@@ -17,10 +16,10 @@ function HomePart1() {
             document.body.classList.toggle('light')
         if(btn === false){
             setBtn('active')
-            console.log('hola')
+      
         }else{
             setBtn(false)
-            console.log('adios')
+
         }
     }
 

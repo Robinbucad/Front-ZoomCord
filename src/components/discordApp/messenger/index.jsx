@@ -8,7 +8,8 @@ import UserSettingsFooter from "../footerUserSettings";
 import classes from './friendMd.module.scss'
 import { io } from 'socket.io-client'
 import { useRef } from "react";
-
+import HeaderApp from "../headerApp";
+import FollowUser from "../../modal/addFriend";
 
 function Messenger() {
     const token = sessionStorage.getItem('token')
@@ -20,29 +21,26 @@ function Messenger() {
     const [fullscreen] = useState(true);
     const [show, setShow] = useState(false);
     const socket = useRef()
- 
+    const [hide, updateHide] = useState(false)
+    const [modalShow, setModalShow] = useState(false);
 
-    
 
     useEffect(() => {
         socket.current = io("ws://localhost:4000")
-      
+
     }, [])
 
     useEffect(() => {
         socket.current.on("getMessage", (data) => {
-            setMessages([...messages,data])
+            setMessages([...messages, data])
         })
 
-    },[messages])
+    }, [messages])
 
 
 
     useEffect(() => {
         socket.current.emit("addUser", user._id);
-        //  socket.current.on("getUsers", users => {
-
-        //  })
     }, [user])
 
 
@@ -89,33 +87,42 @@ function Messenger() {
         getMessages()
     }, [currentChat])
 
- 
+    const date = new Date()
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+
+    const takeDate = `${hours}:${minutes}`
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const message = {
-            senderId: user._id,
-            text: newMessage,
-            conversationId: currentChat._id,
-        };
 
-         socket.current.emit("sendMessage",message)
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            const message = {
+                date: takeDate,
+                img: user.img,
+                username: user.username,
+                senderId: user._id,
+                text: newMessage,
+                conversationId: currentChat._id,
+            };
 
-        try {
-            const res = await fetch('http://localhost:3001/message/', {
-                method: 'post',
-                body: JSON.stringify(message),
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+            socket.current.emit("sendMessage", message)
+            try {
+                const res = await fetch('http://localhost:3001/message/', {
+                    method: 'post',
+                    body: JSON.stringify(message),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
 
-                },
-            })
-            const dat = await res.json()
-            setMessages([...messages, dat])
-            setNewMessage('')
-        } catch (err) {
-            console.log(err)
+                    },
+                })
+                const dat = await res.json()
+                setMessages([...messages, dat])
+                setNewMessage('')
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 
@@ -129,43 +136,41 @@ function Messenger() {
         }
     }
 
+    const handleConv = e => {
+        console.log('')
+    }
 
 
 
     return (
         <div className={classes.containerApp}>
+             <FollowUser
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
             <UserSettings show={show} fullscreen={fullscreen} setShow={() => handleShow(false)}></UserSettings>
-            <DivServs></DivServs>
+            <DivServs handleCurrentServ={handleConv}></DivServs>
             <div className={classes.containerMd}>
 
 
                 <div className={classes.inputDivMd}>
                     <input className={classes.inputSearch} type='text' placeholder='Busca una conversación'></input>
                 </div>
-                <div>
-                    <div >
+
+                <section className={classes.secFriends}>
+                    <header className={classes.headerMdList}>
                         <p>Amigos</p>
-                    </div>
+                        <button onClick={() => setModalShow(true)} className={classes.btnMd} >+</button>
+                    </header>
 
-                    <div >
-                        <p>Nitro</p>
-                    </div>
-                </div>
-
-
-                <header className={classes.headerMdList}>
-                    <p >MENSAJES DIRECTOS</p>
-                    <button className={classes.btnMd} >+</button>
-                </header>
-
-                <section className={classes.containerConversations}>
-                    {conversations.map((e, i) => (
-                        <div key={i} onClick={() => setCurrentChat(e)}>
-                          <Conversation key={i} conversation={e} currentUser={user}></Conversation>
-                        </div>
-                    ))}
+                    <section className={classes.containerConversations}>
+                        {conversations.map((e, i) => (
+                            <div className={classes.divFriend} key={i} onClick={() => setCurrentChat(e)}>
+                                <Conversation key={i} conversation={e} currentUser={user}></Conversation>
+                            </div>
+                        ))}
+                    </section>
                 </section>
-
                 <div className={classes.userSetts} >
                     <UserSettingsFooter handleShow={handleShow}></UserSettingsFooter>
 
@@ -173,32 +178,25 @@ function Messenger() {
                 </div>
             </div>
             <div className={classes.chatContainer}>
-                <header className={classes.headerChat}>
-                    <p>NAME USER</p>
-                    <div className={classes.settingsChat}>
-                        <p>Call</p>
-                        <p>Videocall</p>
-                        <input placeholder="Buscar" className={classes.inputSearchMsgChat} type='text'></input>
-                    
-                    </div>
-                </header>
+
+                <HeaderApp></HeaderApp>
 
                 {
 
                     currentChat ?
                         <div className={classes.conversation}>
+
                             <div className={classes.chatBox}>
-                                {messages.map(m => (
-                                    <div>
-                                        <Message message={m}></Message>
-                                    </div>
+                                {messages.map((m, i) => (
+
+                                    <Message key={i} message={m} currentChat={currentChat} conversation={conversations} ></Message>
+
                                 ))}
                             </div>
                             <div className={classes.divInputChat}>
-                                <input type='text' onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className={classes.inputChat} placeholder="Escriba algo"></input>
-                                <button onClick={handleSubmit}>Enviar</button>
+                                <input type='text' onChange={(e) => setNewMessage(e.target.value)} value={newMessage} onKeyPress={handleSubmit} className={classes.inputChat} placeholder="Escriba algo"></input>
                             </div>
-                        </div> : <p>Open conversation to start a chat</p>
+                        </div> : <p>Abre una conversaion</p>
                 }
 
             </div>

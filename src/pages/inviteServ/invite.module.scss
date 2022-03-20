@@ -1,0 +1,46 @@
+@import '../../sass/global.scss';
+
+
+.invitationContainer{
+    background:url('../../assets/img/signup.jpg');
+    height: 100vh;
+    @include flexBox(flex,center,center,'','','')
+}
+
+.cardInvitation{
+    background-color: $HoverListFrMd;
+    color: white;
+    width: 24rem;
+    height: 15rem;
+    display: flex;
+    padding-top: 20px;
+    justify-content: space-between;
+}
+
+
+
+.btnInvite{
+    width: 100%;
+}
+
+.bodyCardInv{
+    @include flexBox(flex,center,space-between,'','','');
+    flex-direction:column;
+}
+
+.imgServInv{
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+}
+
+.divImgInv{
+    display: flex;
+    justify-content: center;
+}
+
+.divInfoServ{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

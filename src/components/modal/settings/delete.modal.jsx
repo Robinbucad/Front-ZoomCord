@@ -6,7 +6,7 @@ function DeleteUser(props){
     const token = sessionStorage.getItem('token')
     let navigate = useNavigate()
     const {idUser} = useUsername()
-    console.log(idUser)
+
 
     const handleDeleteClick = async(e) => {
         e.preventDefault()
