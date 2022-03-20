@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-import './style.scss'
+import classes from './footer.module.scss'
 import { useTranslation } from 'react-i18next'
 import ES from '../../../assets/img/ES.svg'
 import { useState } from 'react'
@@ -33,16 +33,16 @@ function HomeFooter() {
 
 
     return (
-        <footer className="footer-home">
-            <div className='part1-footer'>
+        <footer className={classes.footerHome}>
+            <div className={classes.part1Footer}>
                 <div>
                     
-                    <h2 className='title-footer'>{h("home.footerTitle")}</h2>
+                    <h2 className={classes.titleFooter}>{h("home.footerTitle")}</h2>
                     <div>
-                    {flag === ES ? <img className='img-flag' src={ES}></img> :  <img className='img-flag' src={KY}></img>}
+                    {flag === ES ? <img className={classes.imgFlag} src={ES}></img> :  <img className='img-flag' src={KY}></img>}
                         <select className='select-lng' onChange={handleChange}>
-                            <option className='opt-select' value='es'> Español</option>
-                            <option className='opt-select' value='en'> English</option>
+                            <option className={classes.optSelect} value='es'> Español</option>
+                            <option className={classes.optSelect} value='en'> English</option>
                         </select>
                     </div>
 
@@ -51,12 +51,12 @@ function HomeFooter() {
                     </div>
                 </div>
                 <div>
-                    <p className='my-name'>{h("home.author")}</p>
+                    <p className={classes.myName}>{h("home.author")}</p>
                 </div>
             </div>
-            <div className='part2-footer'>
+            <div className={classes.part2Footer}>
                 <h1>Foto discord</h1>
-                <Link to='/signUp'> <button className='btn-login-footer'>{h("home.signup")}</button></Link>
+                <Link to='/signUp'> <button className={classes.btnLoginFooter}>{h("home.signup")}</button></Link>
             </div>
         </footer>
     )

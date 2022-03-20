@@ -1,9 +1,10 @@
-import './style.scss'
+import classes from './landing.module.scss'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaSun, FaMoon } from 'react-icons/fa'
 import { useState } from 'react'
+
 
 function HomePart1() {
 
@@ -12,27 +13,25 @@ function HomePart1() {
     const [btn,setBtn] = useState(false)
 
     const handleClick = e => {    
-            document.body.classList.toggle('dark')    
-            document.body.classList.toggle('light')
+            document.body.classList.toggle(classes.dark)    
+            document.body.classList.toggle(classes.light)
         if(btn === false){
-            setBtn('active')
+            setBtn(classes.active)
       
         }else{
-            setBtn(false)
-
+            setBtn(true)
         }
     }
 
-    console.log(btn)
     return (
         <React.Fragment>
-            <section className="home-part1-container">
+            <section className={classes.homePart1Container}>
                 <div>
                     <div>
-                        <header className='header-homepage'>
+                        <header className={classes.headerHomepage}>
 
                             <p>Imagen dsicord</p>
-                            <ul className='nav-list'>
+                            <ul className={classes.navList}>
                                 <li>{t("header.download")}</li>
                                 <li>Nitro</li>
                                 <li>{t("header.security")}</li>
@@ -40,24 +39,24 @@ function HomePart1() {
                                 <li>{t("header.blog")}</li>
                                 <li>{t("header.employees")}</li>
                             </ul>
-                            <button onClick={handleClick} className='switch' id={btn} >
+                            <button onClick={handleClick} className={classes.switch} id={btn} >
                                 <span><FaSun></FaSun></span>
                                 <span><FaMoon></FaMoon></span>
                             </button>
-                            <Link to='/login'> <button className='btn-homepage-login'>{t("header.login")}</button></Link>
+                            <Link to='/login'> <button className={classes.btnHomepageLogin}>{t("header.login")}</button></Link>
                         </header>
                     </div>
-                    <div className='container-p1'>
-                        <div className='homepage1-container' >
+                    <div className={classes.containerP1}>
+                        <div className={classes.homepage1Container} >
                             <div>
-                                <h1 className='title-homepage'>{h("home.titleH1")}</h1>
+                                <h1 className={classes.titleHomepage}>{h("home.titleH1")}</h1>
                             </div>
-                            <div className='text-homepage'>
+                            <div className={classes.textHomepage}>
                                 <p>{h("home.textH1")}</p>
                             </div>
-                            <div className='div-btns-home'>
-                                <button className='btn-dnWindows'>{h("home.downloadWin")}</button>
-                                <button className='bnt-openOnNav'>{h("home.openOnNav")}</button>
+                            <div className={classes.divBtnsHome}>
+                                <button className={classes.btnDnWindows}>{h("home.downloadWin")}</button>
+                                <button className={classes.bntOpenOnNav}>{h("home.openOnNav")}</button>
                             </div>
                         </div>
                     </div>

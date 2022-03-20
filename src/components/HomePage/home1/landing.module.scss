@@ -6,7 +6,7 @@
 body{
     background-color: white;
         &.dark{
-            background-color: '';
+            background-color:red;
             transition: .3s ease all;
         }
         &.light{
@@ -16,52 +16,41 @@ body{
      
 }
 
-.home-part1-container{
+.homePart1Container{
     height: 70vh;
     background-image: url('../../../assets//img/prueba.png');
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 
-
-
-.header-homepage{
-    color: white;
-    display: flex;
-    justify-content: space-around;
+.headerHomepage{
+    @include flexBox(flex,center,space-around,'',white,'');
     padding: 1.5rem;
-    align-items: center;
     font-weight: bold;
     @include breakpoint(md){
         font-size: 14px;   
     }
-
 }
 
-.nav-list{
-    display: flex;
+.navList{
+    @include flexBox(flex,'',space-between,'','','');
     list-style: none;
     width: 32%;
-    justify-content: space-between;
-
     @include breakpoint(md){
-        display: flex;
-        justify-content: space-around;
+        @include flexBox(flex,'',space-around,'','','');
         width: 100%;     
     }
    
 }
 
-.btn-homepage-login{
+.btnHomepageLogin{
     padding: 0.7rem;
     width: 7rem;
     border-radius: 30px;
     border: none;
     font-size: 15px;
 
-    
     body.dark & {
         background-color:$SecondaryOscuro;
         transition: .3s ease all;   
@@ -72,7 +61,7 @@ body{
     }
 }
 
-.homepage1-container{
+.homepage1Container{
     color: white;
     display: flex;
     flex-direction: column;
@@ -84,7 +73,7 @@ body{
     }
 }
 
-.title-homepage{
+.titleHomepage{
     font-weight: bold;
     font-size: 3.95rem;
     @include breakpoint(md){ 
@@ -94,14 +83,12 @@ body{
     }
 }
 
-.container-p1{
-    display: flex;
-    justify-content: center;
+.containerP1{
+    @include flexBox(flex,'',center,'','','');
     padding: 6rem;
-   
 }
 
-.text-homepage{
+.textHomepage{
     text-align: center;
     @include breakpoint(md){ 
         font-size: 20px;
@@ -109,7 +96,7 @@ body{
     }
 }
 
-.div-btns-home{
+.divBtnsHome{
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -122,8 +109,9 @@ body{
     }
 }
 
-.btn-dnWindows{
+.btnDnWindows{
     padding: 1rem;
+    font-size: 12px;
     width: 46%;
     border-radius: 30px;
     border: none;
@@ -136,8 +124,9 @@ body{
 
 }
 
-.bnt-openOnNav{
+.bntOpenOnNav{
     padding: 1rem;
+    font-size: 12px;
     width: 46%;
     border-radius: 30px;
     border: none;
@@ -154,7 +143,7 @@ body{
 
 /*PART 2 OF HOME PAGE*/
 
-.part2-home-container{
+.part2HomeContainer{
     height: 70vh;
     display: flex;
     justify-content: center;
@@ -170,7 +159,7 @@ body{
     
 }
 
-.info-home2-container{
+.infoHome2Container{
     display: flex;
     width: 65%;
     justify-content: space-between;
@@ -179,12 +168,11 @@ body{
 
 }
 
-.img-home2{
-    width: 100%;
-   
+.imgHome2{
+    width: 100%;  
 }
 
-.title-home2{
+.titleHome2{
     font-size: 3rem;
     font-weight: bold;
     @include breakpoint(md){ 
@@ -194,57 +182,49 @@ body{
     }
 }
 
-.div-info-home2{
-    width: 40%;
-    
+.divInfoHome2{
+    width: 40%;  
 }
 
 /*PART 3 HOME*/
 
 
 
-.part3-home-container{
+.part3HomeContainer{
+    @include flexBox(flex,center,center,'','','');
     height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #F6F6F6;
 
     body.dark & {
         background-color:$PrimaryClaro;
         color: white;
-    }
-   
-  
+    } 
 }
 
 /*PART 4 HOME*/
 
-.part4-home-container{
+.part4HomeContainer{
+    @include flexBox(flex,center,center,'','','');
     height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: white;
+
     body.dark & {
         background-color: $SecondaryOscuro;
         color: white;
-    }
-
-   
+    }   
 }
 
 /*PART 5 HOME*/
 
-.part5-home-container{
+.part5HomeContainer{
+    @include flexBox(flex,center,center,'','','');
     height: 130vh;
-    display: flex;
-    justify-content: center;
     flex-direction: column;
-    align-items: center;
+    display: flex;
     background-color:#F6F6F6;
     padding-bottom: 10%;
     padding-top: 10%;
+
     body.dark & {
         background-color: $PrimaryClaro;
         color: white;
@@ -256,7 +236,7 @@ body{
     }
 }
 
-.div-info-home5{
+.divInfoHome5{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -264,28 +244,28 @@ body{
     height: 30%;
 }
 
-.title-home5{
+.titleHome5{
     font-weight: bold;
     font-size: 3rem;
     text-align: center;
 }
 
-.text-home5{
+.textHome5{
     text-align: center;
 }
 
-.img-home5{
+.imgHome5{
     width: 75rem;
 }
 
-.footer-home5{
+.footerHome5{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
 }
 
-.btn-readyHome5{
+.btnReadyHome5{
     background-color:#7983F5 ;
     color: white;
     border: none;
@@ -340,4 +320,6 @@ body{
     }
 }
 
+
+//ANTES 340 LINEAS
 

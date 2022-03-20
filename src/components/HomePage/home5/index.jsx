@@ -1,28 +1,30 @@
 import { useTranslation } from 'react-i18next'
 import home5img from '../../../assets/img/home5.svg'
+import classes from '../home1/landing.module.scss'
+
 
 function HomePart5(){
 
     const [h] = useTranslation("home")
 
     return(
-        <section className="part5-home-container">
+        <section className={classes.part5HomeContainer}>
  
         
-            <div className='div-info-home5'>
+            <div className={classes.divInfoHome5}>
                
-                <h1 className='title-home5'>{h("home.titleH5")}</h1>
+                <h1 className={classes.titleHome5}>{h("home.titleH5")}</h1>
                
-                <p className="text-home5">{h("home.textH5")}</p>
+                <p className={classes.textHome5}>{h("home.textH5")}</p>
             </div>
 
             <div>
-                <img className='img-home5' src={home5img}></img>
+                <img className={classes.imgHome5} src={home5img}></img>
             </div>
 
-            <footer className='footer-home5'>
+            <footer className={classes.footerHome5}>
                 <h1>{h("home.text2H5")}</h1>
-                <button className='btn-readyHome5'>{h("home.downloadWinFooter")}</button>
+                <button className={classes.btnReadyHome5}>{h("home.downloadWinFooter")}</button>
             </footer>
      
     </section>
