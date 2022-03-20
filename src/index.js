@@ -13,6 +13,7 @@ import home_es from './translations/es/home.json'
 import registerLogin_es from './translations/es/register.login.json'
 import registerLogin_en from './translations/en/register.login.json'
 
+
 i18next.init({
   interpolation: { escapeValue: false },
   lng:"es",
@@ -33,9 +34,11 @@ i18next.init({
 
 ReactDOM.render(
   <React.StrictMode>
+   
     <I18nextProvider i18n={i18next}>
       <App />
     </I18nextProvider>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

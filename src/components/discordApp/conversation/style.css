@@ -1,0 +1,14 @@
+
+.conver{
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-default{
+    width: 25px;
+    border-radius: 50%;
+}

@@ -1,22 +1,41 @@
 import React, { useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
+import { useUsername } from "../../../hooks/hook-name-user"
 import './style.css'
 
 function CreateServModal(props) {
 
+    const token = sessionStorage.getItem('token')
     const [changeModa, updateChangeModal] = useState(false)
+    const [modalShow, setModalShow] = useState(false);
     const [changeModalClub, updateChangeModalClub] = useState(false)
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
-
     const [servName, updateServName] = useState('')
-    
+    const [servImg,updateImg] = useState('')
+    const {user} = useUsername()
+    let navigate = useNavigate()
+
+    const onSubmit = async e => {
 
 
-    const onSubmit = e => {
-        e.preventDefault()
-       console.log('hola')
+        const server = {
+            name: servName,
+            img: servImg,
+            userId:user._id
+        }
+        const res = await fetch('http://localhost:3001/servers', {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(server)
+        })
+        const dat = await res.json()
     }
+
 
     return (
         <React.Fragment>
@@ -117,14 +136,15 @@ function CreateServModal(props) {
 
                     <div>
                         <p className="name-serv">NOMBRE DEL SERVIDOR</p>
-                        <input className="input-name-serv" onChange={(e) => updateServName(e.target.value)}  type='text' placeholder='El servidor de user'></input>
+                        <input className="input-name-serv" onChange={(e) => updateServName(e.target.value)} type='text' placeholder='El servidor de user'></input>
+                        <input className="input-name-serv" onChange={(e) => updateImg(e.target.value)} type='text' placeholder='Imangen del servidor'></input>
                         <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
                     </div>
 
                 </Modal.Body>
                 <Modal.Footer className="footer-modal">
                     <button className="btn-back-modal" onClick={() => updateChangeModalClub(false)}>Atras</button>
-                    <Button className="btn-modal-create"  disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
+                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
                 </Modal.Footer>
 
 
@@ -132,45 +152,52 @@ function CreateServModal(props) {
 
             {changeModalFriend === false ? '' :
                 <Modal
-                {...props}
-                size="m"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Personaliza tu servidor
-                    </Modal.Title>
+                    {...props}
+                    size="m"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                            Personaliza tu servidor
+                        </Modal.Title>
 
-                </Modal.Header>
-                <Modal.Header>
-                    <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter' }}>
-                        Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="container-opts-modal">
-                    <div className="upload-container">
-                        <div className="div-upload-photo">
-                            <p>UPLOAD</p>
+                    </Modal.Header>
+                    <Modal.Header>
+                        <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter' }}>
+                            Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="container-opts-modal">
+                        <div className="upload-container">
+                            <div className="div-upload-photo">
+                                <p>UPLOAD</p>
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div >
-                        <p className="name-serv">NOMBRE DEL SERVIDOR</p>
-                        <input className="input-name-serv" name='nameServ'  type='text' placeholder='El servidor de user'></input>
-                        <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
-                    </div>
-
-                </Modal.Body>
-                <Modal.Footer className="footer-modal">
-                    <button className="btn-back-modal" onClick={() => updateChangeModalFriend(false)}>Atras</button>
-                    <Button  type='submit' className="btn-modal-create"  disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
-                </Modal.Footer>
 
 
-            </Modal>}
-          
+                        <div >
+                            <p className="name-serv">NOMBRE DEL SERVIDOR</p>
+                            <input className="input-name-serv" name='nameServ' onChange={e => updateServName(e.target.value)} type='text' placeholder='El servidor de user'></input>
+                            <input className="input-name-serv" onChange={(e) => updateImg(e.target.value)} type='text' placeholder='Imangen del servidor'></input>
+                            <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
+                        </div>
+
+
+
+
+
+                    </Modal.Body>
+                    <Modal.Footer className="footer-modal">
+                        <button className="btn-back-modal" onClick={() => updateChangeModalFriend(false)}>Atras</button>
+                        <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
+                    </Modal.Footer>
+
+
+                </Modal>}
+
         </React.Fragment>
     )
 }

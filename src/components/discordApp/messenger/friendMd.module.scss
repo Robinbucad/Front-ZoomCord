@@ -1,0 +1,206 @@
+
+@import '../../../sass/global.scss';
+
+.containerApp{
+    display: flex
+}
+
+.containerMd{
+    @include flexBox(flex, '' , space-between,60px, white,'');
+    padding-top: 11px;
+    flex-direction:column;
+    height: 100vh;
+    background: $MDColor;
+}
+
+.containerConversations{
+    @include flexBox(flex,'','','','',1rem);
+    flex-direction: column;
+}
+
+.inputDivMd{
+    padding-top: 10px;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+}
+
+.inputSearch{
+    @include inputs($SecondaryOscuro, gray , 5px, 100%, 3.5px,'');
+    margin-bottom:10px
+}
+
+.secFriends{
+    padding: 10px;
+}
+
+
+
+.headerMdList{
+    @include flexBox(flex, center,space-between, '','','');
+}
+
+.divFriend{
+    padding: 4px;
+}
+
+.divFriend:hover{
+    background-color: $HoverListFrMd;
+    border-radius: 5px;
+}
+
+
+
+.btnMd{
+    @include btn('','',none, none);
+    color: gray;
+    font-size: 25px;
+}
+
+
+
+.userSetts{
+
+    margin-top: auto;
+}
+
+.activeUsersDiv{
+    width: 25%;
+    background-color: $PrimaryClaro;
+}
+
+// CHAT MD SETTINGS
+
+.chatBox{
+    overflow-y: auto;
+}
+
+
+.chatFriend{
+    display: flex;
+    background-color: green;
+}
+
+.chatContainer{
+    background-color:$PrimaryClaro;
+    width:100%;
+    color: white;
+}
+
+
+.inputChatSearch{
+    @include inputs($SecondaryOscuro, gray , 5px, 40%,2px,'');
+}
+
+.headerChat{
+    @include flexBox(flex, center , space-between,73px, white,'');
+    border-bottom: 1px solid gray;
+    background-color:$PrimaryClaro;
+}
+
+.settingsChat{
+    @include flexBox(flex,center,space-between,'',white,'');
+    width: 10%
+}
+
+.inputSearchMsgChat{
+    @include inputs($SecondaryOscuro,white,5px,'',3px,'')
+}
+
+.groupHeaderChat{
+    @include flexBox(flex,center,space-between,'','','');
+    width:40%
+}
+
+.inputChat{
+    background-color: $HoverListFrMd;
+    @include inputs(#40444B,gray, 5px, 100%,10px,'')
+}
+
+.divInputChat{
+    padding-top: 1rem;
+    @include flexBox(flex,center,center,'','','');
+}
+
+.conversation{
+    height: 91%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 1rem;
+    justify-content: flex-end;
+    overflow: auto;
+    padding:30px;
+    width: 60%;
+    position:fixed;
+}
+
+.msgContainer{
+    background-color: red;
+}
+
+//SERVER CSS
+
+.DivServList{
+
+    border-bottom: 1px solid gray;
+    padding: 12px;
+}
+
+.imgServ{
+    @include servLog(55px, 50%,$HoverListFrMd,green);
+    height: 55px;
+}
+
+.imgServ:hover{
+    transition: 0.4s;
+    border-radius: 35%;
+}
+
+.containerServ{
+    @include flexBox(flex,center, '','','',1rem);
+    flex-direction: column;
+    padding: 10px;
+    background-color: $SecondaryOscuro;
+}
+
+
+::-webkit-scrollbar{
+
+    background-color:$MDColor;
+    border-radius: 50px;
+    width: 7px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+ 
+}
+
+
+
+::-webkit-scrollbar-thumb{
+    height: 1rem;
+    background: $SecondaryOscuro;
+    border-radius:12px;
+    cursor: pointer;
+  
+
+}
+
+.userBtn{
+    display: flex;
+    gap: 5rem;
+}
+
+.divInviteFriend{
+    padding: 10px
+}
+.inputInviteFriend{
+   @include inputs($SecondaryOscuro,gray,5px,100%,3px,'')
+}
+
+.bodyModal{
+    background-color: $PrimaryClaro;
+    color: white;
+}

@@ -1,0 +1,51 @@
+
+.footerHome{
+    background-color: #23272A;
+    color: white;
+    padding: 2rem;
+    
+}
+
+.part1Footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.part2Footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.titleFooter{
+    color: #5865F2;
+    font-weight: bold;
+}
+
+.myName{
+    color: #5865F2;
+}
+
+.btnLoginFooter{
+    padding: 1rem;
+    width: 7rem;
+    border-radius: 30px;
+    border: none;
+    background-color: #7983F5;
+    color: white;
+    font-weight: bold;
+}
+
+.select-lng{
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.optSelect{
+    color: black;
+}
+
+.imgFlag{
+    width: 20px;
+}

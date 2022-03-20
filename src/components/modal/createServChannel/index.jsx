@@ -5,14 +5,8 @@ import './style.css'
 function CreateServChannel(props) {
     return (
         <React.Fragment>
-            <Modal
-                {...props}
-                size="m"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
+            <Modal {...props} size="m" aria-labelledby="contained-modal-title-vcenter" centered >
                 
-
-            >
                 <section className="card-modal-channel">
                     <Modal.Header className="header-modal-channels" closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">

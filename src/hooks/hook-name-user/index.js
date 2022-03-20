@@ -1,18 +1,26 @@
-import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom'
+import {useEffect, useState } from "react";
+
 
 export function useUsername(){
-    const [username, updateUsername] = useState([])
-    
-    let { id } = useParams()
-    console.log(id)
+    const [idUser, updateIdUser] = useState([])
+    const [user,upadateUser] = useState([])
+    const token = sessionStorage.getItem('token')
+    const tokenLocal = localStorage.getItem('token')
+
     useEffect(() => {
-        fetch(`http://localhost:4000/users/${id}`)
+        fetch(`http://localhost:3001/users`,{
+            method:'get',
+            headers:{
+                Authorization: `Bearer ${token || tokenLocal}`
+            }
+        })
         .then(r => r.json())
-        .then(d => updateUsername(d.username))
-    })
+        .then(d => {   
+            updateIdUser(d._id)
+            upadateUser(d)
+        })
+    },[])
 
-
-    return username
+    return {user,upadateUser,idUser}
 
 }

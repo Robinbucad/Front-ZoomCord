@@ -1,13 +1,16 @@
 import { Modal, Button } from 'react-bootstrap'
 import { useState } from 'react';
-import './style.css'
+import classes from './settings.module.scss'
 import UserProfileSettings from './profile';
+import DeleteUser from './delete.modal';
+import { useNavigate } from 'react-router-dom';
 
 
 function UserSettings(props) {
-
+    let navigate = useNavigate()
     const [accounteSettings, updateAccountSettings] = useState(true)
     const [userProfileSettings, updateUserProfileSettings] = useState(false)
+    const [modalShow, setModalShow] = useState(false)
 
     const handleClickAcc = e => {
         e.preventDefault()
@@ -29,42 +32,47 @@ function UserSettings(props) {
         }
     }
 
+    const handleCloseSession = () => {
+        sessionStorage.removeItem('token')
+        navigate('/')
+    }
+    
+
     return (
         
 
-        <section className='container-settings-father'>
+        <section >
             
 
             <Modal show={props.show} fullscreen={props.fullscreen} onHide={props.setShow}>
 
                 {accounteSettings === true ? 
-             <Modal.Body className='container-modal-settings' >
+             <Modal.Body className={classes.containerModalSettings} >
 
-             <section className='container-settings'>
+             <section className={classes.containerSettings}>
 
-                 <section className='list-settings' >
-                     <div className='div-btns-setts'>
+                 <section className={classes.listSettings} >
+                     <div className={classes.divBtnSetts}>
                          <Button variant='primary' onClick={handleClickAcc}>Mi cuenta</Button>
                          <Button variant='primary' onClick={handleClickUser}>Perfil de usuario</Button>
                      </div>
 
                  </section>
 
-                 <section className='setting-changes'>
+                 <section className={classes.settingChanges}>
                      <Modal.Header style={{ border: 'none' }} closeButton><p>Ajustes</p></Modal.Header>
 
                      <article className='card-user'>
-                         <header className='header-user-settings'>
+                         <header className={classes.headerUserSettings}>
                              <h1>BeZzK</h1>
-                             <Button variant="primary">Editar perfil de</Button>
                          </header>
 
-                         <div className="body-user-container" >
+                         <div className={classes.bodyUserContainer} >
 
-                             <div className="body-user-settings">
+                             <div className={classes.bodyUserSettings}>
 
-                                 <div className='userName-settings'>
-                                     <p className='userName'>NOMBRE DE USUARIO</p>
+                                 <div className={classes.usernSettings}>
+                                     <p >NOMBRE DE USUARIO</p>
                                      <p>BeZzK</p>
                                  </div>
                                  <div>
@@ -72,10 +80,10 @@ function UserSettings(props) {
                                  </div>
                              </div>
 
-                             <div className="body-user-settings">
+                             <div className={classes.bodyUserSettings}>
 
-                                 <div className='userName-settings'>
-                                     <p className='userName'>CORREO ELECTRONICO</p>
+                                 <div >
+                                     <p >CORREO ELECTRONICO</p>
                                      <p>Robin.bucad6@gmail.com</p>
                                  </div>
                                  <div>
@@ -83,9 +91,8 @@ function UserSettings(props) {
                                  </div>
                              </div>
 
-                             <div className="body-user-settings">
-
-                                 <div className='userName-settings'>
+                             <div className={classes.bodyUserSettings}>
+                                 <div >
                                      <p className='userName'>NUMERO DE TELEFONO</p>
                                      <p>616923547</p>
                                  </div>
@@ -98,25 +105,15 @@ function UserSettings(props) {
                          </div>
                      </article>
                      <hr />
-                     <section className='password-settings'>
-                         <h1 className='title-pass-setts'>Contraseña y autenticación</h1>
+                     <section className={classes.passwordSettings}>
+                         <h1 className={classes.titlePassSetts}>Contraseña y autenticación</h1>
                          <Button variant="info">Cambiar contraseña</Button>
-                         <div >
-                             <p className='auth-pass'>AUTENTICACIÓN DE DOS FACTORES</p>
-                             <p className='auth-pass-text'>Protege tu cuenta de Discord con una capa extra de seguridad. Una vez configurada, tendrás que introducir
-                                 tanto tu contraseña como un código de autenticación desde tu telédono para iniciar sesión.
-                             </p>
-                         </div>
-
-                         <Button variant="info">Habilitar autenticación de dos factores</Button>
                      </section>
                      <hr />
-                     <section className='del-acc-sett'>
-                         <p>SUPRESIÓN DE CUENTA</p>
-                         <p>Puedes recuperar la cuenta en cualquier momento después de dehabilitarla</p>
+                     <section>
                          <div className='div-btns-remove'>
-                             <Button variant="danger">Deshabilitar Cuenta</Button>
-                             <Button variant="outline-danger">Eliminar cuenta</Button>
+                             <Button onClick={handleCloseSession} variant="danger">Cerrar Sesion</Button>
+                             <Button onClick={() => setModalShow(true)} variant="outline-danger">Eliminar cuenta</Button>
                          </div>
 
                      </section>
@@ -134,6 +131,7 @@ function UserSettings(props) {
             {userProfileSettings === false ? '' : <UserProfileSettings handleClickAcc={handleClickAcc}></UserProfileSettings>}
                
             </Modal>
+            <DeleteUser show={modalShow} onHide={() => setModalShow(false)}></DeleteUser>
         </section>
 
 

@@ -1,7 +1,7 @@
 import './style.css'
 import { Button, Form } from 'react-bootstrap'
-import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 function SignUp() {
@@ -30,7 +30,7 @@ function SignUp() {
     const onSubmit = e => {
         e.preventDefault()
         const userFormData = new FormData(e.target);
-        fetch('http://localhost:4000/users', {
+        fetch('http://localhost:3001/auth/register', {
                 method: 'POST',
                 body:JSON.stringify(Object.fromEntries(userFormData)), // From entries es todos los value de los inputs
                 headers: {
@@ -39,34 +39,17 @@ function SignUp() {
             })
             .then(r => {
                 if(r.status === 409){
+                    console.log(r)
                     alert('Usuario existente')
                 }else{
                     
-                    navigate(`/discord/`)
+                    navigate(`/`)
                 }
             })
             
         
     }   
 
-    /**
- *  fetch('http://localhost:4000/users', {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: e.target.email.value,
-                    username: e.target.username.value,
-                    password: e.target.password.value,
-                    date: e.target.date.value
-                }),
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-            .then(r => r.json())
-            .then(d => console.log(d))   
- */
-
-    
 
 
     return (

@@ -4,29 +4,40 @@ import SignUp from './pages/singUp';
 import LoginPage from './pages/login';
 import { BrowserRouter, Router, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/home';
-import DcHome from './pages/DCapp';
-import DiscServer from './components/discordApp/DCserv';
-import Chat from './components/discordApp/DcChat';
-import CreateServChannel from './components/modal/createServChannel';
+import PrivateRoute from './components/private-route';
+import Messenger from './components/discordApp/messenger';
+import ValidateEmail from './pages/validation';
+import InvitationPage from './pages/inviteServ/indes';
 
-
+import ServerMessenger from './pages/serverMessenger';
 function App() {
+
+
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
+
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
             <Route path='/' element={<HomePage></HomePage>}></Route>
+
             <Route path='/signUp' element={<SignUp></SignUp>}></Route>
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
-            <Route path='/discord/' element={<DcHome/>}></Route>
-            <Route path='/server' element={<DiscServer></DiscServer>}></Route>   
-            <Route path='/@me/:id' element={<Chat></Chat>}></Route>  
-             
-        </Routes>
-        
-      </BrowserRouter>
-      
-    </div>
+            <Route path='/validate' element={<ValidateEmail></ValidateEmail>}></Route>
+            <Route path='/discord/@me/:id' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
+            <Route path='/@me/:id/' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
+            <Route path='/discord/:id' element={<PrivateRoute><ServerMessenger></ServerMessenger></PrivateRoute>}></Route>
+            <Route path='/invite/:id' element={<InvitationPage></InvitationPage>}></Route>
+          </Routes>
+
+        </BrowserRouter>
+
+
+
+      </div>
+
+
+
   );
 }
 
