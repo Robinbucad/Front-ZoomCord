@@ -4,6 +4,7 @@ import classes from './settings.module.scss'
 import UserProfileSettings from './profile';
 import DeleteUser from './delete.modal';
 import { useNavigate } from 'react-router-dom';
+import { useUsername } from '../../../hooks/hook-name-user';
 
 
 function UserSettings(props) {
@@ -11,6 +12,7 @@ function UserSettings(props) {
     const [accounteSettings, updateAccountSettings] = useState(true)
     const [userProfileSettings, updateUserProfileSettings] = useState(false)
     const [modalShow, setModalShow] = useState(false)
+    const {user} = useUsername()
 
     const handleClickAcc = e => {
         e.preventDefault()
@@ -64,7 +66,7 @@ function UserSettings(props) {
 
                      <article className='card-user'>
                          <header className={classes.headerUserSettings}>
-                             <h1>BeZzK</h1>
+                             <h1>{user.username}</h1>
                          </header>
 
                          <div className={classes.bodyUserContainer} >
@@ -73,7 +75,7 @@ function UserSettings(props) {
 
                                  <div className={classes.usernSettings}>
                                      <p >NOMBRE DE USUARIO</p>
-                                     <p>BeZzK</p>
+                                     <p>{user.username}</p>
                                  </div>
                                  <div>
                                      <Button variant="info">Editar</Button>
@@ -84,7 +86,7 @@ function UserSettings(props) {
 
                                  <div >
                                      <p >CORREO ELECTRONICO</p>
-                                     <p>Robin.bucad6@gmail.com</p>
+                                     <p>{user.email}</p>
                                  </div>
                                  <div>
                                      <Button variant="info">Editar</Button>
@@ -94,7 +96,7 @@ function UserSettings(props) {
                              <div className={classes.bodyUserSettings}>
                                  <div >
                                      <p className='userName'>NUMERO DE TELEFONO</p>
-                                     <p>616923547</p>
+                                     <p>{user.tlf}</p>
                                  </div>
                                  <div>
                                      <Button variant="info">Editar</Button>

@@ -6,6 +6,7 @@ export function useUsername(){
     const [user,upadateUser] = useState([])
     const token = sessionStorage.getItem('token')
     const tokenLocal = localStorage.getItem('token')
+    const [userFooterId,updateFooterId] = useState('')
 
     useEffect(() => {
         fetch(`http://localhost:3001/users`,{
@@ -18,9 +19,10 @@ export function useUsername(){
         .then(d => {   
             updateIdUser(d._id)
             upadateUser(d)
+            updateFooterId(d._id.substring(0,4))
         })
     },[])
 
-    return {user,upadateUser,idUser}
+    return {user,upadateUser,idUser,userFooterId}
 
 }

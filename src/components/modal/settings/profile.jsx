@@ -45,20 +45,7 @@ function UserProfileSettings(props) {
                             </div>
                         </div>
 
-
-
-
                     </article>
-
-                    <article >
-                        <h1>Tema</h1>
-
-                       
-
-                    </article>
-
-
-
 
                 </section>
 

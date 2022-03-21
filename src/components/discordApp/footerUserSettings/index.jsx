@@ -1,19 +1,26 @@
 
 import { GearFill, Headset, Mic } from 'react-bootstrap-icons/'
+import { useUsername } from '../../../hooks/hook-name-user'
 //import classes from './footerSetts.module.scss'
 import classes from '../messenger/friendMd.module.scss'
 
 function UserSettingsFooter(props) {
+
+    const {user,userFooterId} = useUsername()
+
+
+  
+
     return (
 
         <footer className={classes.userSetts}>
             <div className={classes.userInfoSetts}>
                 <div >
-                    <p>IMG</p>
+                    <img className={classes.userSettingsFooterImg} src={user.img}></img>
                 </div>
                 <div className={classes.userNameSetts} >
-                    <p>BeZzK</p>
-                    <p>#3616</p>
+                    <p>{user.username}</p>
+                    <p>#{userFooterId}</p>
                 </div>
             </div>
 

@@ -24,7 +24,6 @@ function Messenger() {
     const [hide, updateHide] = useState(false)
     const [modalShow, setModalShow] = useState(false);
 
-
     useEffect(() => {
         socket.current = io("ws://localhost:4000")
 

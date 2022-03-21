@@ -8,9 +8,10 @@ import PrivateRoute from './components/private-route';
 import Messenger from './components/discordApp/messenger';
 import ValidateEmail from './pages/validation';
 import InvitationPage from './pages/inviteServ/indes';
-
-
 import ServerMessenger from './pages/serverMessenger';
+import PageNotFound from './pages/not Found';
+
+
 function App() {
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route path='/@me/:id/' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
             <Route path='/discord/:id' element={<PrivateRoute><ServerMessenger></ServerMessenger></PrivateRoute>}></Route>
             <Route path='/invite/:id' element={<InvitationPage></InvitationPage>}></Route>
+            <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
 
         </BrowserRouter>
