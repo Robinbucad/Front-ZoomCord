@@ -8,9 +8,10 @@ function Conversation({ conversation, currentUser }) {
     const [user, setUser] = useState([])
     const token = sessionStorage.getItem('token')
     const currentUserId = currentUser._id
-
+    console.log(user)
     useEffect(() => {
         const filter = conversation.members.find(e => e !== currentUserId)
+    
         const getUser = async () => {
             try {
                 const res = await fetch(`http://localhost:3001/users/${filter}`, {
@@ -21,13 +22,15 @@ function Conversation({ conversation, currentUser }) {
                 })
                 const dat = await res.json()
                 setUser([dat])
+                console.log(dat)
             } catch (err) {
                 console.log(err)
             }
         }
         getUser()
-    }, [currentUser, conversation])
+    }, [currentUser, conversation,user])
 
+    
 
 
     return (
