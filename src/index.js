@@ -12,20 +12,20 @@ import home_en from './translations/en/home.json'
 import home_es from './translations/es/home.json'
 import registerLogin_es from './translations/es/register.login.json'
 import registerLogin_en from './translations/en/register.login.json'
-
+import UserProvider from './context/user/user.provider.jsx'
 
 i18next.init({
   interpolation: { escapeValue: false },
-  lng:"es",
-  resources:{
-    es:{
-      header:header_es,
-      home:home_es,
+  lng: "es",
+  resources: {
+    es: {
+      header: header_es,
+      home: home_es,
       registerLogin: registerLogin_es,
     },
-    en:{
-      header:header_en,
-      home:home_en,
+    en: {
+      header: header_en,
+      home: home_en,
       registerLogin: registerLogin_en,
     },
   },
@@ -34,10 +34,12 @@ i18next.init({
 
 ReactDOM.render(
   <React.StrictMode>
-   
-    <I18nextProvider i18n={i18next}>
-      <App />
-    </I18nextProvider>
+    <UserProvider>
+      <I18nextProvider i18n={i18next}>
+        <App />
+      </I18nextProvider>
+
+    </UserProvider>
 
   </React.StrictMode>,
   document.getElementById('root')

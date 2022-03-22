@@ -1,16 +1,17 @@
 
+import { useContext } from 'react'
 import { GearFill, Headset, Mic } from 'react-bootstrap-icons/'
-import { useUsername } from '../../../hooks/hook-name-user'
+import { UserContext } from '../../../context/user/user.contex'
+
 //import classes from './footerSetts.module.scss'
 import classes from '../messenger/friendMd.module.scss'
 
+
 function UserSettingsFooter(props) {
 
-    const {user,userFooterId} = useUsername()
-
-
-  
-
+    const [user,setUser,userId,setUserId] = useContext(UserContext)
+    const id = userId.substring(0,4)
+    console.log(userId)
     return (
 
         <footer className={classes.userSetts}>
@@ -20,7 +21,7 @@ function UserSettingsFooter(props) {
                 </div>
                 <div className={classes.userNameSetts} >
                     <p>{user.username}</p>
-                    <p>#{userFooterId}</p>
+                    <p>#{id}</p>
                 </div>
             </div>
 

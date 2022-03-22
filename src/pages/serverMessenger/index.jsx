@@ -1,5 +1,5 @@
 import classes from '../../components/discordApp/messenger/friendMd.module.scss'
-import {  useState } from 'react';
+import {  useContext, useState } from 'react';
 import UserSettingsFooter from '../../components/discordApp/footerUserSettings';
 import UserSettings from '../../components/modal/settings';
 import DivServs from '../../components/discordApp/DCdivServ';
@@ -7,17 +7,20 @@ import { io } from 'socket.io-client'
 import { useRef } from 'react'
 import { useEffect } from 'react';
 import MessageServer from '../../components/discordApp/messageServ';
-import { useUsername } from '../../hooks/hook-name-user';
 import { Dropdown } from 'react-bootstrap'
 import { Modal, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../../context/user/user.contex';
+
+const usernameLocal = localStorage.getItem('username')
+const idLocal = localStorage.getItem('id')
+const imgLocal = localStorage.getItem('img')
 
 function ServerMessenger() {
     const token = sessionStorage.getItem('token')
     const tokenLocal = localStorage.getItem('token')
     const [fullscreen] = useState(true);
     const [show, setShow] = useState(false);
-    const { user } = useUsername()
     const [currentServ, updateCurrentServ] = useState('')
     const [currentServId, updateCurrentServId] = useState('')
     const [messages, setMessages] = useState([])
@@ -27,6 +30,8 @@ function ServerMessenger() {
     const handleCloseLink = () => setShowLink(false);
     const handleShowLink = () => setShowLink(true);
     const {id} = useParams()
+    const [user,setUser,userId,setUserId] = useContext(UserContext)
+
 
 
 
@@ -57,7 +62,7 @@ function ServerMessenger() {
                 const res = await fetch(`http://localhost:3001/servers/${id}`,{
                     method:'get',
                     headers:{
-                        Authorization: `Bearer ${token || tokenLocal}`
+                        Authorization: `Bearer ${token}`
                     }
                 })
                 const dat = await res.json()
@@ -78,7 +83,7 @@ function ServerMessenger() {
                 const res = await fetch(`http://localhost:3001/servMsg/${currentServId}`, {
                     method: 'get',
                     headers: {
-                        Authorization: `Bearer ${token || tokenLocal}`
+                        Authorization: `Bearer ${token}`
                     },
                 })
                 const dat = await res.json()
@@ -103,9 +108,9 @@ function ServerMessenger() {
         if (e.key === 'Enter') {
             const message = {
                 date: takeDate,
-                img: user.img,
+                img: user.img ,
                 username: user.username,
-                senderId: user._id,
+                senderId:user._id ,
                 text: newMessage,
                 conversationId: currentServId
             }
@@ -118,7 +123,7 @@ function ServerMessenger() {
                     body: JSON.stringify(message),
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token || tokenLocal }`
+                        Authorization: `Bearer ${token  }`
 
                     },
                 })
@@ -141,10 +146,10 @@ function ServerMessenger() {
             <div className={classes.containerMd}>
 
 
-                {/* <div className={classes.DivServList}>
+                <div className={classes.DivServList}>
                     <h4>{currentServ}</h4>
 
-                </div> */}
+                </div>
 
                 <Dropdown>
                     <Dropdown.Toggle style={{ background: 'none', border: 'none' }} >
@@ -197,7 +202,7 @@ function ServerMessenger() {
 
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
-                        {messages.map((m, i) => (
+                        {messages?.map((m, i) => (
                             <MessageServer key={i} message={m}></MessageServer>
                         ))}
                     </div>

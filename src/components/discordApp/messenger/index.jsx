@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useContext, useEffect, useState } from "react";
 import { useUsername } from "../../../hooks/hook-name-user";
 import Message from "../message";
 import Conversation from "../conversation";
@@ -10,11 +10,14 @@ import { io } from 'socket.io-client'
 import { useRef } from "react";
 import HeaderApp from "../headerApp";
 import FollowUser from "../../modal/addFriend";
+import { UserContext } from "../../../context/user/user.contex";
+
+const idLocal = localStorage.getItem('id')
+
 
 function Messenger() {
     const token = sessionStorage.getItem('token')
     const [conversations, setConversations] = useState([])
-    const { user } = useUsername()
     const [currentChat, setCurrentChat] = useState('')
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
@@ -23,24 +26,26 @@ function Messenger() {
     const socket = useRef()
     const [hide, updateHide] = useState(false)
     const [modalShow, setModalShow] = useState(false);
+    const [user,setUser,userId,setUserId] = useContext(UserContext)
+    console.log(user)
 
-    useEffect(() => {
-        socket.current = io("ws://localhost:4000")
+    // useEffect(() => {
+    //     socket.current = io("ws://localhost:4000")
 
-    }, [])
+    // }, [])
 
-    useEffect(() => {
-        socket.current.on("getMessage", (data) => {
-            setMessages([...messages, data])
-        })
+    // useEffect(() => {
+    //     socket.current.on("getMessage", (data) => {
+    //         setMessages([...messages, data])
+    //     })
 
-    }, [messages])
+    // }, [messages])
 
 
 
-    useEffect(() => {
-        socket.current.emit("addUser", user._id);
-    }, [user])
+    // useEffect(() => {
+    //     socket.current.emit("addUser", user._id);
+    // }, [user])
 
 
     useEffect(() => {
@@ -54,14 +59,17 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setConversations(dat)
+                console.log(dat)
             } catch (err) {
                 console.log(err)
             }
-
-
         }
-        getConversations()
-    }, [user._id])
+        if (!user) {
+            console.log('No convs')
+        } else {
+            getConversations()
+        }
+    }, [user,currentChat])
 
 
     useEffect(() => {
@@ -75,21 +83,18 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setMessages(dat)
-
-
-
+                console.log(dat)
             } catch (err) {
                 console.log('error')
             }
-            await socket.current.emit("join_chat", currentChat._id)
+           // await socket.current.emit("join_chat", currentChat._id)
         };
-        getMessages()
+        getMessages() // HACER CONDICIONAL
     }, [currentChat])
 
     const date = new Date()
     const hours = date.getHours()
     const minutes = date.getMinutes()
-
     const takeDate = `${hours}:${minutes}`
 
     const handleSubmit = async (e) => {
@@ -98,9 +103,9 @@ function Messenger() {
             e.preventDefault()
             const message = {
                 date: takeDate,
-                img: user.img,
-                username: user.username,
-                senderId: user._id,
+                img: user.img ,
+                username: user.username ,
+                senderId: user._id ,
                 text: newMessage,
                 conversationId: currentChat._id,
             };
@@ -139,14 +144,12 @@ function Messenger() {
         console.log('')
     }
 
-
-
     return (
         <div className={classes.containerApp}>
-             <FollowUser
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                />
+            <FollowUser
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
             <UserSettings show={show} fullscreen={fullscreen} setShow={() => handleShow(false)}></UserSettings>
             <DivServs handleCurrentServ={handleConv}></DivServs>
             <div className={classes.containerMd}>
@@ -163,11 +166,12 @@ function Messenger() {
                     </header>
 
                     <section className={classes.containerConversations}>
-                        {conversations.map((e, i) => (
+                    {conversations.map((e, i) => (
                             <div className={classes.divFriend} key={i} onClick={() => setCurrentChat(e)}>
                                 <Conversation key={i} conversation={e} currentUser={user}></Conversation>
                             </div>
-                        ))}
+                        ))}           
+                     
                     </section>
                 </section>
                 <div className={classes.userSetts} >

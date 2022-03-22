@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import { useUsername } from "../../../hooks/hook-name-user"
+import { UserContext } from "../../../context/user/user.contex"
 import './style.css'
 
 function CreateServModal(props) {
@@ -14,7 +14,8 @@ function CreateServModal(props) {
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
     const [servName, updateServName] = useState('')
     const [servImg,updateImg] = useState('')
-    const {user} = useUsername()
+    const [user,setUser,userId,setUserId] = useContext(UserContext)
+     
     let navigate = useNavigate()
 
     const onSubmit = async e => {
@@ -189,11 +190,11 @@ function CreateServModal(props) {
 
 
 
-                    </Modal.Body>
-                    <Modal.Footer className="footer-modal">
+                     <Modal.Footer className="footer-modal">
                         <button className="btn-back-modal" onClick={() => updateChangeModalFriend(false)}>Atras</button>
                         <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
-                    </Modal.Footer>
+                    </Modal.Footer> </Modal.Body>
+                  
 
 
                 </Modal>}

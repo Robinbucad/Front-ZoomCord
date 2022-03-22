@@ -1,28 +1,27 @@
-import {useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../context/user/user.contex";
 
 
-export function useUsername(){
-    const [idUser, updateIdUser] = useState([])
-    const [user,upadateUser] = useState([])
+export function useUsername() {
+    const [user, setUser, userId, setUserId] = useContext(UserContext)
     const token = sessionStorage.getItem('token')
-    const tokenLocal = localStorage.getItem('token')
-    const [userFooterId,updateFooterId] = useState('')
-
+    
     useEffect(() => {
-        fetch(`http://localhost:3001/users`,{
-            method:'get',
-            headers:{
-                Authorization: `Bearer ${token || tokenLocal}`
-            }
-        })
-        .then(r => r.json())
-        .then(d => {   
-            updateIdUser(d._id)
-            upadateUser(d)
-            updateFooterId(d._id.substring(0,4))
-        })
-    },[])
-
-    return {user,upadateUser,idUser,userFooterId}
+        const fetchUsers = async () => {
+     
+                const res = await fetch('http://localhost:3001/users',{
+                    method: 'get',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                const dat = await res.json()
+                sessionStorage.setItem('iduser',dat._id)
+                setUser([dat])
+                setUserId(dat._id)    
+        }
+        fetchUsers()
+    }, [userId])
+    return { user }
 
 }

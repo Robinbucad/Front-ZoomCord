@@ -456,3 +456,12 @@
 .msgText{
     font-size: 13px;
 }
+
+.divConv{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+.conver:hover{
+    background-color: $PrimaryClaro;
+}

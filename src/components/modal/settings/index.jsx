@@ -4,7 +4,6 @@ import classes from './settings.module.scss'
 import UserProfileSettings from './profile';
 import DeleteUser from './delete.modal';
 import { useNavigate } from 'react-router-dom';
-import { useUsername } from '../../../hooks/hook-name-user';
 
 
 function UserSettings(props) {
@@ -12,7 +11,6 @@ function UserSettings(props) {
     const [accounteSettings, updateAccountSettings] = useState(true)
     const [userProfileSettings, updateUserProfileSettings] = useState(false)
     const [modalShow, setModalShow] = useState(false)
-    const {user} = useUsername()
 
     const handleClickAcc = e => {
         e.preventDefault()
@@ -61,7 +59,7 @@ function UserSettings(props) {
 
                  </section>
 
-                 <section className={classes.settingChanges}>
+                 {/* <section className={classes.settingChanges}>
                      <Modal.Header style={{ border: 'none' }} closeButton><p>Ajustes</p></Modal.Header>
 
                      <article className='card-user'>
@@ -120,7 +118,7 @@ function UserSettings(props) {
 
                      </section>
 
-                 </section>
+                 </section> */}
 
 
 

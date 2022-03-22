@@ -1,27 +1,28 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { useUsername } from '../../../hooks/hook-name-user'
+import { UserContext } from '../../../context/user/user.contex'
 import classes from './addUser.module.scss'
 
 function FollowUser(props) {
     const token = sessionStorage.getItem('token')
     const [userSearch, setUserSearch] = useState('')
     const [userFind, setUserFind] = useState([])
-    const {user} = useUsername()
-    const [idUserFind,setUserId] = useState('')
+    const [idUserFind,setUserIdFriend] = useState('')
+    const [user,setUser,userId,setUserId] = useContext(UserContext)
 
     const handleSubmit = async e => {
         if (e.key === 'Enter') {
             try {
-                const res = await fetch(`http://localhost:3001/users/friends/${userSearch}`, {
+                const res = await fetch(`http://localhost:3001/users/friends/add/${userSearch}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 })
                 const dat = await res.json()
+                console.log(dat)
                 setUserFind(dat)
-                dat.map(u => setUserId(u._id))
+                dat.map(u => setUserIdFriend(u._id))
             } catch (err) {
                 console.log(err)
             }
@@ -31,7 +32,7 @@ function FollowUser(props) {
     const handleAddUser = async e => {
 
         const members = { 
-             senderId:user._id,
+             senderId:userId,
             receiverId:idUserFind
         }
         

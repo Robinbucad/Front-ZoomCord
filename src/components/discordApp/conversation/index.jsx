@@ -1,17 +1,19 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
+import { UserContext } from "../../../context/user/user.contex"
 import classes from '../messenger/friendMd.module.scss'
 
-function Conversation({ conversation, currentUser }) {
-    const [user, setUser] = useState([])
+function Conversation({ conversation },props) {
+    const [users, setUsers] = useState([])
     const token = sessionStorage.getItem('token')
-    const currentUserId = currentUser._id
-    console.log(user)
+    const [user, setUser, userId, setUserId] = useContext(UserContext)
+
+
     useEffect(() => {
-        const filter = conversation.members.find(e => e !== currentUserId)
-    
+        const filter = conversation.members.find(e => e !== userId)
+        console.log(filter)
         const getUser = async () => {
             try {
                 const res = await fetch(`http://localhost:3001/users/${filter}`, {
@@ -21,32 +23,30 @@ function Conversation({ conversation, currentUser }) {
                     },
                 })
                 const dat = await res.json()
-                setUser([dat])
-                console.log(dat)
+                setUsers([dat])
             } catch (err) {
                 console.log(err)
             }
         }
         getUser()
-    }, [currentUser, conversation,user])
-
-    
+    }, [user])
+    console.log(users)
 
 
     return (
         <div>
-            {user.length===0 ? '' : user.map((e,i) => (
-                <Link key={i} to={`/@me/${e._id}`}>
-                    <div>
-                        <div className={classes.conver}>
-                            <img className={classes.profileDefault} src={e.img} />
-                            <p>{e.username}</p>
-                        </div>
+        {users.length===0 ? '' : users.map((e,i) => (
+            <Link key={i} to={`/@me/${e._id}`}>
+                <div>
+                    <div className={classes.conver}>
+                        <img className={classes.profileDefault} src={e.img} />
+                        <p>{e.username}</p>
                     </div>
-                </Link>
-            ))}
+                </div>
+            </Link>
+        ))}
 
-        </div>
+    </div>
 
 
 

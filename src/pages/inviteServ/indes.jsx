@@ -2,7 +2,6 @@ import classes from './invite.module.scss'
 import { Card, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useUsername } from '../../hooks/hook-name-user'
 
 
 function InvitationPage() {
@@ -13,8 +12,6 @@ function InvitationPage() {
     const [servName, setServName] = useState('')
     const [servImg, setServImg] = useState('')
     const [members, setMembers] = useState([])
-    const {user} = useUsername()
-    const idUser = user._id
     let navigate = useNavigate()
 
 
@@ -34,32 +31,32 @@ function InvitationPage() {
         fetchServers()
     }, [])
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        try{
-            const res = await fetch(`http://localhost:3001/servers/${id}`,{
-                method:'post',
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    userId:idUser
-                })
-            })
-            const dat = await res.json()
+    // const handleSubmit = async(e) => {
+    //     e.preventDefault()
+    //     try{
+    //         const res = await fetch(`http://localhost:3001/servers/${id}`,{
+    //             method:'post',
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${token}`
+    //             },
+    //             body: JSON.stringify({
+    //                 userId:idUser
+    //             })
+    //         })
+    //         const dat = await res.json()
             
-        }catch(err){
-            alert('El usuario ya existe en el servidor')
-        }
-        navigate(`/discord/${id}`)
+    //     }catch(err){
+    //         alert('El usuario ya existe en el servidor')
+    //     }
+    //     navigate(`/discord/${id}`)
        
-    } 
+    // } 
 
     return (
         <section className={classes.invitationContainer}>
             <Card className={classes.cardInvitation} >
-                <div className={classes.divImgInv}>
+                {/* <div className={classes.divImgInv}>
                     <img className={classes.imgServInv} variant="top" src={servImg} />
                 </div>
 
@@ -70,7 +67,7 @@ function InvitationPage() {
                     </div>
 
                     <Button className={classes.btnInvite} onClick={handleSubmit} variant="primary">Aceptar invitacion</Button>
-                </Card.Body>
+                </Card.Body> */}
             </Card>
         </section>
 
