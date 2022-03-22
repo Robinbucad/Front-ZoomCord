@@ -14,8 +14,7 @@ function CreateServModal(props) {
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
     const [servName, updateServName] = useState('')
     const [servImg,updateImg] = useState('')
-    const [user,setUser,userId,setUserId] = useContext(UserContext)
-     
+    const [user,setUser] = useContext(UserContext)
     let navigate = useNavigate()
 
     const onSubmit = async e => {
@@ -24,7 +23,8 @@ function CreateServModal(props) {
         const server = {
             name: servName,
             img: servImg,
-            userId:user._id
+            userId:user._id,
+            ADMIN:user._id
         }
         const res = await fetch('http://localhost:3001/servers', {
             method: 'post',

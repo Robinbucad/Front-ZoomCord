@@ -1,5 +1,5 @@
 import classes from '../../components/discordApp/messenger/friendMd.module.scss'
-import {  useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import UserSettingsFooter from '../../components/discordApp/footerUserSettings';
 import UserSettings from '../../components/modal/settings';
 import DivServs from '../../components/discordApp/DCdivServ';
@@ -12,9 +12,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../context/user/user.contex';
 
-const usernameLocal = localStorage.getItem('username')
-const idLocal = localStorage.getItem('id')
-const imgLocal = localStorage.getItem('img')
+
 
 function ServerMessenger() {
     const token = sessionStorage.getItem('token')
@@ -29,8 +27,9 @@ function ServerMessenger() {
     const [showLink, setShowLink] = useState(false);
     const handleCloseLink = () => setShowLink(false);
     const handleShowLink = () => setShowLink(true);
-    const {id} = useParams()
-    const [user,setUser,userId,setUserId] = useContext(UserContext)
+    const { id } = useParams()
+    const [user, setUser, userId, setUserId] = useContext(UserContext)
+    const userLocal = localStorage.getItem('user')
 
 
 
@@ -57,11 +56,11 @@ function ServerMessenger() {
 
 
     useEffect(() => {
-       const getCurrentServ = async() => {
-            try{
-                const res = await fetch(`http://localhost:3001/servers/${id}`,{
-                    method:'get',
-                    headers:{
+        const getCurrentServ = async () => {
+            try {
+                const res = await fetch(`http://localhost:3001/servers/${id}`, {
+                    method: 'get',
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
                 })
@@ -69,12 +68,12 @@ function ServerMessenger() {
                 console.log(dat)
                 updateCurrentServ(dat.name)
                 updateCurrentServId(dat._id)
-            }catch(err){
+            } catch (err) {
                 console.log(err)
             }
         }
         getCurrentServ()
-    },[id])
+    }, [id])
 
     useEffect(() => {
 
@@ -108,9 +107,9 @@ function ServerMessenger() {
         if (e.key === 'Enter') {
             const message = {
                 date: takeDate,
-                img: user.img ,
+                img: user.img,
                 username: user.username,
-                senderId:user._id ,
+                senderId: user._id,
                 text: newMessage,
                 conversationId: currentServId
             }
@@ -123,7 +122,7 @@ function ServerMessenger() {
                     body: JSON.stringify(message),
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token  }`
+                        Authorization: `Bearer ${token}`
 
                     },
                 })
@@ -148,12 +147,9 @@ function ServerMessenger() {
 
                 <div className={classes.DivServList}>
                     <h4>{currentServ}</h4>
-
-                </div>
-
-                <Dropdown>
+                    <Dropdown>
                     <Dropdown.Toggle style={{ background: 'none', border: 'none' }} >
-                        {currentServ}
+                   
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu style={{ background: 'black', border: 'none' }}>
@@ -162,24 +158,35 @@ function ServerMessenger() {
                         <Dropdown.Item style={{ color: 'gray' }}>Ajustes</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-                <section>
-                    <header className={classes.headerMdList}>
-                        <p >Canales de texto</p>
+                </div>
 
-                    </header>
-                    {/**AQUI CANALES DE TEXTO> */}
+               
 
-                </section>
+                <div className={classes.sectionsServer}>
+                    <section>
+                        <header className={classes.headerMdList}>
+                            <p >Canales de texto</p>
+                            <button className={classes.btnAdd}>+</button>
+                        </header>
+                        {/**AQUI CANALES DE TEXTO> */}
+                        <div>
+                            <p>#Music</p>
+                            <p>#Text 1</p>
+                            <p>#Other text</p>
+                        </div>
+                    </section>
 
 
-                <section>
-                    <header className={classes.headerMdList}>
-                        <p >Canales de Voz</p>
+                    <section>
+                        <header className={classes.headerMdList}>
+                            <p >Canales de Voz</p>
+                            <button className={classes.btnAdd}>+</button>
+                        </header>
+                        {/**AQUI CANALES DE VOZ */}
 
-                    </header>
-                    {/**AQUI CANALES DE VOZ */}
+                    </section>
 
-                </section>
+                </div>
 
 
 

@@ -8,11 +8,11 @@ import classes from '../messenger/friendMd.module.scss'
 function Conversation({ conversation },props) {
     const [users, setUsers] = useState([])
     const token = sessionStorage.getItem('token')
-    const [user, setUser, userId, setUserId] = useContext(UserContext)
+    const [user, setUser] = useContext(UserContext)
 
 
     useEffect(() => {
-        const filter = conversation.members.find(e => e !== userId)
+        const filter = conversation.members.find(e => e !== user._id)
         console.log(filter)
         const getUser = async () => {
             try {
@@ -30,8 +30,6 @@ function Conversation({ conversation },props) {
         }
         getUser()
     }, [user])
-    console.log(users)
-
 
     return (
         <div>

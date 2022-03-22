@@ -3,11 +3,12 @@ import { UserContext } from "./user.contex"
 
 
 function UserProvider({children}){
-    
-    const[ user, setUser] = useState([])
-    const [userId,setUserId] = useState('')
+    const userLocal = localStorage.getItem('user')
+    const userData = JSON.parse(userLocal)
+    const[ user, setUser] = useState(userData)
+
     return(
-        <UserContext.Provider value={[user,setUser,userId,setUserId]}>
+        <UserContext.Provider value={[user,setUser]}>
             {children}
         </UserContext.Provider>
     )

@@ -15,7 +15,7 @@ function LoginPage() {
 
     const [userName, updateUserName] = useState()
     const [password, updatePassword] = useState()
-    const [user,setUser,userId,setUserId] = useContext(UserContext)
+    const [user,setUser] = useContext(UserContext)
 
 
 
@@ -46,6 +46,7 @@ function LoginPage() {
         console.log(r)
         if(r.access_token){
             console.log(r.access_token)
+            localStorage.setItem('token',r.access_token)
             sessionStorage.setItem('token', r.access_token)
             fetch(`http://localhost:3001/users`,{
                 method:'get',
@@ -56,7 +57,8 @@ function LoginPage() {
             .then(r => r.json())
             .then(d => {
                 setUser(d)
-                setUserId(d._id)
+    
+                localStorage.setItem('user',JSON.stringify(d))
                  navigate(`/discord/@me/${d._id}`)
             })
   

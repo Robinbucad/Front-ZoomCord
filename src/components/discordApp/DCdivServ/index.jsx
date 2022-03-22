@@ -12,7 +12,7 @@ function DivServs() {
     const [conversations, setConversations] = useState([])
     const [modalServShow, setServModalShow] = useState(false)
     const [user,setUser] = useContext(UserContext)
-   
+    console.log(user)
 
    useEffect(() => {
 
@@ -40,7 +40,7 @@ function DivServs() {
     return (
 
         <div className={classes.containerServ}>
-            <Link to={`/discord/@me/${user._id}`}>
+            <Link to={`/discord/@me/${ user._id}`}>
 
                 <div>
                     <img className={classes.imgServ} src={logo}></img>

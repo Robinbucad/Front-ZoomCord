@@ -3,7 +3,7 @@ import { UserContext } from "../../context/user/user.contex";
 
 
 export function useUsername() {
-    const [user, setUser, userId, setUserId] = useContext(UserContext)
+    const [user, setUser] = useContext(UserContext)
     const token = sessionStorage.getItem('token')
     
     useEffect(() => {
@@ -16,12 +16,10 @@ export function useUsername() {
                     }
                 })
                 const dat = await res.json()
-                sessionStorage.setItem('iduser',dat._id)
                 setUser([dat])
-                setUserId(dat._id)    
         }
         fetchUsers()
-    }, [userId])
+    }, [user._id])
     return { user }
 
 }

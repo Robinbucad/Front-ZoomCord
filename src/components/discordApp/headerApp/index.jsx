@@ -1,24 +1,45 @@
 import classes from '../messenger/friendMd.module.scss'
 import { FaSun, FaMoon } from 'react-icons/fa'
-import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../../../context/user/user.contex'
 
 function HeaderApp() {
-    const [btn,setBtn] = useState(false)
+    const [btn,setBtn] = useState('false')
+    const token = sessionStorage.getItem('token')
+    const {id} = useParams()
+    const [currentUser,setCurrentUser] = useState([])
+    const [user,setUser] = useContext(UserContext)
+
 
     const handleClick = e => {
         document.body.classList.toggle(classes.dark)
         document.body.classList.toggle(classes.light)
-        if (btn === false) {
+        if (btn === 'false') {
             setBtn(classes.active)
         } else {
-            setBtn(false)
+            setBtn('false')
         }
     }
+
+    useEffect(() => {
+        const getCurrentUserChat = async() => {
+            const res = await fetch(`http://localhost:3001/users/${id}`,{
+                method:'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            const dat = await res.json()
+            setCurrentUser(dat)
+        }
+        getCurrentUserChat()
+    },[id])
 
 
     return (
         <header className={classes.headerChat}>
-            <p>NAME USER</p>
+            <p>{currentUser.username}</p>
             <div className={classes.settingsChat}>
                 <p>Call</p>
                 <p>Videocall</p>

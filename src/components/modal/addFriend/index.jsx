@@ -8,8 +8,10 @@ function FollowUser(props) {
     const [userSearch, setUserSearch] = useState('')
     const [userFind, setUserFind] = useState([])
     const [idUserFind,setUserIdFriend] = useState('')
-    const [user,setUser,userId,setUserId] = useContext(UserContext)
+    const [user,setUser] = useContext(UserContext)
 
+
+    
     const handleSubmit = async e => {
         if (e.key === 'Enter') {
             try {
@@ -32,7 +34,7 @@ function FollowUser(props) {
     const handleAddUser = async e => {
 
         const members = { 
-             senderId:userId,
+             senderId:user._id,
             receiverId:idUserFind
         }
         

@@ -12,7 +12,7 @@ import HeaderApp from "../headerApp";
 import FollowUser from "../../modal/addFriend";
 import { UserContext } from "../../../context/user/user.contex";
 
-const idLocal = localStorage.getItem('id')
+
 
 
 function Messenger() {
@@ -26,26 +26,26 @@ function Messenger() {
     const socket = useRef()
     const [hide, updateHide] = useState(false)
     const [modalShow, setModalShow] = useState(false);
-    const [user,setUser,userId,setUserId] = useContext(UserContext)
-    console.log(user)
+    const [user,setUser] = useContext(UserContext)
+    console.log(messages)
 
-    // useEffect(() => {
-    //     socket.current = io("ws://localhost:4000")
+    useEffect(() => {
+        socket.current = io("ws://localhost:4000")
 
-    // }, [])
+    }, [])
 
-    // useEffect(() => {
-    //     socket.current.on("getMessage", (data) => {
-    //         setMessages([...messages, data])
-    //     })
+    useEffect(() => {
+        socket.current.on("getMessage", (data) => {
+            setMessages([...messages, data])
+        })
 
-    // }, [messages])
+    }, [messages])
 
 
 
-    // useEffect(() => {
-    //     socket.current.emit("addUser", user._id);
-    // }, [user])
+    useEffect(() => {
+        socket.current.emit("addUser", user._id);
+    }, [user])
 
 
     useEffect(() => {
@@ -83,13 +83,13 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setMessages(dat)
-                console.log(dat)
+         
             } catch (err) {
                 console.log('error')
             }
-           // await socket.current.emit("join_chat", currentChat._id)
+            await socket.current.emit("join_chat", currentChat._id)
         };
-        getMessages() // HACER CONDICIONAL
+        getMessages()
     }, [currentChat])
 
     const date = new Date()
@@ -105,7 +105,7 @@ function Messenger() {
                 date: takeDate,
                 img: user.img ,
                 username: user.username ,
-                senderId: user._id ,
+                senderId:user._id,
                 text: newMessage,
                 conversationId: currentChat._id,
             };
@@ -175,14 +175,14 @@ function Messenger() {
                     </section>
                 </section>
                 <div className={classes.userSetts} >
-                    <UserSettingsFooter handleShow={handleShow}></UserSettingsFooter>
+                    <UserSettingsFooter  handleShow={handleShow}></UserSettingsFooter>
 
 
                 </div>
             </div>
             <div className={classes.chatContainer}>
 
-                <HeaderApp></HeaderApp>
+                <HeaderApp currentChat={currentChat}></HeaderApp>
 
                 {
 

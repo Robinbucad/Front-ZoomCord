@@ -190,6 +190,7 @@
     .DivServList{
         border-bottom: 1px solid gray;
         padding: 12px;
+        display: flex
     }
     
     .imgServ{
@@ -269,7 +270,20 @@
 .imgServ{
     @include servLog(55px, 50%,$HoverListFrMd,green);
     height: 55px;
- 
+}
+
+.sectionsServer{
+    padding: 10px;
+    @include flexBox(flex,'','','','',10px);
+    flex-direction:column;
+}
+
+.btnAdd{
+    border: none;
+    background: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
 }
 
 .imgServ:hover{
