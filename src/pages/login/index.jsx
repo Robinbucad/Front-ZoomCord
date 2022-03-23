@@ -43,9 +43,9 @@ function LoginPage() {
             },
         })
         const r = await d.json()
-        console.log(r)
+
         if(r.access_token){
-            console.log(r.access_token)
+    
             localStorage.setItem('token',r.access_token)
             sessionStorage.setItem('token', r.access_token)
             fetch(`http://localhost:3001/users`,{

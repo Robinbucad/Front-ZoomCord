@@ -45,8 +45,7 @@ function InvitationPage() {
                 })
             })
             const dat = await res.json()
-           
-            console.log(dat)
+        
         }catch(err){
             alert('El usuario ya existe en el servidor')
         }

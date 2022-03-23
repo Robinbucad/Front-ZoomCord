@@ -5,7 +5,10 @@ import UserProfileSettings from './profile';
 import DeleteUser from './delete.modal';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../context/user/user.contex';
-
+import React from 'react'
+import EditEmail from './editEmailModal';
+import { useUsername } from '../../../hooks/hook-name-user';
+import EditUsername from './editUsername';
 
 function UserSettings(props) {
     let navigate = useNavigate()
@@ -13,6 +16,9 @@ function UserSettings(props) {
     const [userProfileSettings, updateUserProfileSettings] = useState(false)
     const [modalShow, setModalShow] = useState(false)
     const [user,setUser] = useContext(UserContext)
+    const [modalEmailShow, setModalEmailShow] = useState(false);
+    const [userModalShow,setModalUserShow] = useState(false)
+
 
 
     const handleClickAcc = e => {
@@ -39,7 +45,7 @@ function UserSettings(props) {
         sessionStorage.removeItem('token')
         navigate('/')
     }
-    
+
 
     return (
         
@@ -79,7 +85,7 @@ function UserSettings(props) {
                                      <p>{user.username}</p>
                                  </div>
                                  <div>
-                                     <Button variant="info">Editar</Button>
+                                     <Button onClick={() => setModalUserShow(true)} variant="info">Editar</Button>
                                  </div>
                              </div>
 
@@ -90,7 +96,7 @@ function UserSettings(props) {
                                      <p>{user.email}</p>
                                  </div>
                                  <div>
-                                     <Button variant="info">Editar</Button>
+                                     <Button onClick={() => setModalEmailShow(true)} variant="info">Editar</Button>
                                  </div>
                              </div>
 
@@ -131,10 +137,12 @@ function UserSettings(props) {
             
             : ''}
 
-            {userProfileSettings === false ? '' : <UserProfileSettings handleClickAcc={handleClickAcc}></UserProfileSettings>}
+            {!userProfileSettings  ? '' : <UserProfileSettings handleClickAcc={handleClickAcc}></UserProfileSettings>}
                
             </Modal>
             <DeleteUser show={modalShow} onHide={() => setModalShow(false)}></DeleteUser>
+            <EditEmail show={modalEmailShow} onHide={()=> setModalEmailShow(false)}></EditEmail>
+            <EditUsername show={userModalShow} onHide={() => setModalUserShow(false)}></EditUsername>
         </section>
 
 

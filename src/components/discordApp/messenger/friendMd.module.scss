@@ -1,5 +1,6 @@
 
 @import '../../../sass/global.scss';
+@import '../../../sass/mediaquery.scss';
 
     .containerApp{
         display: flex
@@ -18,6 +19,8 @@
             transition: 0.3s ease all;
             color: black;
         }
+        
+    
     }
     
     .containerConversations{
@@ -84,12 +87,17 @@
     .activeUsersDiv{
         width: 25%;
         background-color: $PrimaryClaro;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         body.dark &{
             background-color: $LightSecondary;
             transition: 0.3s ease all;
         }
+
+      
     }
-    
+
     // CHAT MD SETTINGS
     
     .chatBox{
@@ -109,7 +117,7 @@
     
     .chatContainer{
         background-color:$PrimaryClaro;
-        width:100%;
+        width:65%;
         color: white;
     
         body.dark &{
@@ -134,6 +142,10 @@
             transition: 0.3s ease all;
             color: black
         }
+        @include breakpoint(s){
+            width: 100%;
+          
+     }
     }
     
     .settingsChat{
@@ -142,6 +154,10 @@
         body.dark &{
             color: black
         }
+
+        @include breakpoint(s){
+            gap: 1rem
+     }
     }
     
     .inputSearchMsgChat{
@@ -175,10 +191,16 @@
         color: white;
         gap: 1rem;
         justify-content: flex-end;
-        overflow: auto;
+        overflow-y: auto;
         padding:30px;
         width: 60%;
         position:fixed;
+
+        @include breakpoint(s){
+            width: 60%; 
+           position:relative;
+           width: 100%;
+     }
     }
     
     .msgContainer{
@@ -378,6 +400,7 @@
     align-items: center;
     gap: 10px;
 
+
     body.dark &{
         transition: 0.3s ease all;
         color: black;
@@ -385,7 +408,8 @@
 }
 
 .profileDefault{
-    width: 25px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
 }
 
@@ -478,4 +502,170 @@
 }
 .conver:hover{
     background-color: $PrimaryClaro;
+}
+
+//POSTS
+
+
+.likeComment{
+    display: flex;
+    padding: 10px;
+    gap: 1rem;
+    align-items: center;
+}
+
+.bodyPost{
+    background-color: $SecondaryOscuro;
+    color: white;
+    @include flexBox(flex,'',flex-end,'','','');
+    flex-direction: column;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    @include breakpoint(s){
+        height: 7rem;
+ }
+}
+
+.imgPost{
+    width: 100%;
+    height: 8rem;
+    border-radius: 10px 10px 0 0;
+    @include breakpoint(s){
+        height: 5rem;
+ }
+}
+
+.cardPost{
+    width: 16rem;
+    height: 18rem;
+    @include breakpoint(s){
+        width: 8rem;
+        height: 8rem;   
+    }
+}
+
+
+.sectionCards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    height: 80%;
+    width: 350px;
+    position: fixed;
+    gap: 1rem;
+    @include breakpoint(s){
+        display: none;
+ }
+}
+
+.titlePost{
+    font-size: 20px;
+    @include breakpoint(s){
+        font-size: 20px;
+ }
+}
+
+.descTop{
+    @include breakpoint(s){
+        font-size: 12px;
+ }
+}
+
+.addPostBtn{
+    font-size: 30px;
+    color: gray;
+    border: none;
+    background:none;
+}
+
+.heartShapeRed{
+    position: relative;
+    width: 10px;
+    height: 10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color:#cb3a3a;
+    cursor: pointer;
+  }
+  .heartShapeRed:before,
+  .heartShapeRed:after{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    content: '';
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    background-color:#cb3a3a;
+  }
+  .heartShapeRed:before{
+    bottom: 0px;
+    left: -5px;
+  }
+  .heartShapeRed:after{
+    top: -5px;
+    right: 0px;
+  }
+
+  /*MODAL DELETE*/
+  
+  .modalDeleteServer{
+
+      background-color:$PrimaryClaro;
+      height: 20rem;
+      width: 28rem;
+      border-radius: 5px;
+      color: white;
+  }
+
+  .headerDeleteServer{
+      border: none;
+  }
+
+  .askDelServ{
+      background-color:#FAA81A;
+      padding: 8px;
+      color: white;
+      border-radius: 8px;
+    width: 95%;
+  }
+
+  .divAskDelServ{
+      display: flex;
+      justify-content: center;
+  }
+
+  .bodyModalDel{
+    @include flexBox(flex,'',space-around,'','',20px);
+    flex-direction: column;
+    height: 80%;
+  }
+
+  .footerDel{
+      background-color: $SecondaryOscuro;
+    height: 30%;
+    padding: 10px;
+    @include flexBox(flex,center,flex-end,'','',20px);
+    border-radius: 0 0 6px 6px;
+  }
+
+  .inputDel{
+      @include inputs($SecondaryOscuro,'',5px,95%,10px,'');
+      border: 1px solid black;
+  }
+
+  .inputDivDelServ{
+      padding: 10px;
+      color: gray;
+  }
+
+.modalChangeServer{
+    background-color: $PrimaryClaro;
+    color: white;
+    border-radius: 8px;
 }

@@ -12,7 +12,7 @@ function PageNotFound(){
     vuelta()
 
     let [counter, updateCounter] = useState(4)
-    //SE PASA EL COUNTER DONDE QUIERAS TENER EL CONTADOR
+
 
     let intervalId = useEffect(() => {
         setInterval(() => {

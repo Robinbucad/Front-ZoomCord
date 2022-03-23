@@ -35,6 +35,7 @@ function CreateServModal(props) {
             body: JSON.stringify(server)
         })
         const dat = await res.json()
+        window.location.reload()
     }
 
 
@@ -145,7 +146,7 @@ function CreateServModal(props) {
                 </Modal.Body>
                 <Modal.Footer className="footer-modal">
                     <button className="btn-back-modal" onClick={() => updateChangeModalClub(false)}>Atras</button>
-                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
+                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
                 </Modal.Footer>
 
 

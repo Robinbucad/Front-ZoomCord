@@ -3,23 +3,25 @@ import { UserContext } from "../../context/user/user.contex";
 
 
 export function useUsername() {
-    const [user, setUser] = useContext(UserContext)
-    const token = sessionStorage.getItem('token')
     
+    const token = sessionStorage.getItem('token')
+    const [userHook,setUserHook] = useState([])
+
     useEffect(() => {
         const fetchUsers = async () => {
      
                 const res = await fetch('http://localhost:3001/users',{
-                    method: 'get',
+                    method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 })
                 const dat = await res.json()
-                setUser([dat])
+                setUserHook(dat)
+                console.log(userHook)
         }
         fetchUsers()
-    }, [user._id])
-    return { user }
+    }, [userHook])
+    return { userHook }
 
 }

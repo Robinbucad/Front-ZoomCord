@@ -3,6 +3,7 @@ import { FaSun, FaMoon } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../../context/user/user.contex'
+import ModalPost from '../../modal/addPost'
 
 function HeaderApp() {
     const [btn,setBtn] = useState('false')
@@ -10,7 +11,9 @@ function HeaderApp() {
     const {id} = useParams()
     const [currentUser,setCurrentUser] = useState([])
     const [user,setUser] = useContext(UserContext)
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleClick = e => {
         document.body.classList.toggle(classes.dark)
@@ -42,13 +45,16 @@ function HeaderApp() {
             <p>{currentUser.username}</p>
             <div className={classes.settingsChat}>
                 <p>Call</p>
-                <p>Videocall</p>
                 <button onClick={handleClick} className={classes.switch} id={btn} >
                     <span><FaMoon></FaMoon></span>
                     <span><FaSun></FaSun></span>
 
                 </button>
+                <button className={classes.addPostBtn}  onClick={handleShow}>
+                    +
+                </button>
             </div>
+            <ModalPost show={show} handleClose={handleClose}></ModalPost>
         </header>
     )
 }

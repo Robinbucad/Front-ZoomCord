@@ -12,7 +12,7 @@ function DivServs() {
     const [conversations, setConversations] = useState([])
     const [modalServShow, setServModalShow] = useState(false)
     const [user,setUser] = useContext(UserContext)
-    console.log(user)
+ 
 
    useEffect(() => {
 

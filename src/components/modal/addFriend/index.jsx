@@ -22,7 +22,7 @@ function FollowUser(props) {
                     }
                 })
                 const dat = await res.json()
-                console.log(dat)
+          
                 setUserFind(dat)
                 dat.map(u => setUserIdFriend(u._id))
             } catch (err) {
@@ -50,8 +50,8 @@ function FollowUser(props) {
                 body:JSON.stringify(members)
             })
             const dat =await res.json()
-          
-            console.log(dat)
+            window.location.reload()
+     
         }catch(err){
             console.log(err)
         }

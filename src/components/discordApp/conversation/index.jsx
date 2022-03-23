@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom"
 import { UserContext } from "../../../context/user/user.contex"
 import classes from '../messenger/friendMd.module.scss'
 
@@ -13,7 +12,7 @@ function Conversation({ conversation },props) {
 
     useEffect(() => {
         const filter = conversation.members.find(e => e !== user._id)
-        console.log(filter)
+ 
         const getUser = async () => {
             try {
                 const res = await fetch(`http://localhost:3001/users/${filter}`, {
@@ -35,12 +34,12 @@ function Conversation({ conversation },props) {
         <div>
         {users.length===0 ? '' : users.map((e,i) => (
             <Link key={i} to={`/@me/${e._id}`}>
-                <div>
+             
                     <div className={classes.conver}>
                         <img className={classes.profileDefault} src={e.img} />
                         <p>{e.username}</p>
                     </div>
-                </div>
+             
             </Link>
         ))}
 
