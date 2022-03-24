@@ -45,6 +45,8 @@ function UserSettings(props) {
 
     const handleCloseSession = () => {
         sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
         navigate('/')
     }
 
