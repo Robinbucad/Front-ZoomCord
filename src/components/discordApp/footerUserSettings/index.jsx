@@ -1,14 +1,16 @@
 
 
 import { useContext } from 'react'
-import { GearFill, Headset, Mic } from 'react-bootstrap-icons/'
+import { GearFill } from 'react-bootstrap-icons/'
 import { UserContext } from '../../../context/user/user.contex'
 import classes from '../messenger/friendMd.module.scss'
-
+import{FaPhoneSquareAlt} from 'react-icons/fa'
 
 function UserSettingsFooter(props) {
     const [user,setUser] = useContext(UserContext)
-
+    const handleClick = () => {
+        window.open('/videocall','_blank')
+    }
 
     return (
 
@@ -24,8 +26,7 @@ function UserSettingsFooter(props) {
             </div>
 
             <div className={classes.btnsSettsDiv}>
-                <button className={classes.btnOptsUser} ><Mic></Mic></button>
-                <button className={classes.btnOptsUser} ><Headset></Headset></button>
+                <button className={classes.btnCall} onClick={handleClick}><FaPhoneSquareAlt></FaPhoneSquareAlt></button>
                 <button className={classes.btnOptsUser} onClick={props.handleShow}><GearFill ></GearFill></button>
 
             </div>

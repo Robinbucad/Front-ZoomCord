@@ -1,28 +1,41 @@
 import { useContext } from 'react'
-import { VideoContext } from '../../context/videoContext/videoContext'
+import { UserContext } from '../../context/user/user.contex';
+import { SocketContext} from '../../context/videoContext/videoContext'
 import classes from './videocall.module.scss'
+import {FaPhoneAlt} from 'react-icons/fa'
 
 function VideoPlayer() {
 
-
-    const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } = useContext(VideoContext)
-
+    const [user,setUser] = useContext(UserContext)
+    const { callAccepted, myVideo, userVideo,answerCall, callEnded, stream, call } = useContext(SocketContext);
+   
 
     return (
         <section className={classes.sectionContainer}>
 
             {stream ? <div className={classes.videoDiv}>
-
+        
+      
                
-                <video playsInline muted ref={myVideo} autoPlay/>
+            <video className={classes.videoImg} playsInline muted ref={myVideo} autoPlay />
             </div> : ''}
     
 
             {callAccepted && !callEnded ? <div className={classes.videoDiv}>
 
-                <video playsInline ref={userVideo} autoPlay/>
-            </div> : <p>Hola</p>}
+            <video className={classes.videoImg} playsInline ref={userVideo} autoPlay />
+            </div> :''}
+            <div>
+            {call.isReceivingCall && !callAccepted ? 
+            <div className={classes.divAnswerCall}>
+                <p className={classes.userCaller}>{call.name}...</p>
+                <button className={classes.iconAnswerCall} onClick={answerCall}><FaPhoneAlt className={classes.iconPhoneAnswer}></FaPhoneAlt></button>
+            </div> : ''}
 
+          
+
+            </div>
+          
         </section>
     )
 }

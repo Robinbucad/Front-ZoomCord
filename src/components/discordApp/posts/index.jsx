@@ -7,6 +7,7 @@ function Posts() {
     const token = sessionStorage.getItem('token')
     const [publications, setPublications] = useState([])
     const [user,setUser] = useContext(UserContext)
+    console.log(publications)
  
     //ACTUALIZAR publications no otro fetch
 
@@ -20,7 +21,7 @@ function Posts() {
             })
             const dat = await res.json()
             setPublications(dat)
-            console.log(dat)
+    
         }
         fetchPublications()
     }, [])
@@ -46,7 +47,7 @@ function Posts() {
             })
             
             const dat = await res.json()
-            
+        
         }catch(err){
 
         }
@@ -60,7 +61,8 @@ function Posts() {
             <section className={classes.sectionCards}>
                 {publications.map((e,i) => (
                     <section key={i} className={classes.cardPost}>
-                        <img className={classes.imgPost} src={e.img} />
+        
+                        <img className={classes.imgPost} src={`http://localhost:3001/${e.file}`} />
                         <div className={classes.bodyPost}>
                      
                             <h2 className={classes.titlePost}>{e.username}</h2>

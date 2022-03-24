@@ -44,7 +44,6 @@ function HeaderApp() {
         <header className={classes.headerChat}>
             <p>{currentUser.username}</p>
             <div className={classes.settingsChat}>
-                <p>Call</p>
                 <button onClick={handleClick} className={classes.switch} id={btn} >
                     <span><FaMoon></FaMoon></span>
                     <span><FaSun></FaSun></span>

@@ -19,20 +19,22 @@ function App() {
 
   return (
 
+
       <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<HomePage></HomePage>}></Route>
 
-            {/* <Route path='/signUp' element={<SignUp></SignUp>}></Route>
+            <Route path='/signUp' element={<SignUp></SignUp>}></Route>
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/validate' element={<ValidateEmail></ValidateEmail>}></Route>
             <Route path='/discord/@me/:id' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
             <Route path='/@me/:id/' element={<PrivateRoute><Messenger></Messenger></PrivateRoute>}></Route>
             <Route path='/discord/:id' element={<PrivateRoute><ServerMessenger></ServerMessenger></PrivateRoute>}></Route>
             <Route path='/invite/:id' element={<InvitationPage></InvitationPage>}></Route>
-            <Route path='*' element={<PageNotFound></PageNotFound>}></Route> */}
-            <Route path='/videocall' element={<VideoCall></VideoCall>}></Route>
+            <Route path='/videocall' element={<PrivateRoute><VideoCall></VideoCall></PrivateRoute>}></Route>
+            <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
+
           </Routes>
 
         </BrowserRouter>

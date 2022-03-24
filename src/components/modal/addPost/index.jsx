@@ -8,23 +8,24 @@ function ModalPost(props) {
     const [user, setUser] = useContext(UserContext)
     const [img, setImg] = useState('')
     const [description, setDescription] = useState('')
-    const [show,setShow] = useState(false)
-    const handleSubmit = async() => {
-       
-        const res = await fetch('http://localhost:3001/publications/',{
-            method:'post',
-            body: JSON.stringify({
-                username:user.username,
-                description:description,
-                img:img,
-                likes:0
-            }),
+    const [show, setShow] = useState(false)
+
+    //APPEND
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const userFormData = new FormData(e.target);
+        userFormData.append('username', user.username);
+
+        const res = await fetch('http://localhost:3001/publications/', {
+
+            method: 'post',
+            body: userFormData,
             headers: {
-                "Content-Type": "application/json",
+                // 'content-type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
             }
         })
-        const dat =await res.json()
+        const dat = await res.json()
         window.location.reload()
         setShow(false)
     }
@@ -32,6 +33,30 @@ function ModalPost(props) {
     return (
 
 
+        <Modal show={props.show} onHide={props.handleClose}>
+            <section className={classes.sectionModalAddPost}>
+                <Modal.Header closeButton style={{ border: 'none' }}>
+                    <Modal.Title>{user.username}</Modal.Title>
+                </Modal.Header>
+                <form onSubmit={handleSubmit} className={classes.modalPostDivInput}>
+                    <input  onChange={(e) => setImg(e.target.value)} type='file' name='file' placeholder='Pon url imagen'></input>
+                    <textarea className={classes.descriptionModal} onChange={(e) => setDescription(e.target.value)} type='text' name='description' placeholder='Description' />
+                    <button className={classes.btnPost} type='submit'>
+                        Subir
+                    </button>
+                </form>
+            </section>
+
+
+        </Modal>
+    )
+}
+
+export default ModalPost
+
+
+/**
+ * 
         <Modal show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>{user.username}</Modal.Title>
@@ -44,7 +69,4 @@ function ModalPost(props) {
                 Subir
             </button>
         </Modal>
-    )
-}
-
-export default ModalPost
+ */

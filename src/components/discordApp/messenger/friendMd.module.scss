@@ -366,6 +366,25 @@
     }
 }
 
+.btnCall{
+    @include btn(40px,40px,none, none);
+    color: white;
+    body.dark &{
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
+.btnCall:hover{
+    background-color: $PrimaryClaro;
+    border-radius: 5px;
+    body.dark &{
+        background-color: $LightTerciary;
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
 .btnOptsUser:hover{
     background-color: $PrimaryClaro;
     border-radius: 5px;
