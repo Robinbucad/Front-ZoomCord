@@ -5,7 +5,7 @@ function Message({ message}) {
     return (
         <div className={classes.msg}>
             <div>
-                <img className={classes.imgMsg} src={message.img}></img>
+                <img className={classes.imgMsg} src={message.file}></img>
             </div>
 
             <div>

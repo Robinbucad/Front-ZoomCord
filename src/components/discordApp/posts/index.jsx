@@ -7,8 +7,7 @@ function Posts() {
     const token = sessionStorage.getItem('token')
     const [publications, setPublications] = useState([])
     const [user,setUser] = useContext(UserContext)
-    console.log(publications)
- 
+    
     //ACTUALIZAR publications no otro fetch
 
     useEffect(() => {
@@ -27,13 +26,13 @@ function Posts() {
     }, [])
 
     const handleLikes = async (e) => {
-  
+       
 
         const liked = {
             _id:user._id,
             username:user.username,
             desciption:user.description,
-            img:user.img
+            file:user.file
         }
       
         try{

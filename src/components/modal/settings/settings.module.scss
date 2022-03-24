@@ -137,3 +137,9 @@
     @include flexBox(flex,'','','','',20px);
     flex-direction: column;
 }
+
+.imgModalChange{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}

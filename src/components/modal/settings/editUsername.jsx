@@ -53,7 +53,7 @@ function EditUsername(props) {
         >
             <section className={classes.cardModalUpdate}>
                 <Modal.Header className={classes.headerEmailModal} style={{ border: 'none' }} closeButton>
-                    <h1>Cambia tu email</h1>
+                    <h1>Cambia tu nombre de usuario</h1>
                     <p>Introduce un nuevo nombre de usuario y tu contraseña existente</p>
                 </Modal.Header>
                 <Modal.Body className={classes.bodyInputsModify}>

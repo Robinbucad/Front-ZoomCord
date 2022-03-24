@@ -9,6 +9,8 @@ import React from 'react'
 import EditEmail from './editEmailModal';
 import { useUsername } from '../../../hooks/hook-name-user';
 import EditUsername from './editUsername';
+import EditImage from './editImg.modal';
+import defaultImg from '../../../assets/img/default.jpg'
 
 function UserSettings(props) {
     let navigate = useNavigate()
@@ -18,7 +20,7 @@ function UserSettings(props) {
     const [user,setUser] = useContext(UserContext)
     const [modalEmailShow, setModalEmailShow] = useState(false);
     const [userModalShow,setModalUserShow] = useState(false)
-
+    const [imgModalShow,setModalImgShow] = useState(false)
 
 
     const handleClickAcc = e => {
@@ -102,11 +104,10 @@ function UserSettings(props) {
 
                              <div className={classes.bodyUserSettings}>
                                  <div >
-                                     <p className='userName'>NUMERO DE TELEFONO</p>
-                                     <p>{user.tlf}</p>
+                                    <img className={classes.imgModalChange} src={user.file === '' ? defaultImg : `http://localhost:3001/${user.file}` }></img>
                                  </div>
                                  <div>
-                                     <Button variant="info">Editar</Button>
+                                     <Button onClick={() =>  setModalImgShow(true)} variant="info">Editar</Button>
                                  </div>
                              </div>
 
@@ -143,6 +144,7 @@ function UserSettings(props) {
             <DeleteUser show={modalShow} onHide={() => setModalShow(false)}></DeleteUser>
             <EditEmail show={modalEmailShow} onHide={()=> setModalEmailShow(false)}></EditEmail>
             <EditUsername show={userModalShow} onHide={() => setModalUserShow(false)}></EditUsername>
+            <EditImage show={imgModalShow} onHide={() => setModalImgShow(false)}></EditImage>
         </section>
 
 

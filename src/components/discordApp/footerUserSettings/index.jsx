@@ -5,6 +5,7 @@ import { GearFill } from 'react-bootstrap-icons/'
 import { UserContext } from '../../../context/user/user.contex'
 import classes from '../messenger/friendMd.module.scss'
 import{FaPhoneSquareAlt} from 'react-icons/fa'
+import defaultImg from '../../../assets/img/default.jpg'
 
 function UserSettingsFooter(props) {
     const [user,setUser] = useContext(UserContext)
@@ -17,7 +18,7 @@ function UserSettingsFooter(props) {
         <footer className={classes.userSetts}>
             <div className={classes.userInfoSetts}>
                 <div >
-                    <img className={classes.userSettingsFooterImg} src={user.img}></img>
+                    <img className={classes.userSettingsFooterImg} src={user.file === '' ? defaultImg : `http://localhost:3001/${user.file}` }></img>
                 </div>
                 <div className={classes.userNameSetts} >
                     <p>{user.username}</p>

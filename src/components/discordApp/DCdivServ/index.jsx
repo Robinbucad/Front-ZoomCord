@@ -51,7 +51,7 @@ function DivServs() {
             {conversations.map((e,i) => (
                 <Link key={i} to={`/discord/${e._id}`}>
                     <div>
-                        <img className={classes.imgServ} src={e.img}></img>
+                        <img className={classes.imgServ} src={`http://localhost:3001/${e.file}`}></img>
                     </div>
                 </Link>
             ))}

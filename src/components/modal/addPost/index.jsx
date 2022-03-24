@@ -6,7 +6,6 @@ import classes from './addPost.module.scss'
 function ModalPost(props) {
     const token = sessionStorage.getItem('token')
     const [user, setUser] = useContext(UserContext)
-    const [img, setImg] = useState('')
     const [description, setDescription] = useState('')
     const [show, setShow] = useState(false)
 
@@ -39,7 +38,7 @@ function ModalPost(props) {
                     <Modal.Title>{user.username}</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={handleSubmit} className={classes.modalPostDivInput}>
-                    <input  onChange={(e) => setImg(e.target.value)} type='file' name='file' placeholder='Pon url imagen'></input>
+                    <input  type='file' name='file' placeholder='Pon url imagen'></input>
                     <textarea className={classes.descriptionModal} onChange={(e) => setDescription(e.target.value)} type='text' name='description' placeholder='Description' />
                     <button className={classes.btnPost} type='submit'>
                         Subir

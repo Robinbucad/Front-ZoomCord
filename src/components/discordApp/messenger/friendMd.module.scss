@@ -95,6 +95,9 @@
             transition: 0.3s ease all;
         }
 
+        @include breakpoint(s){
+           display: none;
+     }
       
     }
 
