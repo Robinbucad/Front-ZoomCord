@@ -1,0 +1,14 @@
+@import '../../sass/global.scss';
+
+.sectionContainer{
+    background-color:$PrimaryClaro;
+    @include flexBox(flex,center,center,'','',10px);
+    height: 90vh;
+}
+
+.videoDiv{
+    background-color:gray;
+    height: 400px;
+    width: 800px;
+    border-radius: 5px;
+}

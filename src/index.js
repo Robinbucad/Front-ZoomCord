@@ -13,6 +13,8 @@ import home_es from './translations/es/home.json'
 import registerLogin_es from './translations/es/register.login.json'
 import registerLogin_en from './translations/en/register.login.json'
 import UserProvider from './context/user/user.provider.jsx'
+import VideoProvider from './context/videoContext/videoContext.provider.jsx'
+
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -35,9 +37,12 @@ i18next.init({
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <I18nextProvider i18n={i18next}>
-        <App />
-      </I18nextProvider>
+      <VideoProvider>
+        <I18nextProvider i18n={i18next}>
+          <App />
+        </I18nextProvider>
+      </VideoProvider>
+
 
     </UserProvider>
 
