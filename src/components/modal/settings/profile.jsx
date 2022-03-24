@@ -1,11 +1,11 @@
 
 import { Modal, Button, Form } from 'react-bootstrap'
 import classes from './settings.module.scss'
+import { useState } from 'react'
 
 
 function UserProfileSettings(props) {
-
-
+  
 
     return (
         <Modal.Body className={classes.containerModalSettings} >
@@ -45,28 +45,7 @@ function UserProfileSettings(props) {
                             </div>
                         </div>
 
-
-
-
                     </article>
-
-                    <article >
-                        <h1>Tema</h1>
-
-                        <div className={classes.optDiv}>
-                            <label htmlFor="es">Oscuro</label>
-                            <Form.Check type="radio" name='theme' />
-                        </div>
-
-                        <div className={classes.optDiv}>
-                            <label htmlFor="es">Claro</label>
-                            <Form.Check type="radio" name='theme' />
-                        </div>
-
-                    </article>
-
-
-
 
                 </section>
 

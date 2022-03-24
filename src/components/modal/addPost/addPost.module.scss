@@ -1,0 +1,37 @@
+@import '../../../sass/global.scss';
+
+.modalPostDivInput{
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+
+    background-color: $PrimaryClaro;
+    height: 80%;
+    border-radius: 0 0 10px 10px;
+    justify-content: space-around;
+}
+
+.sectionModalAddPost{
+    background-color: $PrimaryClaro;
+    height: 20rem;
+    border-radius: 10px;
+    color:gray;
+}
+
+.descriptionModal{
+    width: 90%;
+    height: 5rem;
+    background-color:$SecondaryOscuro;
+    border-radius: 10px;
+}
+
+.btnPost{
+    background-color: $SecondaryOscuro;
+    width: 5rem;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}

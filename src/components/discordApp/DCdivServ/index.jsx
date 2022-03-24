@@ -1,20 +1,21 @@
 
 import { Link } from 'react-router-dom'
 import CreateServModal from '../../modal/createServ'
-import { useState } from 'react'
-import classes from './servers.module.scss'
+import { useContext, useState } from 'react'
+import classes from '../messenger/friendMd.module.scss'
 import logo from '../../../assets/img/discord/serv/servDisc.png'
 import { useEffect } from 'react'
-import { useUsername } from '../../../hooks/hook-name-user'
+import { UserContext } from '../../../context/user/user.contex'
 
 function DivServs() {
     const token = sessionStorage.getItem('token')
     const [conversations, setConversations] = useState([])
     const [modalServShow, setServModalShow] = useState(false)
-    const { user } = useUsername()
+    const [user,setUser] = useContext(UserContext)
+ 
 
+   useEffect(() => {
 
-    useEffect(() => {
         const getServConversations = async () => {
             try {
                 const res = await fetch(`http://localhost:3001/servers/conversations/${user._id}`, {
@@ -29,13 +30,17 @@ function DivServs() {
                 console.log(err)
             }
         }
-        getServConversations()
-    }, [user])
+        if(!user){
+            console.log('nada')
+        }else{
+            getServConversations()
+        }  
+     }, [user])
 
     return (
 
         <div className={classes.containerServ}>
-            <Link to={`/discord/@me/${user._id}`}>
+            <Link to={`/discord/@me/${ user._id}`}>
 
                 <div>
                     <img className={classes.imgServ} src={logo}></img>
@@ -46,10 +51,9 @@ function DivServs() {
             {conversations.map((e,i) => (
                 <Link key={i} to={`/discord/${e._id}`}>
                     <div>
-                        <img className={classes.imgServ} src={e.img}></img>
+                        <img className={classes.imgServ} src={`http://localhost:3001/${e.file}`}></img>
                     </div>
                 </Link>
-
             ))}
 
             <button onClick={() => setServModalShow(true)} className={classes.imgServ}>

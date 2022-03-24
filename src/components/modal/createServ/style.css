@@ -36,6 +36,8 @@
     height: 5rem;
     border-radius: 100%;
     border-style: dashed;
+    font-size: 0;
+    cursor: pointer;
 }
 
 .footer-modal{

@@ -19,7 +19,7 @@ function HomePart1() {
             setBtn(classes.active)
       
         }else{
-            setBtn(true)
+            setBtn(false)
         }
     }
 

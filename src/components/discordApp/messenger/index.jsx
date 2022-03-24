@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useUsername } from "../../../hooks/hook-name-user";
+import { useContext, useEffect, useState, useRef } from "react";
 import Message from "../message";
 import Conversation from "../conversation";
 import DivServs from "../DCdivServ";
@@ -7,14 +6,17 @@ import UserSettings from "../../modal/settings";
 import UserSettingsFooter from "../footerUserSettings";
 import classes from './friendMd.module.scss'
 import { io } from 'socket.io-client'
-import { useRef } from "react";
 import HeaderApp from "../headerApp";
 import FollowUser from "../../modal/addFriend";
+import { UserContext } from "../../../context/user/user.contex";
+import Posts from "../posts";
+import { useUsername } from "../../../hooks/hook-name-user";
+
+
 
 function Messenger() {
     const token = sessionStorage.getItem('token')
     const [conversations, setConversations] = useState([])
-    const { user } = useUsername()
     const [currentChat, setCurrentChat] = useState('')
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
@@ -23,7 +25,9 @@ function Messenger() {
     const socket = useRef()
     const [hide, updateHide] = useState(false)
     const [modalShow, setModalShow] = useState(false);
+    const [user, setUser] = useContext(UserContext)
 
+  
 
     useEffect(() => {
         socket.current = io("ws://localhost:4000")
@@ -39,7 +43,7 @@ function Messenger() {
 
 
 
-    useEffect(() => {
+    useEffect(() => { // ¿Futura funcionalidad, ver usuatios conectados?
         socket.current.emit("addUser", user._id);
     }, [user])
 
@@ -55,14 +59,17 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setConversations(dat)
+        
             } catch (err) {
                 console.log(err)
             }
-
-
         }
-        getConversations()
-    }, [user._id])
+        if (!user) {
+            console.log('No convs')
+        } else {
+            getConversations()
+        }
+    }, [user, currentChat])
 
 
     useEffect(() => {
@@ -77,8 +84,6 @@ function Messenger() {
                 const dat = await res.json()
                 setMessages(dat)
 
-
-
             } catch (err) {
                 console.log('error')
             }
@@ -88,17 +93,13 @@ function Messenger() {
     }, [currentChat])
 
     const date = new Date()
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-
-    const takeDate = `${hours}:${minutes}`
-
+    
     const handleSubmit = async (e) => {
 
         if (e.key === 'Enter') {
             e.preventDefault()
             const message = {
-                date: takeDate,
+                date: date,
                 img: user.img,
                 username: user.username,
                 senderId: user._id,
@@ -107,6 +108,7 @@ function Messenger() {
             };
 
             socket.current.emit("sendMessage", message)
+
             try {
                 const res = await fetch('http://localhost:3001/message/', {
                     method: 'post',
@@ -128,26 +130,27 @@ function Messenger() {
 
 
     function handleShow() {
-        if (show === false) {
 
-            setShow(true)
-        } else {
-            setShow(false)
-        }
+        setShow(!show)
+
+        // if (show === false) {
+
+        //     setShow(true)
+        // } else {
+        //     setShow(false)
+        // }
     }
 
     const handleConv = e => {
         console.log('')
     }
 
-
-
     return (
         <div className={classes.containerApp}>
-             <FollowUser
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                />
+            <FollowUser
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
             <UserSettings show={show} fullscreen={fullscreen} setShow={() => handleShow(false)}></UserSettings>
             <DivServs handleCurrentServ={handleConv}></DivServs>
             <div className={classes.containerMd}>
@@ -169,6 +172,7 @@ function Messenger() {
                                 <Conversation key={i} conversation={e} currentUser={user}></Conversation>
                             </div>
                         ))}
+
                     </section>
                 </section>
                 <div className={classes.userSetts} >
@@ -179,7 +183,7 @@ function Messenger() {
             </div>
             <div className={classes.chatContainer}>
 
-                <HeaderApp></HeaderApp>
+                <HeaderApp currentChat={currentChat}></HeaderApp>
 
                 {
 
@@ -200,12 +204,13 @@ function Messenger() {
                 }
 
             </div>
+            
+                <div className={classes.activeUsersDiv}>
 
-            <div className={classes.activeUsersDiv}>
-                <p>users</p>
-            </div>
-
-
+                    <Posts></Posts>
+             
+                </div>
+    
         </div>
     )
 }

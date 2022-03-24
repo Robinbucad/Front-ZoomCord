@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import { useUsername } from "../../../hooks/hook-name-user"
+import { UserContext } from "../../../context/user/user.contex"
 import './style.css'
 
 function CreateServModal(props) {
@@ -13,27 +13,31 @@ function CreateServModal(props) {
     const [changeModalClub, updateChangeModalClub] = useState(false)
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
     const [servName, updateServName] = useState('')
-    const [servImg,updateImg] = useState('')
-    const {user} = useUsername()
+    const [servImg, updateImg] = useState('')
+    const [user, setUser] = useContext(UserContext)
     let navigate = useNavigate()
 
     const onSubmit = async e => {
-
+        e.preventDefault()
+        const servFormData = new FormData(e.target);
+        servFormData.append('userId', user._id);
+        servFormData.append('ADMIN', user._id);
 
         const server = {
             name: servName,
             img: servImg,
-            userId:user._id
+            userId: user._id,
+            ADMIN: user._id
         }
         const res = await fetch('http://localhost:3001/servers', {
             method: 'post',
             headers: {
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(server)
+            body: servFormData
         })
         const dat = await res.json()
+        window.location.reload()
     }
 
 
@@ -144,7 +148,7 @@ function CreateServModal(props) {
                 </Modal.Body>
                 <Modal.Footer className="footer-modal">
                     <button className="btn-back-modal" onClick={() => updateChangeModalClub(false)}>Atras</button>
-                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={props.onHide}>Crear</Button>
+                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
                 </Modal.Footer>
 
 
@@ -169,31 +173,34 @@ function CreateServModal(props) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="container-opts-modal">
-                        <div className="upload-container">
-                            <div className="div-upload-photo">
-                                <p>UPLOAD</p>
+                        <form onSubmit={onSubmit} >
+                            <div className="upload-container">
+                                <input type='file' name='file' className="div-upload-photo">
+
+                                </input>
                             </div>
-                        </div>
 
 
 
 
-                        <div >
-                            <p className="name-serv">NOMBRE DEL SERVIDOR</p>
-                            <input className="input-name-serv" name='nameServ' onChange={e => updateServName(e.target.value)} type='text' placeholder='El servidor de user'></input>
-                            <input className="input-name-serv" onChange={(e) => updateImg(e.target.value)} type='text' placeholder='Imangen del servidor'></input>
-                            <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
-                        </div>
+                            <div >
+                                <p className="name-serv">NOMBRE DEL SERVIDOR</p>
+                                <input className="input-name-serv" name='name' type='text' placeholder='El servidor de user'></input>
+                                <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
+                            </div>
+                            <Modal.Footer className="footer-modal">
+                                <button className="btn-back-modal" onClick={() => updateChangeModalFriend(false)}>Atras</button>
+                                <Button className="btn-modal-create" type='submit' required>Crear</Button>
+                            </Modal.Footer>
+                        </form>
+
 
 
 
 
 
                     </Modal.Body>
-                    <Modal.Footer className="footer-modal">
-                        <button className="btn-back-modal" onClick={() => updateChangeModalFriend(false)}>Atras</button>
-                        <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
-                    </Modal.Footer>
+
 
 
                 </Modal>}

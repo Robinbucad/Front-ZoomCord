@@ -11,18 +11,19 @@ function ValidateEmail() {
 
 
 
-    useEffect(async() => {
-       
-            try {
-                const res = await fetch(`http://localhost:3001/auth/validate?token=${param}`, {
-                    method: 'get',
-                })
-                const dat = await res.json()
+    useEffect(() => {
+       const fetchValidate = async() => {
+        try {
+            const res = await fetch(`http://localhost:3001/auth/validate?token=${param}`, {
+                method: 'get',
+            })
+            const dat = await res.json()
 
-            } catch (err) {
-                console.log(err)
-            }
-        
+        } catch (err) {
+            console.log(err)
+        }
+       }
+    fetchValidate()      
     }, [])
 
     function vuelta() {

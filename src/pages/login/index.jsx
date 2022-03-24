@@ -4,7 +4,8 @@ import { Button, Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { useUsername } from '../../hooks/hook-name-user'
+import { UserContext } from '../../context/user/user.contex'
+
 import './style.css'
 
 function LoginPage() {
@@ -14,9 +15,9 @@ function LoginPage() {
 
     const [userName, updateUserName] = useState()
     const [password, updatePassword] = useState()
-   
+    const [user,setUser] = useContext(UserContext)
 
-    const {user} = useUsername()
+
 
 
     const handleUsername = e => {
@@ -42,11 +43,11 @@ function LoginPage() {
             },
         })
         const r = await d.json()
-        
+
         if(r.access_token){
-            console.log(r.access_token)
-            sessionStorage.setItem('token', r.access_token)
+    
             localStorage.setItem('token',r.access_token)
+            sessionStorage.setItem('token', r.access_token)
             fetch(`http://localhost:3001/users`,{
                 method:'get',
                 headers:{
@@ -55,7 +56,10 @@ function LoginPage() {
             })
             .then(r => r.json())
             .then(d => {
-                navigate(`/discord/@me/${d._id}`)
+                setUser(d)
+    
+                localStorage.setItem('user',JSON.stringify(d))
+                 navigate(`/discord/@me/${d._id}`)
             })
   
         }else{
@@ -63,9 +67,6 @@ function LoginPage() {
         }
 
     }
-
-
-    
 
     return (
         <section className="signUp-container">

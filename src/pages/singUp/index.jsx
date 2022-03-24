@@ -9,7 +9,7 @@ function SignUp() {
     
 
     const [t] = useTranslation("registerLogin")
-    console.log(t("registerLogin.username"))
+ 
 
     const [value, updateValue] = useState('false')
     const [btn, updateBtn] = useState(true)
@@ -39,7 +39,7 @@ function SignUp() {
             })
             .then(r => {
                 if(r.status === 409){
-                    console.log(r)
+               
                     alert('Usuario existente')
                 }else{
                     

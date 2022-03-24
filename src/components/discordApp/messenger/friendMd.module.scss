@@ -1,154 +1,314 @@
 
 @import '../../../sass/global.scss';
+@import '../../../sass/mediaquery.scss';
 
-.containerApp{
-    display: flex
-}
+    .containerApp{
+        display: flex
+    }
+    
+    .containerMd{
+        @include flexBox(flex, '' , space-between,60px, white,'');
+        padding-top: 11px;
+        flex-direction:column;
+        height: 100vh;
+        background: $MDColor;
+        transition: 0.3s ease all;
+    
+        body.dark &{
+            background-color: $LightPrimary;
+            transition: 0.3s ease all;
+            color: black;
+        }
+        
+    
+    }
+    
+    .containerConversations{
+        @include flexBox(flex,'','','','',1rem);
+        flex-direction: column;
+    }
+    
+    .inputDivMd{
+        padding-top: 10px;
+        border-bottom: 1px solid gray;
+        padding: 10px;
+    }
+    
+    .inputSearch{
+        @include inputs($SecondaryOscuro, gray , 5px, 100%, 3.5px,'');
+        margin-bottom:10px;
+    
+        body.dark &{
+            background-color: $LightTerciary;
+            transition: 0.3s ease all;
+        }
+    }
+    
+    .secFriends{
+        padding: 10px;
+    
+    }
+    
+    
+    
+    .headerMdList{
+        @include flexBox(flex, center,space-between, '','','');
+    }
+    
+    .divFriend{
+        padding: 4px;
+        
+    }
+    
+    .divFriend:hover{
+        background-color: $HoverListFrMd;
+        border-radius: 5px;
+        body.dark &{
+            background-color: $LightTerciary;
+            transition: 0.3s ease all;
+            border-radius: 5px;
+        }
+    }
+    
+    
+    
+    .btnMd{
+        @include btn('','',none, none);
+        color: gray;
+        font-size: 25px;
+    }
+    
+    
+    
+    .userSetts{
+        margin-top: auto;
+    }
+    
+    .activeUsersDiv{
+        width: 25%;
+        background-color: $PrimaryClaro;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        body.dark &{
+            background-color: $LightSecondary;
+            transition: 0.3s ease all;
+        }
 
-.containerMd{
-    @include flexBox(flex, '' , space-between,60px, white,'');
-    padding-top: 11px;
-    flex-direction:column;
-    height: 100vh;
-    background: $MDColor;
-}
+        @include breakpoint(s){
+           display: none;
+     }
+      
+    }
 
-.containerConversations{
-    @include flexBox(flex,'','','','',1rem);
-    flex-direction: column;
-}
+    // CHAT MD SETTINGS
+    
+    .chatBox{
+        overflow-y: auto;
+        body.dark &{
+            transition: 0.3s ease all;
+            color: black;
+        }
+        
+    }
+    
+    
+    .chatFriend{
+        display: flex;
+        background-color: green;
+    }
+    
+    .chatContainer{
+        background-color:$PrimaryClaro;
+        width:65%;
+        color: white;
+    
+        body.dark &{
+            background-color: $LightSecondary;
+            transition: 0.3s ease all;
+            border-radius: 5px;
+        }
+    }
+    
+    
+    .inputChatSearch{
+        @include inputs($SecondaryOscuro, gray , 5px, 40%,2px,'');
+     
+    }
+    
+    .headerChat{
+        @include flexBox(flex, center , space-between,73px, white,'');
+        border-bottom: 1px solid gray;
+        background-color:$PrimaryClaro;
+        body.dark &{
+            background-color: $LightSecondary;
+            transition: 0.3s ease all;
+            color: black
+        }
+        @include breakpoint(s){
+            width: 100%;
+          
+     }
+    }
+    
+    .settingsChat{
+        @include flexBox(flex,center,space-between,'',white,'');
+        width: 25%;
+        body.dark &{
+            color: black
+        }
 
-.inputDivMd{
-    padding-top: 10px;
-    border-bottom: 1px solid gray;
-    padding: 10px;
-}
+        @include breakpoint(s){
+            gap: 1rem
+     }
+    }
+    
+    .inputSearchMsgChat{
+        @include inputs($SecondaryOscuro,white,5px,'',3px,'')
+    }
+    
+    .groupHeaderChat{
+        @include flexBox(flex,center,space-between,'','','');
+        width:40%
+    }
+    
+    .inputChat{
+        background-color: $HoverListFrMd;
+        @include inputs(#40444B,gray, 5px, 100%,10px,'');
+        body.dark &{
+            background-color: $LightTerciary;
+            transition: 0.3s ease all;
+            border-radius: 5px;
+        }
+    }
+    
+    .divInputChat{
+        padding-top: 1rem;
+        @include flexBox(flex,center,center,'','','');
+    }
+    
+    .conversation{
+        height: 91%;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        gap: 1rem;
+        justify-content: flex-end;
+        overflow-y: auto;
+        padding:30px;
+        width: 60%;
+        position:fixed;
 
-.inputSearch{
-    @include inputs($SecondaryOscuro, gray , 5px, 100%, 3.5px,'');
-    margin-bottom:10px
-}
+        @include breakpoint(s){
+            width: 60%; 
+           position:relative;
+           width: 100%;
+     }
+    }
+    
+    .msgContainer{
+        background-color: red;
+    }
+    
+    //SERVER CSS
+    
+    .DivServList{
+        border-bottom: 1px solid gray;
+        padding: 12px;
+        display: flex
+    }
+    
+    .imgServ{
+        @include servLog(55px, 50%,$HoverListFrMd,green);
+        height: 55px;
+    }
+    
+    .imgServ:hover{
+        transition: 0.4s;
+        border-radius: 35%;
+    }
+    
+    .containerServ{
+        @include flexBox(flex,center, '','','',1rem);
+        flex-direction: column;
+        padding: 10px;
+        background-color: $SecondaryOscuro;
+     
+    }
+    
+    
+    ::-webkit-scrollbar{
+    
+        background-color:$MDColor;
+        border-radius: 50px;
+        width: 7px;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+     
+    }
+    
+    
+    
+    ::-webkit-scrollbar-thumb{
+        height: 1rem;
+        background: $SecondaryOscuro;
+        border-radius:12px;
+        cursor: pointer;
+      
+    
+    }
+    
+    .userBtn{
+        display: flex;
+        gap: 5rem;
+    }
+    
+    .divInviteFriend{
+        padding: 10px
+    }
+    .inputInviteFriend{
+       @include inputs($SecondaryOscuro,gray,5px,100%,3px,'')
+    }
+    
+    .bodyModal{
+        background-color: $PrimaryClaro;
+        color: white;
+    }
+    
+    // MULTI THEMING
+    
+    .optDiv{
+        display: flex;
+        gap: 10px;
+    }
+    
 
-.secFriends{
-    padding: 10px;
-}
 
 
 
-.headerMdList{
-    @include flexBox(flex, center,space-between, '','','');
-}
+//Servers
 
-.divFriend{
-    padding: 4px;
-}
-
-.divFriend:hover{
-    background-color: $HoverListFrMd;
-    border-radius: 5px;
-}
-
-
-
-.btnMd{
-    @include btn('','',none, none);
-    color: gray;
-    font-size: 25px;
-}
-
-
-
-.userSetts{
-
-    margin-top: auto;
-}
-
-.activeUsersDiv{
-    width: 25%;
-    background-color: $PrimaryClaro;
-}
-
-// CHAT MD SETTINGS
-
-.chatBox{
-    overflow-y: auto;
-}
-
-
-.chatFriend{
-    display: flex;
-    background-color: green;
-}
-
-.chatContainer{
-    background-color:$PrimaryClaro;
-    width:100%;
-    color: white;
-}
-
-
-.inputChatSearch{
-    @include inputs($SecondaryOscuro, gray , 5px, 40%,2px,'');
-}
-
-.headerChat{
-    @include flexBox(flex, center , space-between,73px, white,'');
-    border-bottom: 1px solid gray;
-    background-color:$PrimaryClaro;
-}
-
-.settingsChat{
-    @include flexBox(flex,center,space-between,'',white,'');
-    width: 10%
-}
-
-.inputSearchMsgChat{
-    @include inputs($SecondaryOscuro,white,5px,'',3px,'')
-}
-
-.groupHeaderChat{
-    @include flexBox(flex,center,space-between,'','','');
-    width:40%
-}
-
-.inputChat{
-    background-color: $HoverListFrMd;
-    @include inputs(#40444B,gray, 5px, 100%,10px,'')
-}
-
-.divInputChat{
-    padding-top: 1rem;
-    @include flexBox(flex,center,center,'','','');
-}
-
-.conversation{
-    height: 91%;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    gap: 1rem;
-    justify-content: flex-end;
-    overflow: auto;
-    padding:30px;
-    width: 60%;
-    position:fixed;
-}
-
-.msgContainer{
-    background-color: red;
-}
-
-//SERVER CSS
-
-.DivServList{
-
-    border-bottom: 1px solid gray;
-    padding: 12px;
-}
 
 .imgServ{
     @include servLog(55px, 50%,$HoverListFrMd,green);
     height: 55px;
+}
+
+.sectionsServer{
+    padding: 10px;
+    @include flexBox(flex,'','','','',10px);
+    flex-direction:column;
+}
+
+.btnAdd{
+    border: none;
+    background: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
 }
 
 .imgServ:hover{
@@ -161,46 +321,373 @@
     flex-direction: column;
     padding: 10px;
     background-color: $SecondaryOscuro;
+    transition: 0.3s ease all;
+    body.dark &{
+        background-color: $LightTerciary;
+        transition: 0.3s ease all;
+    }
 }
 
+.divImgServ{
+    height: 55px;
+    width: 55px;
+    background-color: red;
+}
 
-::-webkit-scrollbar{
+//Footer
 
-    background-color:$MDColor;
-    border-radius: 50px;
-    width: 7px;
-    color: black;
+.userSetts{
+    background-color:$userSetts;
+    transition: 0.3s ease all;
+    body.dark &{
+        background-color: $LightUserSetts;
+        transition: 0.3s ease all;
+    }
+    @include flexBox(flex, center, space-between,65px,'','');
+
+}
+
+.userInfoSetts{
+    @include flexBox(flex, center, space-between,'','',12px)
+}
+
+.userNameSetts{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.userNameSetts > p{
+    margin: 0;
+}
+
+.btnOptsUser{
+    @include btn(40px,40px,none, none);
+    color: white;
+    body.dark &{
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
+.btnCall{
+    @include btn(40px,40px,none, none);
+    color: white;
+    body.dark &{
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
+.btnCall:hover{
+    background-color: $PrimaryClaro;
+    border-radius: 5px;
+    body.dark &{
+        background-color: $LightTerciary;
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
+.btnOptsUser:hover{
+    background-color: $PrimaryClaro;
+    border-radius: 5px;
+    body.dark &{
+        background-color: $LightTerciary;
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
+.btnsSettsDiv{
+    width: 45%;
+    @include flexBox(flex, center, space-between,'','','');
+    font-size:20px;
+    padding-right: 10px;
+
+}
+
+.userSettingsFooterImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+//CONVERSATIONS 
+
+.conver{
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
- 
+    gap: 10px;
+
+
+    body.dark &{
+        transition: 0.3s ease all;
+        color: black;
+    }
 }
 
-
-
-::-webkit-scrollbar-thumb{
-    height: 1rem;
-    background: $SecondaryOscuro;
-    border-radius:12px;
-    cursor: pointer;
-  
-
+.profileDefault{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
 }
 
-.userBtn{
+.switch{
+    background-color:#343D5B ;
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
     display: flex;
-    gap: 5rem;
+    outline: none;
+    &::after{
+        content: '';
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        background: #f1f1f1;
+        top: 0;
+        left: 0; //SE VARIA ENTRE LEFT Y RIGHT PARA LA ANIMACION DEL BOTON
+        left: unset; 
+        border-radius: 100px;
+        transition: .3s ease all;
+        box-shadow: 0px 0px 2px 2px rgba (0,0,0,.2);
+    }
+    &#active{
+        background: gray;
+        color:black;
+        &::after{ // LOS DOBLES PUNTOS ES COMO UNA CONDICION
+            right: 0;
+            left: unset;
+        }
+    }
+    span{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        background: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
-.divInviteFriend{
-    padding: 10px
-}
-.inputInviteFriend{
-   @include inputs($SecondaryOscuro,gray,5px,100%,3px,'')
+// MESSAGE
+
+.msg{
+    @include flexBox(flex,center,'','','','');
+    gap: 1rem;
+    padding: 5px;
 }
 
-.bodyModal{
+.msg:hover{
+    background-color: $hoverMsg;
+    border-radius: 10px;
+    body.dark &{
+        background-color: $LightTerciary;
+        color: black;
+    }
+    
+}
+
+.imgMsg{
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.dateMsg{
+    font-size: 10px;
+    color: gray;
+}
+
+.usernameMsg{
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.msgText{
+    font-size: 13px;
+}
+
+.divConv{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+.conver:hover{
+    background-color: $PrimaryClaro;
+}
+
+//POSTS
+
+
+.likeComment{
+    display: flex;
+    padding: 10px;
+    gap: 1rem;
+    align-items: center;
+}
+
+.bodyPost{
+    background-color: $SecondaryOscuro;
+    color: white;
+    @include flexBox(flex,'',flex-end,'','','');
+    flex-direction: column;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    @include breakpoint(s){
+        height: 7rem;
+ }
+}
+
+.imgPost{
+    width: 100%;
+    height: 8rem;
+    border-radius: 10px 10px 0 0;
+    @include breakpoint(s){
+        height: 5rem;
+ }
+}
+
+.cardPost{
+    width: 16rem;
+    height: 18rem;
+    @include breakpoint(s){
+        width: 8rem;
+        height: 8rem;   
+    }
+}
+
+
+.sectionCards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    height: 80%;
+    width: 350px;
+    position: fixed;
+    gap: 1rem;
+    @include breakpoint(s){
+        display: none;
+ }
+}
+
+.titlePost{
+    font-size: 20px;
+    @include breakpoint(s){
+        font-size: 20px;
+ }
+}
+
+.descTop{
+    @include breakpoint(s){
+        font-size: 12px;
+ }
+}
+
+.addPostBtn{
+    font-size: 30px;
+    color: gray;
+    border: none;
+    background:none;
+}
+
+.heartShapeRed{
+    position: relative;
+    width: 10px;
+    height: 10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color:#cb3a3a;
+    cursor: pointer;
+  }
+  .heartShapeRed:before,
+  .heartShapeRed:after{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    content: '';
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    background-color:#cb3a3a;
+  }
+  .heartShapeRed:before{
+    bottom: 0px;
+    left: -5px;
+  }
+  .heartShapeRed:after{
+    top: -5px;
+    right: 0px;
+  }
+
+  /*MODAL DELETE*/
+  
+  .modalDeleteServer{
+
+      background-color:$PrimaryClaro;
+      height: 20rem;
+      width: 28rem;
+      border-radius: 5px;
+      color: white;
+  }
+
+  .headerDeleteServer{
+      border: none;
+  }
+
+  .askDelServ{
+      background-color:#FAA81A;
+      padding: 8px;
+      color: white;
+      border-radius: 8px;
+    width: 95%;
+  }
+
+  .divAskDelServ{
+      display: flex;
+      justify-content: center;
+  }
+
+  .bodyModalDel{
+    @include flexBox(flex,'',space-around,'','',20px);
+    flex-direction: column;
+    height: 80%;
+  }
+
+  .footerDel{
+      background-color: $SecondaryOscuro;
+    height: 30%;
+    padding: 10px;
+    @include flexBox(flex,center,flex-end,'','',20px);
+    border-radius: 0 0 6px 6px;
+  }
+
+  .inputDel{
+      @include inputs($SecondaryOscuro,'',5px,95%,10px,'');
+      border: 1px solid black;
+  }
+
+  .inputDivDelServ{
+      padding: 10px;
+      color: gray;
+  }
+
+.modalChangeServer{
     background-color: $PrimaryClaro;
     color: white;
+    border-radius: 8px;
 }

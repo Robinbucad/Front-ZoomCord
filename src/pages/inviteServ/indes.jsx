@@ -1,22 +1,19 @@
 import classes from './invite.module.scss'
 import { Card, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { useUsername } from '../../hooks/hook-name-user'
+import { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../../context/user/user.contex'
 
 
 function InvitationPage() {
 
     const { id } = useParams()
-    console.log(id) // HARE UN POST A ESTE ID PASANDOLE EL ID DEL USUARIO
     const token = localStorage.getItem('token')
     const [servName, setServName] = useState('')
     const [servImg, setServImg] = useState('')
     const [members, setMembers] = useState([])
-    const {user} = useUsername()
-    const idUser = user._id
-    let navigate = useNavigate()
-
+    const [user,setUser] = useContext(UserContext)
+    const [load,setLoad] = useState(false)
 
     useEffect(() => {
         const fetchServers = async () => {
@@ -44,15 +41,15 @@ function InvitationPage() {
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    userId:idUser
+                    userId:user._id
                 })
             })
             const dat = await res.json()
-            
+        
         }catch(err){
             alert('El usuario ya existe en el servidor')
         }
-        navigate(`/discord/${id}`)
+        setLoad(true)
        
     } 
 
@@ -68,8 +65,10 @@ function InvitationPage() {
                         <Card.Title>{servName}</Card.Title>
                         <p>{members.length !== 1 ? `${members.length} miembros` : `${members.length} miembro`}</p>
                     </div>
-
+                {load === false ? 
                     <Button className={classes.btnInvite} onClick={handleSubmit} variant="primary">Aceptar invitacion</Button>
+                : <p>Vuelve a la página y refresca :D</p>
+                }
                 </Card.Body>
             </Card>
         </section>

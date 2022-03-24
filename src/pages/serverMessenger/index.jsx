@@ -1,5 +1,5 @@
 import classes from '../../components/discordApp/messenger/friendMd.module.scss'
-import {  useState } from 'react';
+import { useContext, useState } from 'react';
 import UserSettingsFooter from '../../components/discordApp/footerUserSettings';
 import UserSettings from '../../components/modal/settings';
 import DivServs from '../../components/discordApp/DCdivServ';
@@ -7,17 +7,17 @@ import { io } from 'socket.io-client'
 import { useRef } from 'react'
 import { useEffect } from 'react';
 import MessageServer from '../../components/discordApp/messageServ';
-import { useUsername } from '../../hooks/hook-name-user';
 import { Dropdown } from 'react-bootstrap'
 import { Modal, Button } from 'react-bootstrap'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { UserContext } from '../../context/user/user.contex';
+import Posts from '../../components/discordApp/posts';
+
 
 function ServerMessenger() {
     const token = sessionStorage.getItem('token')
-    const tokenLocal = localStorage.getItem('token')
     const [fullscreen] = useState(true);
     const [show, setShow] = useState(false);
-    const { user } = useUsername()
     const [currentServ, updateCurrentServ] = useState('')
     const [currentServId, updateCurrentServId] = useState('')
     const [messages, setMessages] = useState([])
@@ -26,10 +26,17 @@ function ServerMessenger() {
     const [showLink, setShowLink] = useState(false);
     const handleCloseLink = () => setShowLink(false);
     const handleShowLink = () => setShowLink(true);
-    const {id} = useParams()
-
-
-
+    const { id } = useParams()
+    const [user, setUser] = useContext(UserContext)
+    const [members, setMembers] = useState([])
+    const [listMembers, setListMembers] = useState([])
+    const [smShow, setSmShow] = useState(false);
+    const [nameServ, setNameServ] = useState('')
+    const [smChangeShow,setSmChangeShow]= useState(false)
+    const [newServName,setNewServName] = useState('')
+    const [adminId,setAdminId] = useState('')
+    let navigate = useNavigate()
+   
     function handleShow() {
         if (show === false) {
 
@@ -50,26 +57,31 @@ function ServerMessenger() {
         })
     }, [messages])
 
+    
+
 
     useEffect(() => {
-       const getCurrentServ = async() => {
-            try{
-                const res = await fetch(`http://localhost:3001/servers/${id}`,{
-                    method:'get',
-                    headers:{
-                        Authorization: `Bearer ${token || tokenLocal}`
+        const getCurrentServ = async () => {
+            try {
+                const res = await fetch(`http://localhost:3001/servers/${id}`, {
+                    method: 'get',
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
                 })
                 const dat = await res.json()
-                console.log(dat)
+                setMembers(dat.members)
                 updateCurrentServ(dat.name)
                 updateCurrentServId(dat._id)
-            }catch(err){
+                setListMembers(dat.members)
+            } catch (err) {
                 console.log(err)
             }
         }
         getCurrentServ()
-    },[id])
+    }, [id])
+
+  
 
     useEffect(() => {
 
@@ -78,7 +90,7 @@ function ServerMessenger() {
                 const res = await fetch(`http://localhost:3001/servMsg/${currentServId}`, {
                     method: 'get',
                     headers: {
-                        Authorization: `Bearer ${token || tokenLocal}`
+                        Authorization: `Bearer ${token}`
                     },
                 })
                 const dat = await res.json()
@@ -118,7 +130,7 @@ function ServerMessenger() {
                     body: JSON.stringify(message),
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token || tokenLocal }`
+                        Authorization: `Bearer ${token}`
 
                     },
                 })
@@ -132,6 +144,63 @@ function ServerMessenger() {
         }
     }
 
+
+
+    const handleDelServ = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await fetch(`http://localhost:3001/servers/${currentServId}`, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: nameServ,
+                    userId: user._id
+                })
+            })
+            const dat = await res.json()
+
+            setTimeout(() => {
+                navigate(`/discord/@me/${user._id}`)
+            }, 250)
+
+
+        } catch (err) {
+            alert('O no eres admin, o has escrito mal el nombre del servidor')
+        }
+    }
+
+    const handleNewServName = async(e) => {
+        e.preventDefault()
+        try {
+            const res = await fetch(`http://localhost:3001/servers/${currentServId}`, {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: newServName,
+                    userId: user._id
+                })
+            })
+            const dat = await res.json()
+
+            setTimeout(() => {
+                window.location.reload()
+            }, 250)
+
+
+        } catch (err) {
+            alert('No eres administrador')
+        }
+    }
+
+ 
+
+
     return (
         <div className={classes.containerApp}>
 
@@ -141,40 +210,44 @@ function ServerMessenger() {
             <div className={classes.containerMd}>
 
 
-                {/* <div className={classes.DivServList}>
+                <div className={classes.DivServList}>
                     <h4>{currentServ}</h4>
+                    <Dropdown>
+                        <Dropdown.Toggle style={{ background: 'none', border: 'none' }} >
 
-                </div> */}
+                        </Dropdown.Toggle>
 
-                <Dropdown>
-                    <Dropdown.Toggle style={{ background: 'none', border: 'none' }} >
-                        {currentServ}
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu style={{ background: 'black', border: 'none' }}>
-                        <Dropdown.Item onClick={handleShowLink} style={{ color: 'gray' }} >Invite Friend</Dropdown.Item>
-                        <Dropdown.Item style={{ color: 'gray' }} >Delete Server</Dropdown.Item>
-                        <Dropdown.Item style={{ color: 'gray' }}>Ajustes</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                <section>
-                    <header className={classes.headerMdList}>
-                        <p >Canales de texto</p>
-
-                    </header>
-                    {/**AQUI CANALES DE TEXTO> */}
-
-                </section>
+                        <Dropdown.Menu style={{ background: 'black', border: 'none' }}>
+                            <Dropdown.Item onClick={handleShowLink} style={{ color: 'gray' }} >Invite Friend</Dropdown.Item>
+                            <Dropdown.Item style={{ color: 'gray' }} onClick={() => setSmShow(true)} >Delete Server</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSmChangeShow(true)} style={{ color: 'gray' }}>Ajustes</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
 
 
-                <section>
-                    <header className={classes.headerMdList}>
-                        <p >Canales de Voz</p>
 
-                    </header>
-                    {/**AQUI CANALES DE VOZ */}
+                <div className={classes.sectionsServer}>
+                    <section>
+                        <header className={classes.headerMdList}>
+                            <p >Usuarios Servidor</p>
+                            <p>{listMembers.length}</p>
+                        </header>
+                
 
-                </section>
+                    </section>
+
+
+                    <section>
+                        <header className={classes.headerMdList}>
+                            <p >Canales de Voz</p>
+                            <button className={classes.btnAdd}>+</button>
+                        </header>
+                        {/**AQUI CANALES DE VOZ */}
+
+                    </section>
+
+                </div>
 
 
 
@@ -197,7 +270,7 @@ function ServerMessenger() {
 
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
-                        {messages.map((m, i) => (
+                        {messages?.map((m, i) => (
                             <MessageServer key={i} message={m}></MessageServer>
                         ))}
                     </div>
@@ -209,7 +282,7 @@ function ServerMessenger() {
             </div>
 
             <div className={classes.activeUsersDiv}>
-                <p>HOLA GENTE</p>
+                <Posts></Posts>
             </div>
 
             <Modal show={showLink} onHideLink={handleCloseLink}>
@@ -236,7 +309,60 @@ function ServerMessenger() {
                     </Modal.Footer>
                 </section>
 
+
             </Modal>
+            <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}>
+                <section className={classes.modalDeleteServer}>
+                    <Modal.Header className={classes.headerDeleteServer} closeButton>
+                        <h4>
+                            Eliminar el servidor {currentServ}
+                        </h4>
+                    </Modal.Header>
+                    <section className={classes.bodyModalDel}>
+                        <div className={classes.divAskDelServ}>
+                            <p className={classes.askDelServ}>¿Seguro que quieres eliminar {currentServ}? Esta acción sera irreversible</p>
+                        </div>
+
+
+                        <div className={classes.inputDivDelServ}>
+                            <p>INTRODUCE EL NOMBRE DEL SERVIDOR</p>
+                            <input onChange={(e) => setNameServ(e.target.value)} className={classes.inputDel} type='text'></input>
+                        </div>
+                        <footer className={classes.footerDel}>
+
+                            <Button onClick={handleDelServ} variant="danger">Eliminar servidor</Button>
+
+                        </footer>
+                    </section>
+                </section>
+
+            </Modal>
+            <Modal size="sm" show={smChangeShow} onHide={() => setSmChangeShow(false)}>
+                <section className={classes.modalChangeServer}>
+                    <Modal.Header className={classes.headerDeleteServer} closeButton>
+                        <h4>
+                            Cambiar nombre del servidor {currentServ}
+                        </h4>
+                    </Modal.Header>
+                    <section className={classes.bodyModalDel}>
+                        <div className={classes.divAskDelServ}>
+                            <p className={classes.askDelServ}>¿Quieres cambiar el nombre del servidor {currentServ}?</p>
+                        </div>
+
+                        <div className={classes.inputDivDelServ}>
+                            <p>INTRODUCE EL NUEVO NOMBRE</p>
+                            <input onChange={(e) => setNewServName(e.target.value)}  className={classes.inputDel} type='text'></input>
+                        </div>
+                        <footer className={classes.footerDel}>
+
+                            <Button onClick={handleNewServName} variant="primary">Cambiar nombre</Button>
+
+                        </footer>
+                    </section>
+                </section>
+
+            </Modal>
+
         </div>
     )
 }
