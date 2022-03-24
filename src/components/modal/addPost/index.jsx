@@ -10,7 +10,7 @@ function ModalPost(props) {
     const [description, setDescription] = useState('')
     const [show, setShow] = useState(false)
 
-    //APPEND
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const userFormData = new FormData(e.target);
