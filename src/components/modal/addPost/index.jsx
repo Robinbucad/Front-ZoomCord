@@ -14,6 +14,7 @@ function ModalPost(props) {
         e.preventDefault()
         const userFormData = new FormData(e.target);
         userFormData.append('username', user.username);
+        userFormData.append('userId',user._id)
 
         const res = await fetch('http://localhost:3001/publications/', {
 

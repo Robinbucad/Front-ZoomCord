@@ -7,7 +7,7 @@ function MessageServer({message}) {
     return (
         <div className={classes.msg}>
             <div>
-                <img className={classes.imgMsg} src={message.img}></img>
+                <img className={classes.imgMsg} src={`http://localhost:3001/${message.file}`}></img>
             </div>
 
             <div>

@@ -1,34 +1,37 @@
-.div-modal{
+@import '../../../sass/global.scss';
+
+.divModal{
     display: flex;
     justify-content: space-between;
     border: 1px solid;
     padding: 1rem;
     border-radius: 10px;
     width: 100%;
-    background-color: white;
-    border-color: #E2E3E4;
+    background-color: $SecondaryOscuro;
+    border-color: gray;
+    color: white;
 }
 
-.div-modal:hover{
+.divModal:hover{
     background-color: #F4F5F6;
 }
 
-.container-opts-modal{
+.containerOptsModal{
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.opt-modal{
+.optModal{
     font-size: 20px;
 }
 
-.btn-back-modal{
+.btnBackModal{
     background: none;
     border: none;
 }
 
-.div-upload-photo{
+.divUploadPhoto{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,23 +43,23 @@
     cursor: pointer;
 }
 
-.footer-modal{
+.footerModal{
     display: flex;
     justify-content: space-between;
-    background-color: #F6F6F7;
+    background-color:$PrimaryClaro;
 }
 
-.upload-container{
+.uploadContainer{
     display: flex;
     justify-content: center;
 }
 
-.btn-modal-create{
+.btnModalCreate{
     width: 23%;
     padding: 0.5rem;
 }
 
-.input-name-serv{
+.inputNameServ{
     width: 100%;
     padding: 10px;
     background-color:#FCFCFC;
@@ -69,7 +72,7 @@
     color: gray;
 }
 
-.name-serv{
+.nameServ{
     font-size: 13px;
     font-weight: bold;
     margin-bottom: 2%;
@@ -77,4 +80,10 @@
 
 #contained-modal-title-vcenter{
     font-weight: bold;
+}
+
+.sectionCreate{
+    background-color: $PrimaryClaro;
+    border-radius: 10px;
+    color: white;
 }

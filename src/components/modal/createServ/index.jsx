@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../../../context/user/user.contex"
-import './style.css'
+import classes from './modal.module.scss'
+
 
 function CreateServModal(props) {
 
@@ -49,30 +50,33 @@ function CreateServModal(props) {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+            <section className={classes.sectionCreate}>
+
+          
+                <Modal.Header style={{border:'none'}} closeButton>
+                    <Modal.Title  id="contained-modal-title-vcenter">
                         Crear un servidor
                     </Modal.Title>
 
                 </Modal.Header>
-                <Modal.Header>
+                <Modal.Header style={{border:'none'}}>
                     <Modal.Title style={{ fontSize: '20px', fontWeight: 'lighter' }}>
                         Tu servidor es donde te reúnes con tus amigos. Crea el tuyo y empieza a hablar
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <button onClick={() => updateChangeModal(true)} className="div-modal">
-                        <h4 className="opt-modal">Crear mi plantilla</h4>
+                <Modal.Body style={{border:'none'}}>
+                    <button onClick={() => updateChangeModal(true)} className={classes.divModal}>
+                        <h4 className={classes.optModal}>Crear mi plantilla</h4>
                         <p > Flecha </p>
                     </button>
 
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer style={{border:'none'}}>
                     <Button onClick={props.onHide}>Close</Button>
 
                 </Modal.Footer>
 
-
+                </section>
             </Modal>
 
             {changeModa === false ? '' : <Modal
@@ -81,36 +85,39 @@ function CreateServModal(props) {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
+                <section className={classes.sectionCreate}>
+
+           
+                <Modal.Header closeButton style={{border:'none'}}>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Háblanos un poco de tu servidor
                     </Modal.Title>
 
                 </Modal.Header>
-                <Modal.Header>
+                <Modal.Header style={{border:'none'}}>
                     <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter' }}>
                         Para poder ayudarte con la configuración, nos gustaria saber si tu servidor
                         es solo para unos cuantos amigos o para una comunidad más amplia
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="container-opts-modal">
-                    <button onClick={() => updateChangeModalClub(true)} className="div-modal">
-                        <h4 className="opt-modal">Para un club o una comunidad</h4>
+                <Modal.Body className={classes.containerOptsModal}>
+                    <button onClick={() => updateChangeModalClub(true)} className={classes.divModal}>
+                        <h4 className={classes.optModal}>Para un club o una comunidad</h4>
                         <p> Flecha </p>
                     </button>
 
-                    <button onClick={() => updateChangeModalFriend(true)} className="div-modal">
+                    <button onClick={() => updateChangeModalFriend(true)} className={classes.divModal}>
                         <h4 className="opt-modal">Para mis amigos y yo</h4>
                         <p> Flecha </p>
                     </button>
 
                 </Modal.Body>
-                <Modal.Footer className="footer-modal">
-                    <button className="btn-back-modal" onClick={() => updateChangeModal(false)}>Atras</button>
+                <Modal.Footer style={{border:'none'}} className={classes.footerModal}>
+                    <button className={classes.btnBackModal} onClick={() => updateChangeModal(false)}>Atras</button>
                     <Button onClick={props.onHide}>Close</Button>
                 </Modal.Footer>
 
-
+                </section>
             </Modal>}
 
             {changeModalClub === false ? '' : <Modal
@@ -119,20 +126,23 @@ function CreateServModal(props) {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
+                <section className={classes.sectionCreate}>
+
+             
+                <Modal.Header  style={{border:'none'}} closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Personaliza tu servidor
                     </Modal.Title>
 
                 </Modal.Header>
-                <Modal.Header>
+                <Modal.Header  style={{border:'none'}}>
                     <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter' }}>
                         Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="container-opts-modal">
-                    <div className="upload-container">
-                        <div className="div-upload-photo">
+                <Modal.Body className={classes.containerOptsModal}>
+                    <div className={classes.uploadContainer}>
+                        <div className={classes.divUploadPhoto}>
                             <p>UPLOAD</p>
                         </div>
                     </div>
@@ -140,8 +150,8 @@ function CreateServModal(props) {
 
                     <div>
                         <p className="name-serv">NOMBRE DEL SERVIDOR</p>
-                        <input className="input-name-serv" onChange={(e) => updateServName(e.target.value)} type='text' placeholder='El servidor de user'></input>
-                        <input className="input-name-serv" onChange={(e) => updateImg(e.target.value)} type='text' placeholder='Imangen del servidor'></input>
+                        <input className={classes.inputNameServ} onChange={(e) => updateServName(e.target.value)} type='text' placeholder='El servidor de user'></input>
+                        <input className={classes.inputNameServ} onChange={(e) => updateImg(e.target.value)} type='text' placeholder='Imangen del servidor'></input>
                         <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
                     </div>
 
@@ -151,7 +161,7 @@ function CreateServModal(props) {
                     <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
                 </Modal.Footer>
 
-
+                </section>
             </Modal>}
 
             {changeModalFriend === false ? '' :
@@ -174,7 +184,7 @@ function CreateServModal(props) {
                     </Modal.Header>
                     <Modal.Body className="container-opts-modal">
                         <form onSubmit={onSubmit} >
-                            <div className="upload-container">
+                            <div className={classes.uploadContainer}>
                                 <input type='file' name='file' className="div-upload-photo">
 
                                 </input>
@@ -184,13 +194,13 @@ function CreateServModal(props) {
 
 
                             <div >
-                                <p className="name-serv">NOMBRE DEL SERVIDOR</p>
-                                <input className="input-name-serv" name='name' type='text' placeholder='El servidor de user'></input>
+                                <p className={classes.nameServ}>NOMBRE DEL SERVIDOR</p>
+                                <input className={classes.inputNameServ} name='name' type='text' placeholder='El servidor de user'></input>
                                 <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
                             </div>
-                            <Modal.Footer className="footer-modal">
-                                <button className="btn-back-modal" onClick={() => updateChangeModalFriend(false)}>Atras</button>
-                                <Button className="btn-modal-create" type='submit' required>Crear</Button>
+                            <Modal.Footer className={classes.footerModal}>
+                                <button className={classes.btnBackModal} onClick={() => updateChangeModalFriend(false)}>Atras</button>
+                                <Button className={classes.btnModalCreate} type='submit' required>Crear</Button>
                             </Modal.Footer>
                         </form>
 

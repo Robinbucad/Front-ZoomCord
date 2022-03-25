@@ -14,6 +14,7 @@ function InvitationPage() {
     const [members, setMembers] = useState([])
     const [user,setUser] = useContext(UserContext)
     const [load,setLoad] = useState(false)
+ 
 
     useEffect(() => {
         const fetchServers = async () => {
@@ -21,7 +22,7 @@ function InvitationPage() {
                 const res = await fetch(`http://localhost:3001/servers/${id}`)
                 const dat = await res.json()
                 setServName(dat.name)
-                setServImg(dat.img)
+                setServImg(dat.file)
                 setMembers(dat.members)
 
             } catch (err) {
@@ -57,7 +58,8 @@ function InvitationPage() {
         <section className={classes.invitationContainer}>
             <Card className={classes.cardInvitation} >
                 <div className={classes.divImgInv}>
-                    <img className={classes.imgServInv} variant="top" src={servImg} />
+
+                    {servImg !== '' ? <img className={classes.imgServInv} variant="top" src={`http://localhost:3001/${servImg}`} /> : <p>Loading Img...</p> }
                 </div>
 
                 <Card.Body className={classes.bodyCardInv}>

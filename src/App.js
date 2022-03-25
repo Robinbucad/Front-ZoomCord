@@ -11,7 +11,7 @@ import InvitationPage from './pages/inviteServ/indes';
 import ServerMessenger from './pages/serverMessenger';
 import PageNotFound from './pages/not Found';
 import VideoCall from './pages/videocall';
-
+import NotificationProvider from './context/notifications/notifications.provider';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
 
   return (
 
-
+    <NotificationProvider>
       <div className="App">
         <BrowserRouter>
           <Routes>
@@ -42,6 +42,8 @@ function App() {
 
 
       </div>
+    </NotificationProvider>
+
 
 
 

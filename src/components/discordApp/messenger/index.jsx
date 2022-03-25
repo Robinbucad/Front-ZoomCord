@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import Message from "../message";
 import Conversation from "../conversation";
 import DivServs from "../DCdivServ";
-import UserSettings from "../../modal/settings";
 import UserSettingsFooter from "../footerUserSettings";
 import classes from './friendMd.module.scss'
 import { io } from 'socket.io-client'
@@ -10,7 +9,7 @@ import HeaderApp from "../headerApp";
 import FollowUser from "../../modal/addFriend";
 import { UserContext } from "../../../context/user/user.contex";
 import Posts from "../posts";
-import { useUsername } from "../../../hooks/hook-name-user";
+
 
 
 
@@ -20,22 +19,24 @@ function Messenger() {
     const [currentChat, setCurrentChat] = useState('')
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
-    const [fullscreen] = useState(true);
-    const [show, setShow] = useState(false);
-    const socket = useRef()
-    const [hide, updateHide] = useState(false)
     const [modalShow, setModalShow] = useState(false);
     const [user, setUser] = useContext(UserContext)
-
-  
+    const [socket,setSocket] = useState(null)
+    const [conversationsId,setConversationsId] = useState([])
+    const [notMsg,setNotMsg] = useState([])
 
     useEffect(() => {
-        socket.current = io("ws://localhost:4000")
-
+        setSocket(io("http://localhost:4000"))
     }, [])
 
+    useEffect(() => { // ¿Futura funcionalidad, ver usuatios conectados?
+        socket?.emit("addUser", user.username);
+    }, [user,socket])
+
+
     useEffect(() => {
-        socket.current.on("getMessage", (data) => {
+        socket?.on("getMessage", (data) => {
+            console.log(data)
             setMessages([...messages, data])
         })
 
@@ -43,10 +44,24 @@ function Messenger() {
 
 
 
-    useEffect(() => { // ¿Futura funcionalidad, ver usuatios conectados?
-        socket.current.emit("addUser", user._id);
-    }, [user])
-
+   useEffect(() => {
+       const getNotification = async(req,res) => {
+           try{
+            const res = await fetch(`http://localhost:3001/notMsg/${conversationsId}`, {
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            const dat = await res.json()
+            setNotMsg(dat)
+           
+           }catch(err){
+               console.log(err)
+           }
+       }
+       getNotification()
+   },[conversationsId])
 
     useEffect(() => {
         const getConversations = async () => {
@@ -59,7 +74,7 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setConversations(dat)
-        
+                dat.map(e => setConversationsId(e._id))
             } catch (err) {
                 console.log(err)
             }
@@ -83,11 +98,11 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setMessages(dat)
-
+                
             } catch (err) {
                 console.log('error')
             }
-            await socket.current.emit("join_chat", currentChat._id)
+            await socket?.emit("join_chat", currentChat._id)
         };
         getMessages()
     }, [currentChat])
@@ -100,15 +115,15 @@ function Messenger() {
             e.preventDefault()
             const message = {
                 date: date,
-                img: user.img,
+                file: user.file,
                 username: user.username,
                 senderId: user._id,
                 text: newMessage,
                 conversationId: currentChat._id,
             };
 
-            socket.current.emit("sendMessage", message)
-
+            socket?.emit("sendMessage", message)
+            //socket?.emit("notMsg")
             try {
                 const res = await fetch('http://localhost:3001/message/', {
                     method: 'post',
@@ -125,21 +140,28 @@ function Messenger() {
             } catch (err) {
                 console.log(err)
             }
+
+            try {
+                const res = await fetch('http://localhost:3001/notMsg', {
+                    method: 'post',
+                    body: JSON.stringify({
+                        conversationId:currentChat._id,
+                        senderId:user._id
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+
+                    },
+                })
+                const dat = await res.json()
+                console.log(dat)
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 
-
-    function handleShow() {
-
-        setShow(!show)
-
-        // if (show === false) {
-
-        //     setShow(true)
-        // } else {
-        //     setShow(false)
-        // }
-    }
 
     const handleConv = e => {
         console.log('')
@@ -151,7 +173,7 @@ function Messenger() {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
-            <UserSettings show={show} fullscreen={fullscreen} setShow={() => handleShow(false)}></UserSettings>
+           
             <DivServs handleCurrentServ={handleConv}></DivServs>
             <div className={classes.containerMd}>
 
@@ -169,14 +191,16 @@ function Messenger() {
                     <section className={classes.containerConversations}>
                         {conversations.map((e, i) => (
                             <div className={classes.divFriend} key={i} onClick={() => setCurrentChat(e)}>
-                                <Conversation key={i} conversation={e} currentUser={user}></Conversation>
+                             
+                                <Conversation notMsg={notMsg} key={i} conversation={e} currentUser={user}></Conversation>
                             </div>
                         ))}
 
                     </section>
                 </section>
                 <div className={classes.userSetts} >
-                    <UserSettingsFooter handleShow={handleShow}></UserSettingsFooter>
+
+                    <UserSettingsFooter socket={socket} ></UserSettingsFooter>
 
 
                 </div>
@@ -207,7 +231,7 @@ function Messenger() {
             
                 <div className={classes.activeUsersDiv}>
 
-                    <Posts></Posts>
+                    <Posts socket={socket}></Posts>
              
                 </div>
     
