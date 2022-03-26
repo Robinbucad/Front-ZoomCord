@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
-import {Spinner} from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
+import classes from './notFound.module.scss'
+import notFound from '../../assets/img/notFound.png'
 
-function PageNotFound(){
-    
+function PageNotFound() {
+
     function vuelta() {
         setTimeout(() => {
             window.location = 'http://localhost:3000'
@@ -17,17 +19,21 @@ function PageNotFound(){
     let intervalId = useEffect(() => {
         setInterval(() => {
             updateCounter(counter--)
-            console.log('gol')
-        }, 1000)
+        }, 1500)
 
         return () => clearInterval(intervalId)
     }, [])
-    
-    return(
-        <div>
-            <h1>Page not found</h1>
-            <Spinner animation="border" />
-        </div>
+
+    return (
+        <section className={classes.pageContainer}>
+            <div className={classes.sectionNotFound}> 
+                <h1 className={classes.notFoundNum}>404</h1>
+                <h1>Oops page not found...</h1>
+                <img className={classes.imgNotFound} src={notFound}></img>
+                <Spinner animation="border" />
+            </div>
+
+        </section>
     )
 }
 

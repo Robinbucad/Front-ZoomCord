@@ -2,6 +2,10 @@ import { useSearchParams } from "react-router-dom"
 import { Card, Button } from 'react-bootstrap'
 import { useEffect } from "react"
 import { useState } from "react"
+import classes from './validate.module.scss'
+import disc from '../../assets/img/discord-logo.gif'
+import tick from '../../assets/img/tick.gif'
+
 
 function ValidateEmail() {
 
@@ -48,19 +52,17 @@ function ValidateEmail() {
 
 
     return (
-        <div>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                        {`Seras redirigido en ${counter}`}
-                    </Card.Text>
-        
-                </Card.Body>
-            </Card>
+        <div className={classes.pageValidate}>
+            <section className={classes.sectionInfo}>
+                <p className={classes.titleVal}>Vuelva a la pagina de iniciar sesion</p>
+                <img src={disc}></img>
+                <p>{`Seras redireccionado en...  ${counter}`} </p>
+                <img className={classes.tickImg} src={tick}></img>
+            </section>
         </div>
     )
 }
 
 export default ValidateEmail
+
+

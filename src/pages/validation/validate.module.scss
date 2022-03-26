@@ -1,0 +1,24 @@
+@import '../../sass/global.scss';
+
+.pageValidate{
+    color: white;
+    background-color: #2A2D34;
+    min-height: 100vh;
+    @include flexBox(flex,center,center,'','','');
+
+}
+
+.titleVal{
+    font-size: 2rem;
+}
+
+.sectionInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.tickImg{
+    width: 40px;
+}

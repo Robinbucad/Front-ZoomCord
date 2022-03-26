@@ -1,8 +1,9 @@
-import './style.css'
+
 import { Button, Form } from 'react-bootstrap'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import classes from './signUp.module.scss'
 
 function SignUp() {
 
@@ -53,41 +54,41 @@ function SignUp() {
 
 
     return (
-        <section className="signUp-container">
+        <section className={classes.signUpContainer}>
 
 
-            <div className="card-container">
-                <section className='signUp-card'>
-                    <header className='header-login-card'>
-                        <h2 className='title-login'>{t("registerLogin.create")}</h2>
+            <div className={classes.cardContainer}>
+                <section className={classes.signUpCard}>
+                    <header className={classes.headerLoginCard}>
+                        <h2 className={classes.titleLogin}>{t("registerLogin.create")}</h2>
                     </header>
-                    <form className='form-card' onSubmit={onSubmit}>
-                        <div className='input-div'>
+                    <form className={classes.formCard} onSubmit={onSubmit}>
+                        <div className={classes.inputDiv}>
                             <label htmlFor="email">EMAIL</label>
-                            <input type='email' className='input-signup' name="email"></input>
+                            <input type='email' className={classes.inputSignup} name="email"></input>
                         </div>
 
-                        <div className='input-div'>
+                        <div className={classes.inputDiv}>
                             <label htmlFor="email">{t("registerLogin.username")}</label>
-                            <input type='name' className='input-signup' name="username"></input>
+                            <input type='name' className={classes.inputSignup} name="username"></input>
                         </div>
 
-                        <div className='input-div'>
+                        <div className={classes.inputDiv}>
                             <label htmlFor="email">{t("registerLogin.password")}</label>
-                            <input type='password' className='input-signup' name="password"></input>
+                            <input type='password' className={classes.inputSignup} name="password"></input>
                         </div>
 
                         <div >
-                            <div className='div-selects'>
-                                <label className='font-card-sign' htmlFor='date'>{t("registerLogin.date")}</label>
-                               <input className='input-signup' type='date' name='date'></input>
+                            <div className={classes.divSelects}>
+                                <label className={classes.fontCardSign} htmlFor='date'>{t("registerLogin.date")}</label>
+                               <input className={classes.inputSignup} type='date' name='date'></input>
                             </div>
                         </div>
 
-                        <div className='div-check-privacy'>
+                        <div className={classes.divCheckPrivacy}>
                             <Form.Check onChange={onChange} value={value} Enabled style={{ fontSize: '30px' }} />
-                            <div className='div-privacy-login'>
-                                <p className='privacy-login'>{t("registerLogin.pol")}</p>
+                            <div className={classes.divPrivacyLogin}>
+                                <p className={classes.privacyLogin}>{t("registerLogin.pol")}</p>
                             </div>
 
                         </div>
@@ -97,7 +98,7 @@ function SignUp() {
                         </div>
 
                         <footer>
-                           <Link to='/login'> <p className='font-acc-sign'>{t("registerLogin.haveAcc")}</p></Link>
+                           <Link to='/login'> <p className={classes.fontAccSign}>{t("registerLogin.haveAcc")}</p></Link>
                         </footer>
 
 

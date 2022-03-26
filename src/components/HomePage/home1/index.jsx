@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaSun, FaMoon } from 'react-icons/fa'
 import { useState } from 'react'
+import zoomLogo from '../../../assets/img/zoomcordLogo.png'
 
 
 function HomePart1() {
@@ -30,12 +31,10 @@ function HomePart1() {
                     <div>
                         <header className={classes.headerHomepage}>
 
-                            <p>Imagen dsicord</p>
+                            <img className={classes.zoomCordLogo} src={zoomLogo}></img>
                             <ul className={classes.navList}>
                                 <li>{t("header.download")}</li>
-                                <li>Nitro</li>
                                 <li>{t("header.security")}</li>
-                                <li>{t("header.technical support")}</li>
                                 <li>{t("header.blog")}</li>
                                 <li>{t("header.employees")}</li>
                             </ul>
