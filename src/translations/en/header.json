@@ -1,10 +1,9 @@
 {
     "header":{
-        "download": "Download",
-        "security": "Security",
-        "technical support":"Technical support",
+        "download": "About me",
+        "security": "My projects",
         "blog": "Blog",
-        "employees": "Employees",
+        "employees": "Contact",
         "login": "Login"
     }
 }

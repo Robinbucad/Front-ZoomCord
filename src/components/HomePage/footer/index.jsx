@@ -39,7 +39,7 @@ function HomeFooter() {
                     
                     <h2 className={classes.titleFooter}>{h("home.footerTitle")}</h2>
                     <div>
-                    {flag === ES ? <img className={classes.imgFlag} src={ES}></img> :  <img className='img-flag' src={KY}></img>}
+                    {flag === ES ? <img className={classes.imgFlag} src={ES}></img> :  <img className={classes.imgFlag} src={KY}></img>}
                         <select className='select-lng' onChange={handleChange}>
                             <option className={classes.optSelect} value='es'> Español</option>
                             <option className={classes.optSelect} value='en'> English</option>

@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../context/user/user.contex'
+import classes from '../singUp/signUp.module.scss'
 
-import './style.css'
 
 function LoginPage() {
 
@@ -69,22 +69,22 @@ function LoginPage() {
     }
 
     return (
-        <section className="signUp-container">
+        <section className={classes.signUpContainer}>
 
 
-            <div className="card-container">
-                <section className='login-card'>
+            <div className={classes.cardContainer}>
+                <section className={classes.loginCard}>
 
-                    <form onSubmit={handleSubmit} className='form-card'>
-                        <div className='input-div'>
+                    <form onSubmit={handleSubmit} className={classes.formCard}>
+                        <div className={classes.inputDiv}>
                             <label htmlFor="email">EMAIL</label>
-                            <input onChange={handleUsername} type='email' className='input-signup' name="email"></input>
+                            <input onChange={handleUsername} type='email' className={classes.inputSignup} name="email"></input>
                         </div>
 
 
-                        <div className='input-div'>
+                        <div className={classes.inputDiv}>
                             <label htmlFor="email">{t("registerLogin.password")}</label>
-                            <input onChange={handlePassword} type='password' className='input-signup' name="password"></input>
+                            <input onChange={handlePassword} type='password' className={classes.inputSignup} name="password"></input>
                             <p>{t("registerLogin.forgot")}</p>
                         </div>
 
@@ -95,7 +95,7 @@ function LoginPage() {
                         </div>
 
                         <footer>
-                            <Link to='/signUp'><p className='font-acc-sign'>{t("registerLogin.acc")}</p></Link>
+                            <Link to='/signUp'><p className={classes.fontAccSign}>{t("registerLogin.acc")}</p></Link>
                         </footer>
 
 

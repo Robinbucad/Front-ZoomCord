@@ -1,0 +1,24 @@
+@import '../../sass/global.scss';
+
+
+.pageContainer{
+    background-color:$PrimaryClaro ;
+    color: gray;
+    @include flexBox(flex,center,center,'','','');
+    min-height: 100vh;
+}
+
+.notFoundNum{
+    font-size: 8rem;
+}
+
+.imgNotFound{
+    width: 200px;
+}
+
+.sectionNotFound{
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

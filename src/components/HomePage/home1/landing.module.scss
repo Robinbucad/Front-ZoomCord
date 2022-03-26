@@ -23,6 +23,9 @@ body{
     background-size: cover;
 }
 
+.zoomCordLogo{
+    width: 130px
+}
 
 .headerHomepage{
     @include flexBox(flex,center,space-around,'',white,'');
@@ -64,6 +67,7 @@ body{
 .homepage1Container{
     color: white;
     display: flex;
+    gap: 1rem;
     flex-direction: column;
     justify-content: center;
     width: 39%;
