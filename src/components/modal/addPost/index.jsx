@@ -21,7 +21,6 @@ function ModalPost(props) {
             method: 'post',
             body: userFormData,
             headers: {
-                // 'content-type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
             }
         })

@@ -2,8 +2,6 @@
 import classes from '../messenger/friendMd.module.scss';
 
 function MessageServer({message}) {
-
-
     return (
         <div className={classes.msg}>
             <div>

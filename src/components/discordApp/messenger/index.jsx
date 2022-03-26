@@ -30,18 +30,11 @@ function Messenger() {
         setSocket(io("http://localhost:4000"))
     }, [])
 
-    useEffect(() => { // ¿Futura funcionalidad, ver usuatios conectados?
-        socket?.emit("addUser", user.username);
-    }, [user,socket])
-
-
     useEffect(() => {
         socket?.on("getMessage", (data) => {
             setMessages([...messages, data])
         })
     }, [messages])
-
-
 
 
     useEffect(() => {
@@ -54,8 +47,8 @@ function Messenger() {
                     }
                 })
                 const dat = await res.json()
-                setConversations(dat)
                 setFilter(dat)
+                setConversations(dat)
                 dat.map(e => setConversationsId(e._id))
                 
             } catch (err) {
@@ -125,11 +118,12 @@ function Messenger() {
             }
         }
     }
-    console.log(conversations)
-    const filterConv = e => {
-        const convFiltered = filter.filter(e => e.receiverName.toLowerCase().includes(e.target.value.toLowerCase()))
+
+    const handleFilter = e => {
+        const convFiltered = conversations.filter(u => u.receiverName.toLowerCase().includes(e.target.value.toLowerCase()))
         setFilter(convFiltered)
     }
+
 
     const handleConv = e => {
         console.log('')
@@ -147,7 +141,7 @@ function Messenger() {
 
 
                 <div className={classes.inputDivMd}>
-                    <input className={classes.inputSearch} type='text' onChange={filterConv} placeholder='Busca una conversación'></input>
+                    <input className={classes.inputSearch} onChange={handleFilter} type='text' placeholder='Busca una conversación'></input>
                 </div>
 
                 <section className={classes.secFriends}>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
@@ -10,7 +10,6 @@ function CreateServModal(props) {
 
     const token = sessionStorage.getItem('token')
     const [changeModa, updateChangeModal] = useState(false)
-    const [modalShow, setModalShow] = useState(false);
     const [changeModalClub, updateChangeModalClub] = useState(false)
     const [changeModalFriend, updateChangeModalFriend] = useState(false)
     const [servName, updateServName] = useState('')

@@ -9,13 +9,10 @@ function Conversation({ conversation }) {
     const [users, setUsers] = useState([])
     const token = sessionStorage.getItem('token')
     const [user, setUser] = useContext(UserContext)
-    const [counter,setCounter] = useState([])
-    console.log(conversation)
 
     useEffect(() => {
-        const filter = conversation.members.find(e => e !== user._id)
-      
-        
+        const filter = conversation?.members.find(e => e !== user._id)
+        console.log(filter)
 
         const getUser = async () => {
             try {

@@ -1,15 +1,13 @@
 import classes from '../messenger/friendMd.module.scss'
 import React, { useContext, useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap'
 import { UserContext } from '../../../context/user/user.contex'
-import { SetNotifications } from '../../../context/notifications/notifications.context'
 
-function Posts({ socket }) {
+function Posts() {
     const token = sessionStorage.getItem('token')
     const [publications, setPublications] = useState([])
     const [user, setUser] = useContext(UserContext)
-    const [likesPost, setLikesPost] = useContext(SetNotifications)
-    // const [notiLength,setNotiLength] = useContext(SetNotifications)
+    const [likesPost, setLikesPost] = useState([])
+
     
 
     useEffect(() => {
@@ -22,8 +20,6 @@ function Posts({ socket }) {
             })
             const dat = await res.json()
             setPublications(dat)
-            // console.log(dat)
-            // dat.map(e => setLikesPost(e.likes))
         }
         fetchPublications()
     }, [])
@@ -31,8 +27,6 @@ function Posts({ socket }) {
 
 
     const handleLikes = async (e) => {
-
-
 
         if (e.likes.some(d => d === user.username)) {
 

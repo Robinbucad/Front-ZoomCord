@@ -8,7 +8,7 @@ import { FaPhoneSquareAlt } from 'react-icons/fa'
 import defaultImg from '../../../assets/img/default.jpg'
 import UserSettings from '../../modal/settings'
 import { IoMdNotifications } from 'react-icons/io'
-import { SetNotifications } from '../../../context/notifications/notifications.context'
+
 
 
 function UserSettingsFooter({ socket}) {
