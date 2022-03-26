@@ -3,17 +3,14 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { UserContext } from "../../../context/user/user.contex"
 import classes from '../messenger/friendMd.module.scss'
+import defaultProf from '../../../assets/img/default.jpg'
 
-function Conversation({ conversation, notMsg }) {
+function Conversation({ conversation }) {
     const [users, setUsers] = useState([])
     const token = sessionStorage.getItem('token')
     const [user, setUser] = useContext(UserContext)
     const [counter,setCounter] = useState([])
-
-    useEffect(() => {
-        const filterNot = notMsg.filter(e => e.conversationId === conversation._id)
-        setCounter(filterNot)
-    },[conversation,user])
+    console.log(conversation)
 
     useEffect(() => {
         const filter = conversation.members.find(e => e !== user._id)
@@ -47,10 +44,10 @@ function Conversation({ conversation, notMsg }) {
                 <Link key={i} to={`/@me/${e._id}`}>
                     <div onClick={handleDelNot} className={classes.divConvLength}>
                         <div className={classes.conver}>
-                            <img className={classes.profileDefault} src={`http://localhost:3001/${e.file}`} />
+                            <img className={classes.profileDefault} src={e.file === '' ? defaultProf : `http://localhost:3001/${e.file}`} />
                             <p>{e.username}</p>
                         </div>
-                        <p>{notMsg.length}</p>
+                   
                     </div>
                 </Link>
             ))}

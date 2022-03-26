@@ -4,12 +4,12 @@ import { Card } from 'react-bootstrap'
 import { UserContext } from '../../../context/user/user.contex'
 import { SetNotifications } from '../../../context/notifications/notifications.context'
 
-function Posts({socket}) {
+function Posts({ socket }) {
     const token = sessionStorage.getItem('token')
     const [publications, setPublications] = useState([])
-    const [user,setUser] = useContext(UserContext)
-    const [likesPost,setLikesPost] = useState([])
-    const [notiLength,setNotiLength] = useContext(SetNotifications)
+    const [user, setUser] = useContext(UserContext)
+    const [likesPost, setLikesPost] = useContext(SetNotifications)
+    // const [notiLength,setNotiLength] = useContext(SetNotifications)
     
 
     useEffect(() => {
@@ -22,90 +22,84 @@ function Posts({socket}) {
             })
             const dat = await res.json()
             setPublications(dat)
-            dat.map(e => setLikesPost(e.likes))
+            // console.log(dat)
+            // dat.map(e => setLikesPost(e.likes))
         }
         fetchPublications()
     }, [])
 
 
 
-const handleLikes = async (e) => {
+    const handleLikes = async (e) => {
 
-    
-        setNotiLength(notiLength+1)
 
-        if(likesPost.some(d => d === e.username)){
-           const finding = likesPost.findIndex(d => d === e.username)
-            likesPost.splice(finding, 1)
-            setLikesPost([...likesPost])
-        
-        }else{
-            likesPost.push(e.username)
-            setLikesPost([...likesPost])
+
+        if (e.likes.some(d => d === user.username)) {
+
+            const finding = e.likes.findIndex(d => d === user.username)
+            console.log(finding)
+            const unliked = e.likes.splice(finding, 1)
+            setLikesPost(unliked)
+        } else {
+            const like = e.likes.push(user.username)
+            setLikesPost(like)
         }
 
-        const not = {
-            senderName:user.username,
-            receiverName:e.username,
-            receiverId:e.id
-        }
-        console.log(not)
-       await socket?.emit("sendNotification", not)
+        const liked = { _id: user._id, username: user.username, }
 
-    
-        const liked = { _id:user._id, username:user.username, }    
-
-        try{
-            const res = await fetch(`http://localhost:3001/publications/${e._id}`,{
-                method:'PATCH',
-                body:JSON.stringify(liked),
-                headers:{
+        try {
+            const res = await fetch(`http://localhost:3001/publications/${e._id}`, {
+                method: 'PATCH',
+                body: JSON.stringify(liked),
+                headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
             })
-            
+
             const dat = await res.json()
-            
-        }catch(err){
+
+        } catch (err) {
 
         }
 
 
-        try{
-            const res = await fetch(`http://localhost:3001/notifications`,{
-                method:'post',
-                body:JSON.stringify({
-                    receiverId:e.id,
-                    receiverName:e.username,
-                    senderName:user.username
+        try {
+            const res = await fetch(`http://localhost:3001/notifications`, {
+                method: 'post',
+                body: JSON.stringify({
+                    receiverId: e.id,
+                    receiverName: e.username,
+                    senderName: user.username,
+                    postId: e._id,
+                    file: e.file
                 }),
-                headers:{
+                headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
             })
             const dat = await res.json()
-            socket.emit("getNotiLength",dat)
-        }catch(err){
+       
+        } catch (err) {
             console.log(err)
         }
-        
+
     }
 
     return (
         <React.Fragment>
 
             <section className={classes.sectionCards}>
-                {publications.map((e,i) => (
+                {publications.map((e, i) => (
                     <section key={i} className={classes.cardPost}>
-        
+
                         <img className={classes.imgPost} src={`http://localhost:3001/${e.file}`} />
                         <div className={classes.bodyPost}>
-                     
+
                             <h2 className={classes.titlePost}>{e.username}</h2>
-                       
-                           
+
+
                             <p className={classes.descTop}>
                                 {e.description}
                             </p>
@@ -113,8 +107,8 @@ const handleLikes = async (e) => {
                                 <div onClick={() => handleLikes(e)} className={classes.heartShapeRed}>
 
                                 </div>
-                                
-                                <p>{likesPost.length}</p>
+
+                                <p>{e.likes.length}</p>
                             </div>
                         </div>
                     </section>

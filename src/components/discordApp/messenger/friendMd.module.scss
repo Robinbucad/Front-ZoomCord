@@ -685,11 +685,23 @@
       left: 70px;
       background-color: $SecondaryOscuro;
       position: absolute;
-      width: 213px;
+      width: 215px;
       display: flex;
       gap: 10px;
       flex-direction: column;
      padding: 10px;
+  }
+
+  .divShowNot{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+
+  .imgLikeNot{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
   }
 
   .btnDivRead{

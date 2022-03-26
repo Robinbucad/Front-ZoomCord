@@ -32,8 +32,9 @@ function FollowUser(props) {
     }
 
     const handleAddUser = async e => {
-
-        const members = { 
+      
+        const members = {    
+            receiverName:e.target.value,      
              senderId:user._id,
             receiverId:idUserFind
         }
@@ -72,7 +73,7 @@ function FollowUser(props) {
                                     <p>{e.username}</p>
                                 </div>
                                 <div>
-                                    <button onClick={handleAddUser}>Add</button>
+                                    <button value={userSearch} onClick={handleAddUser}>Add</button>
                                 </div>
                             </div>
                         ))}

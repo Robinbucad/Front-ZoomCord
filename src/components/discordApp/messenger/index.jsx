@@ -23,7 +23,8 @@ function Messenger() {
     const [user, setUser] = useContext(UserContext)
     const [socket,setSocket] = useState(null)
     const [conversationsId,setConversationsId] = useState([])
-    const [notMsg,setNotMsg] = useState([])
+    const [filter,setFilter] = useState([])
+ 
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -36,32 +37,12 @@ function Messenger() {
 
     useEffect(() => {
         socket?.on("getMessage", (data) => {
-            console.log(data)
             setMessages([...messages, data])
         })
-
     }, [messages])
 
 
 
-   useEffect(() => {
-       const getNotification = async(req,res) => {
-           try{
-            const res = await fetch(`http://localhost:3001/notMsg/${conversationsId}`, {
-                method: 'get',
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            const dat = await res.json()
-            setNotMsg(dat)
-           
-           }catch(err){
-               console.log(err)
-           }
-       }
-       getNotification()
-   },[conversationsId])
 
     useEffect(() => {
         const getConversations = async () => {
@@ -74,7 +55,9 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setConversations(dat)
+                setFilter(dat)
                 dat.map(e => setConversationsId(e._id))
+                
             } catch (err) {
                 console.log(err)
             }
@@ -123,7 +106,7 @@ function Messenger() {
             };
 
             socket?.emit("sendMessage", message)
-            //socket?.emit("notMsg")
+            
             try {
                 const res = await fetch('http://localhost:3001/message/', {
                     method: 'post',
@@ -140,28 +123,13 @@ function Messenger() {
             } catch (err) {
                 console.log(err)
             }
-
-            try {
-                const res = await fetch('http://localhost:3001/notMsg', {
-                    method: 'post',
-                    body: JSON.stringify({
-                        conversationId:currentChat._id,
-                        senderId:user._id
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-
-                    },
-                })
-                const dat = await res.json()
-                console.log(dat)
-            } catch (err) {
-                console.log(err)
-            }
         }
     }
-
+    console.log(conversations)
+    const filterConv = e => {
+        const convFiltered = filter.filter(e => e.receiverName.toLowerCase().includes(e.target.value.toLowerCase()))
+        setFilter(convFiltered)
+    }
 
     const handleConv = e => {
         console.log('')
@@ -179,7 +147,7 @@ function Messenger() {
 
 
                 <div className={classes.inputDivMd}>
-                    <input className={classes.inputSearch} type='text' placeholder='Busca una conversación'></input>
+                    <input className={classes.inputSearch} type='text' onChange={filterConv} placeholder='Busca una conversación'></input>
                 </div>
 
                 <section className={classes.secFriends}>
@@ -189,10 +157,10 @@ function Messenger() {
                     </header>
 
                     <section className={classes.containerConversations}>
-                        {conversations.map((e, i) => (
+                        {filter.map((e, i) => (
                             <div className={classes.divFriend} key={i} onClick={() => setCurrentChat(e)}>
                              
-                                <Conversation notMsg={notMsg} key={i} conversation={e} currentUser={user}></Conversation>
+                                <Conversation key={i} conversation={e} currentUser={user}></Conversation>
                             </div>
                         ))}
 
@@ -200,7 +168,7 @@ function Messenger() {
                 </section>
                 <div className={classes.userSetts} >
 
-                    <UserSettingsFooter socket={socket} ></UserSettingsFooter>
+                    <UserSettingsFooter  socket={socket} ></UserSettingsFooter>
 
 
                 </div>

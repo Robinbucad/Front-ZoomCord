@@ -11,39 +11,37 @@ import { IoMdNotifications } from 'react-icons/io'
 import { SetNotifications } from '../../../context/notifications/notifications.context'
 
 
-function UserSettingsFooter({ socket }) {
-    // const socket = useRef()
+function UserSettingsFooter({ socket}) {
+
     const token = sessionStorage.getItem('token')
     const [fullscreen] = useState(true);
     const [user, setUser] = useContext(UserContext)
     const [notifications, setNotifications] = useState([])
     const [show, setShow] = useState(false);
     const [openNots, setOpenNots] = useState(false)
-    const [notiLength,setNotiLength] = useContext(SetNotifications)
-    
     const handleShow = () => setShow(!show)
 
     const handleClick = () => {
         window.open('/videocall', '_blank')
     }
+  
 
-
-    const handleRead = () => {
-        setNotifications([]);
-        setOpenNots(false)
+    const handleRead = async() => {
+         setNotifications([]);
+         setOpenNots(false)    
+         try {
+            const res = await fetch(`http://localhost:3001/notifications/${user._id}`, {
+                method: 'delete',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            })
+            const dat = await res.json()
+            console.log(dat)
+        } catch (err) {
+            console.log(err)
+        }
     }
-
-   
-
-    useEffect(() => {
-
-        socket?.on("getNotification", (data) => {
-       // setNotifications([...notifications, data])    
-     
-        })
-    }, [notiLength])
-
-
 
     useEffect(() => {
         const getNotifications = async () => {
@@ -81,7 +79,11 @@ function UserSettingsFooter({ socket }) {
             {openNots === true ?
                 <div className={classes.spanShowNot}>
                     {notifications.map((e, i) => (
-                        <p>{e.senderName} Le ha dado like</p>
+                        <div key={i} className={classes.divShowNot}>
+                             <p>{e.senderName} Le ha dado like</p>
+                             <img className={classes.imgLikeNot} src={`http://localhost:3001/${e.file}`}></img>
+                        </div>    
+                       
                     ))}
                     <div className={classes.btnDivRead}>
 
