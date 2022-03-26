@@ -18,7 +18,7 @@ export function useUsername() {
                 })
                 const dat = await res.json()
                 setUserHook(dat)
-                console.log(userHook)
+           
         }
         fetchUsers()
     }, [userHook])

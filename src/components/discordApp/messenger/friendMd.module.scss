@@ -153,7 +153,6 @@
     
     .settingsChat{
         @include flexBox(flex,center,space-between,'',white,'');
-        width: 25%;
         body.dark &{
             color: black
         }
@@ -206,6 +205,11 @@
      }
     }
     
+    .divConvLength{
+        @include flexBox(flex,center,space-between,'','','')
+    }
+
+
     .msgContainer{
         background-color: red;
     }
@@ -675,6 +679,60 @@
     @include flexBox(flex,center,flex-end,'','',20px);
     border-radius: 0 0 6px 6px;
   }
+
+  .spanShowNot{
+      bottom: 65px;
+      left: 70px;
+      background-color: $SecondaryOscuro;
+      position: absolute;
+      width: 215px;
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+     padding: 10px;
+  }
+
+  .divShowNot{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+
+  .imgLikeNot{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+  }
+
+  .btnDivRead{
+      display: flex;
+      justify-content: center;
+  }
+
+  .numNotifications{
+    font-size: 11px;
+    position: absolute;
+    background-color:$LightSecondary;
+    padding: 3px;
+    color: black;
+    font-weight: bold;
+    border-radius: 50%;
+    height: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    width: 14px;
+    bottom: 30px;
+  }
+
+  .btnReaded{
+      background-color: $PrimaryClaro;
+      border: none;
+      width: 150px;
+      padding: 5px;
+      border-radius: 5px;
+      color: gray;
+    }
 
   .inputDel{
       @include inputs($SecondaryOscuro,'',5px,95%,10px,'');

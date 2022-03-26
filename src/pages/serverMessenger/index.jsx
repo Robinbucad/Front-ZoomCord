@@ -22,7 +22,7 @@ function ServerMessenger() {
     const [currentServId, updateCurrentServId] = useState('')
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
-    const socket = useRef()
+    const [socket,setSocket] = useState(null)
     const [showLink, setShowLink] = useState(false);
     const handleCloseLink = () => setShowLink(false);
     const handleShowLink = () => setShowLink(true);
@@ -34,7 +34,11 @@ function ServerMessenger() {
     const [nameServ, setNameServ] = useState('')
     const [smChangeShow,setSmChangeShow]= useState(false)
     const [newServName,setNewServName] = useState('')
-    const [adminId,setAdminId] = useState('')
+
+    useEffect(() => {
+        setSocket(io("http://localhost:4000"))
+    }, [])
+
     let navigate = useNavigate()
    
     function handleShow() {
@@ -46,13 +50,8 @@ function ServerMessenger() {
         }
     }
 
-
     useEffect(() => {
-        socket.current = io("ws://localhost:4000")
-    }, [])
-
-    useEffect(() => {
-        socket.current.on("getServMsg", (data) => {
+        socket?.on("getServMsg", (data) => {
             setMessages([...messages, data])
         })
     }, [messages])
@@ -100,7 +99,7 @@ function ServerMessenger() {
             }
 
         }
-        socket.current.emit("join_serv", currentServId)
+        socket?.emit("join_serv", currentServId)
         getServMsg()
     }, [currentServId])
 
@@ -115,14 +114,14 @@ function ServerMessenger() {
         if (e.key === 'Enter') {
             const message = {
                 date: takeDate,
-                img: user.img,
+                file: user.file,
                 username: user.username,
                 senderId: user._id,
                 text: newMessage,
                 conversationId: currentServId
             }
 
-            socket.current.emit("sendServMsg", message)
+            socket?.emit("sendServMsg", message)
 
             try {
                 const res = await fetch('http://localhost:3001/servMsg/', {

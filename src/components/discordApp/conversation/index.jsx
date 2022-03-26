@@ -3,16 +3,17 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { UserContext } from "../../../context/user/user.contex"
 import classes from '../messenger/friendMd.module.scss'
+import defaultProf from '../../../assets/img/default.jpg'
 
-function Conversation({ conversation },props) {
+function Conversation({ conversation }) {
     const [users, setUsers] = useState([])
     const token = sessionStorage.getItem('token')
     const [user, setUser] = useContext(UserContext)
 
-
     useEffect(() => {
-        const filter = conversation.members.find(e => e !== user._id)
- 
+        const filter = conversation?.members.find(e => e !== user._id)
+        console.log(filter)
+
         const getUser = async () => {
             try {
                 const res = await fetch(`http://localhost:3001/users/${filter}`, {
@@ -30,20 +31,25 @@ function Conversation({ conversation },props) {
         getUser()
     }, [user])
 
+    const handleDelNot = () => {
+        console.log('hola')
+    }
+
     return (
         <div>
-        {users.length===0 ? '' : users.map((e,i) => (
-            <Link key={i} to={`/@me/${e._id}`}>
-             
-                    <div className={classes.conver}>
-                        <img className={classes.profileDefault} src={e.img} />
-                        <p>{e.username}</p>
+            {users.length === 0 ? '' : users.map((e, i) => (
+                <Link key={i} to={`/@me/${e._id}`}>
+                    <div onClick={handleDelNot} className={classes.divConvLength}>
+                        <div className={classes.conver}>
+                            <img className={classes.profileDefault} src={e.file === '' ? defaultProf : `http://localhost:3001/${e.file}`} />
+                            <p>{e.username}</p>
+                        </div>
+                   
                     </div>
-             
-            </Link>
-        ))}
+                </Link>
+            ))}
 
-    </div>
+        </div>
 
 
 

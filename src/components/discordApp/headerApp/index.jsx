@@ -1,8 +1,8 @@
 import classes from '../messenger/friendMd.module.scss'
 import { FaSun, FaMoon } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../../context/user/user.contex'
+import { useEffect, useState } from 'react'
+
 import ModalPost from '../../modal/addPost'
 
 function HeaderApp() {
@@ -10,7 +10,6 @@ function HeaderApp() {
     const token = sessionStorage.getItem('token')
     const {id} = useParams()
     const [currentUser,setCurrentUser] = useState([])
-    const [user,setUser] = useContext(UserContext)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
