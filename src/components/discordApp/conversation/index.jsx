@@ -12,7 +12,7 @@ function Conversation({ conversation }) {
 
     useEffect(() => {
         const filter = conversation?.members.find(e => e !== user._id)
-        console.log(filter)
+      
 
         const getUser = async () => {
             try {
