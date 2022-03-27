@@ -145,9 +145,12 @@
             transition: 0.3s ease all;
             color: black
         }
+
+        @include breakpoint(md){
+            padding: 10px;
+        }
         @include breakpoint(s){
             width: 100%;
-          
      }
     }
     
@@ -156,7 +159,9 @@
         body.dark &{
             color: black
         }
-
+        @include breakpoint(md){
+            gap: 1.5rem;
+        }
         @include breakpoint(s){
             gap: 1rem
      }
@@ -225,6 +230,13 @@
     .imgServ{
         @include servLog(55px, 50%,$HoverListFrMd,green);
         height: 55px;
+
+    }
+
+    .imgServ > h1 {
+        @include breakpoint(md){
+            font-size: 3rem;
+        }
     }
     
     .imgServ:hover{
@@ -349,6 +361,9 @@
     }
     @include flexBox(flex, center, space-between,65px,'','');
 
+    @include breakpoint(md){
+        padding-left: 5px;
+    }
 }
 
 .userInfoSetts{
@@ -526,9 +541,7 @@
     gap: 1rem;
     flex-direction: column;
 }
-.conver:hover{
-    background-color: $PrimaryClaro;
-}
+
 
 //POSTS
 
@@ -556,6 +569,10 @@
     width: 100%;
     height: 8rem;
     border-radius: 10px 10px 0 0;
+
+    @include breakpoint(md){
+        border-radius: 10px 10px 0 0;
+    }
     @include breakpoint(s){
         height: 5rem;
  }
@@ -748,4 +765,13 @@
     background-color: $PrimaryClaro;
     color: white;
     border-radius: 8px;
+}
+
+.divOpenConv{
+    padding: 20px;
+}
+
+.divOpenConv > p{
+    font-size: 1rem;
+    font-weight: bold;
 }

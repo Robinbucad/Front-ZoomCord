@@ -236,16 +236,6 @@ function ServerMessenger() {
 
                     </section>
 
-
-                    <section>
-                        <header className={classes.headerMdList}>
-                            <p >Canales de Voz</p>
-                            <button className={classes.btnAdd}>+</button>
-                        </header>
-                        {/**AQUI CANALES DE VOZ */}
-
-                    </section>
-
                 </div>
 
 

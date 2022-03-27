@@ -116,14 +116,10 @@ function UserSettings(props) {
 
                          </div>
                      </article>
-                     <hr />
-                     <section className={classes.passwordSettings}>
-                         <h1 className={classes.titlePassSetts}>Contraseña y autenticación</h1>
-                         <Button variant="info">Cambiar contraseña</Button>
-                     </section>
+                     
                      <hr />
                      <section>
-                         <div className='div-btns-remove'>
+                         <div className={classes.divBtnsRemove}>
                              <Button onClick={handleCloseSession} variant="danger">Cerrar Sesion</Button>
                              <Button onClick={() => setModalShow(true)} variant="outline-danger">Eliminar cuenta</Button>
                          </div>

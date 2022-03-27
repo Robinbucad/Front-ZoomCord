@@ -34,11 +34,11 @@ function FollowUser(props) {
     const handleAddUser = async e => {
       
         const members = {    
-            receiverName:e.target.value,      
+            receiverName:userSearch,      
              senderId:user._id,
             receiverId:idUserFind
         }
-        
+   
      
         e.preventDefault()
         try{
