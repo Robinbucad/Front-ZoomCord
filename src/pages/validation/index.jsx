@@ -15,7 +15,7 @@ function ValidateEmail() {
 
 
 
-    useEffect(() => {
+   
        const fetchValidate = async() => {
         try {
             const res = await fetch(`http://localhost:3001/auth/validate?token=${param}`, {
@@ -27,12 +27,11 @@ function ValidateEmail() {
             console.log(err)
         }
        }
-    fetchValidate()      
-    }, [])
+   
 
     function vuelta() {
         setTimeout(() => {
-            window.location = 'http://localhost:3000'
+           fetchValidate()
         }, 5500)
 
     }
