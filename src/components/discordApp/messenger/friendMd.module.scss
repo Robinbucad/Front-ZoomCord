@@ -257,7 +257,7 @@
     
         background-color:$MDColor;
         border-radius: 50px;
-        width: 7px;
+        width: 14px;
         color: black;
         display: flex;
         justify-content: center;
@@ -311,6 +311,10 @@
 .imgServ{
     @include servLog(55px, 50%,$HoverListFrMd,green);
     height: 55px;
+}
+
+.btnAddServ{
+    font-size: 3rem;
 }
 
 .sectionsServer{

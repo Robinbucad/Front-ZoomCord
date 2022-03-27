@@ -121,7 +121,7 @@ function Messenger() {
     }
 
     const handleFilter = e => {
-        console.log(conversations)
+        
         const convFiltered = conversations.filter(u => u.receiverName.toLowerCase().includes(e.target.value))
         setFilter(convFiltered)
     }
