@@ -35,7 +35,7 @@ function FollowUser(props) {
       
         const members = {    
             receiverName:e.target.value,      
-             senderId:user._id,
+            senderId:user._id,
             receiverId:idUserFind
         }
         
@@ -54,7 +54,7 @@ function FollowUser(props) {
             window.location.reload()
      
         }catch(err){
-            console.log(err)
+            alert('No puedes iniciar una conversacion contigo mismo')
         }
     }
 
