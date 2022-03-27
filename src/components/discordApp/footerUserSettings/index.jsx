@@ -37,7 +37,7 @@ function UserSettingsFooter() {
                 },
             })
             const dat = await res.json()
-            console.log(dat)
+          
         } catch (err) {
             console.log(err)
         }
@@ -55,7 +55,7 @@ function UserSettingsFooter() {
                 })
                 const dat = await res.json()
                 setNotifications(dat)
-                console.log(dat)
+      
             } catch (err) {
                 console.log(err)
             }
