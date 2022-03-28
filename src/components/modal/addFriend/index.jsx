@@ -2,7 +2,8 @@ import { useContext, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { UserContext } from '../../../context/user/user.contex'
 import classes from './addUser.module.scss'
-import defaultPicture from '../../../assets/img/default.jpg'
+import defaultProfile from '../../../assets/img/default.jpg'
+
 
 function FollowUser(props) {
     const token = sessionStorage.getItem('token')
@@ -70,7 +71,8 @@ function FollowUser(props) {
                             <div className={classes.divAddUser} key={i}>
                                 <div className={classes.divInfoUserAdd}>
 
-                                    <img className={classes.addUserImg} src={e.file === '' ? defaultPicture : `http://localhost:3001/${e.file}`}></img>
+                                    <img className={classes.addUserImg} src={e.file === '' ? defaultProfile : `http://localhost:3001/${e.file}` }></img>
+
                                     <p>{e.username}</p>
                                 </div>
                                 <div>

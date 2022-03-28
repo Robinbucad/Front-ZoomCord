@@ -8,7 +8,7 @@ import { FaPhoneSquareAlt } from 'react-icons/fa'
 import defaultImg from '../../../assets/img/default.jpg'
 import UserSettings from '../../modal/settings'
 import { IoMdNotifications } from 'react-icons/io'
-
+import defaultProfile from '../../../assets/img/default.jpg'
 
 
 function UserSettingsFooter() {
@@ -81,7 +81,7 @@ function UserSettingsFooter() {
                     {notifications.map((e, i) => (
                         <div key={i} className={classes.divShowNot}>
                              <p>{e.senderName} Le ha dado like</p>
-                             <img className={classes.imgLikeNot} src={`http://localhost:3001/${e.file}`}></img>
+                             <img className={classes.imgLikeNot} src={e.file === '' ? defaultProfile : `http://localhost:3001/${e.file}` }></img>
                         </div>    
                        
                     ))}

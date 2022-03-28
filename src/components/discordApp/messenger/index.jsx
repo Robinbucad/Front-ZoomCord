@@ -25,6 +25,9 @@ function Messenger() {
     const [conversationsId,setConversationsId] = useState([])
     const [filter,setFilter] = useState([])
  
+
+
+
     useEffect(() => {
         if(Notification.permission === 'default' || 'denied'){
             Notification.requestPermission().then(permission => {
@@ -32,6 +35,7 @@ function Messenger() {
             })
         }
     },[])
+
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -104,7 +108,7 @@ function Messenger() {
       
 
         if (e.key === 'Enter') {
-            e.preventDefault()
+   
             const message = {
                 date: date,
                 file: user.file,
@@ -137,7 +141,6 @@ function Messenger() {
         }
     }
 
-  
 
 
     const handleFilter = e => {

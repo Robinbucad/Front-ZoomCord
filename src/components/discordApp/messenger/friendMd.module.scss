@@ -156,6 +156,7 @@
     
     .settingsChat{
         @include flexBox(flex,center,space-between,'',white,'');
+        gap: 1rem;
         body.dark &{
             color: black
         }
@@ -257,14 +258,17 @@
     
         background-color:$MDColor;
         border-radius: 50px;
-        width: 14px;
+        width: 7px;
         color: black;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-     
-    }
+        
+        @include breakpoint(md){
+            width: 14px;
+        }
+    }       
     
     
     
@@ -436,6 +440,18 @@
 }
 
 //CONVERSATIONS 
+
+.linkConv{
+    color: white;
+    body.dark &{
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
+.linkConv:hover{
+    color: white;
+}
 
 .conver{
     border-radius: 10px;
@@ -797,8 +813,8 @@
     align-items: center;
     width: 14px;
     bottom: 10px;
-    left: 17px;
-  }
+    left: 18px;
+
 
   .btnReaded{
       background-color: $PrimaryClaro;
