@@ -153,6 +153,7 @@
     
     .settingsChat{
         @include flexBox(flex,center,space-between,'',white,'');
+        gap: 1rem;
         body.dark &{
             color: black
         }
