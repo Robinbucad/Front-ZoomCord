@@ -25,7 +25,6 @@ function Messenger() {
     const [conversationsId,setConversationsId] = useState([])
     const [filter,setFilter] = useState([])
  
-    console.log(conversations)
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
