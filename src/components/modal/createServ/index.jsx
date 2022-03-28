@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../../../context/user/user.contex"
 import classes from './modal.module.scss'
-
+import {RiArrowRightSLine} from 'react-icons/ri'
 
 function CreateServModal(props) {
 
@@ -66,7 +66,7 @@ function CreateServModal(props) {
                 <Modal.Body style={{border:'none'}}>
                     <button onClick={() => updateChangeModal(true)} className={classes.divModal}>
                         <h4 className={classes.optModal}>Crear mi plantilla</h4>
-                        <p > Flecha </p>
+                        <RiArrowRightSLine className={classes.arrowRight}></RiArrowRightSLine>
                     </button>
 
                 </Modal.Body>
@@ -102,12 +102,12 @@ function CreateServModal(props) {
                 <Modal.Body className={classes.containerOptsModal}>
                     <button onClick={() => updateChangeModalClub(true)} className={classes.divModal}>
                         <h4 className={classes.optModal}>Para un club o una comunidad</h4>
-                        <p> Flecha </p>
+                        <RiArrowRightSLine className={classes.arrowRight}></RiArrowRightSLine>
                     </button>
 
                     <button onClick={() => updateChangeModalFriend(true)} className={classes.divModal}>
                         <h4 className="opt-modal">Para mis amigos y yo</h4>
-                        <p> Flecha </p>
+                        <RiArrowRightSLine className={classes.arrowRight}></RiArrowRightSLine>
                     </button>
 
                 </Modal.Body>
@@ -150,13 +150,12 @@ function CreateServModal(props) {
                     <div>
                         <p className="name-serv">NOMBRE DEL SERVIDOR</p>
                         <input className={classes.inputNameServ} onChange={(e) => updateServName(e.target.value)} type='text' placeholder='El servidor de user'></input>
-                        <input className={classes.inputNameServ} onChange={(e) => updateImg(e.target.value)} type='text' placeholder='Imangen del servidor'></input>
-                        <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
+                        <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de ZoomCord</p>
                     </div>
 
                 </Modal.Body>
                 <Modal.Footer className="footer-modal">
-                    <button className="btn-back-modal" onClick={() => updateChangeModalClub(false)}>Atras</button>
+                    <button className={classes.btnBackModal} onClick={() => updateChangeModalClub(false)}>Atras</button>
                     <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
                 </Modal.Footer>
 
@@ -170,6 +169,9 @@ function CreateServModal(props) {
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                 >
+                    <section className={classes.sectionCreate}>
+
+                    
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
                             Personaliza tu servidor
@@ -181,10 +183,10 @@ function CreateServModal(props) {
                             Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body className="container-opts-modal">
+                    <Modal.Body className={classes.containerOptsModal}>
                         <form onSubmit={onSubmit} >
                             <div className={classes.uploadContainer}>
-                                <input type='file' name='file' className="div-upload-photo">
+                                <input type='file' name='file' className={classes.divUploadPhoto}>
 
                                 </input>
                             </div>
@@ -195,7 +197,7 @@ function CreateServModal(props) {
                             <div >
                                 <p className={classes.nameServ}>NOMBRE DEL SERVIDOR</p>
                                 <input className={classes.inputNameServ} name='name' type='text' placeholder='El servidor de user'></input>
-                                <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de Discord</p>
+                                <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de ZoomCord</p>
                             </div>
                             <Modal.Footer className={classes.footerModal}>
                                 <button className={classes.btnBackModal} onClick={() => updateChangeModalFriend(false)}>Atras</button>
@@ -204,13 +206,13 @@ function CreateServModal(props) {
                         </form>
 
 
-
+                       
 
 
 
                     </Modal.Body>
 
-
+                    </section>
 
                 </Modal>}
 
