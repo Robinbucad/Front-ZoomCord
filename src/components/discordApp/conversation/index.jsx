@@ -38,7 +38,7 @@ function Conversation({ conversation }) {
     return (
         <div>
             {users.length === 0 ? '' : users.map((e, i) => (
-                <Link key={i} to={`/@me/${e._id}`}>
+                <Link style={{textDecoration:'none'}} className={classes.linkConv} key={i} to={`/@me/${e._id}`}>
                     <div onClick={handleDelNot} className={classes.divConvLength}>
                         <div className={classes.conver}>
                             <img className={classes.profileDefault} src={e.file === '' ? defaultProf : `http://localhost:3001/${e.file}`} />

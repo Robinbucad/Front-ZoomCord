@@ -88,7 +88,7 @@ function SignUp() {
                         <div className={classes.divCheckPrivacy}>
                             <Form.Check onChange={onChange} value={value} Enabled style={{ fontSize: '30px' }} />
                             <div className={classes.divPrivacyLogin}>
-                                <p className={classes.privacyLogin}>{t("registerLogin.pol")}</p>
+                                <p className={classes.privacyLogin}>I have read and accept Discord's <a target="_blank" href="https://www.freeprivacypolicy.com/live/88ec6c33-3565-4885-b114-8ebe3c025b03">Terms of Service</a> and <a target="_blank" href="https://www.freeprivacypolicy.com/live/ccb548b4-7a2b-43c4-b682-3a4a885794fc">Privacy Policy.</a></p>
                             </div>
 
                         </div>

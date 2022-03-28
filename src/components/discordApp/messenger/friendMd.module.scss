@@ -258,14 +258,17 @@
     
         background-color:$MDColor;
         border-radius: 50px;
-        width: 14px;
+        width: 7px;
         color: black;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-     
-    }
+        
+        @include breakpoint(md){
+            width: 14px;
+        }
+    }       
     
     
     
@@ -423,7 +426,7 @@
 }
 
 .btnsSettsDiv{
-    width: 45%;
+    width: 55%;
     @include flexBox(flex, center, space-between,'','','');
     font-size:20px;
     padding-right: 10px;
@@ -437,6 +440,18 @@
 }
 
 //CONVERSATIONS 
+
+.linkConv{
+    color: white;
+    body.dark &{
+        transition: 0.3s ease all;
+        color: black;
+    }
+}
+
+.linkConv:hover{
+    color: white;
+}
 
 .conver{
     border-radius: 10px;
@@ -786,7 +801,7 @@
 
   .numNotifications{
     font-size: 11px;
-    position: absolute;
+    position: relative;
     background-color:$LightSecondary;
     padding: 3px;
     color: black;
@@ -797,7 +812,8 @@
     display: flex;
     align-items: center;
     width: 14px;
-    bottom: 30px;
+    bottom: 10px;
+    left: 18px;
   }
 
   .btnReaded{

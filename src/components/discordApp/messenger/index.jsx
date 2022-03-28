@@ -25,7 +25,7 @@ function Messenger() {
     const [conversationsId,setConversationsId] = useState([])
     const [filter,setFilter] = useState([])
  
-    console.log(conversations)
+
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -89,7 +89,7 @@ function Messenger() {
     const handleSubmit = async (e) => {
 
         if (e.key === 'Enter') {
-            e.preventDefault()
+   
             const message = {
                 date: date,
                 file: user.file,
@@ -119,6 +119,26 @@ function Messenger() {
             }
         }
     }
+
+
+   useEffect(() => {
+    if(Notification.permission === 'denied' || 'default'){
+        Notification.requestPermission().then(r => {
+            if(r === 'granted'){
+                console.log('Hola')
+                new Notification('Title')
+                new Notification('Title',{body:"Hola notificacion"})
+            }
+        })
+    }else if(Notification.permission==='granted'){
+        new Notification('Title',{body:"hola title"})
+    }
+   },[])
+  
+  
+
+  
+
 
     const handleFilter = e => {
         
