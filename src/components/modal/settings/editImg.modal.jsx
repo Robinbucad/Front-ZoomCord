@@ -52,10 +52,11 @@ function EditImage(props) {
                 </Modal.Header>
                 <form onSubmit={handleEdit}>
                     <Modal.Body className={classes.bodyInputsModify}>
-                        <div>
-                            <p>Imagen</p>
-                            <input name='file' type='file' required></input>
-                        </div>
+                    <div className={classes.uploadContainer}>
+                        <input type='file' name='file' className={classes.divUploadPhoto}>
+
+                        </input>
+                    </div>
 
                     </Modal.Body>
                     <Modal.Footer>

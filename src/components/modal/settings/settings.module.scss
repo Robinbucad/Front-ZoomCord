@@ -97,6 +97,23 @@
     @include flexBox(flex,flex-start,space-between,'','','')
 }
 
+.divUploadPhoto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    border-style: dashed;
+    font-size: 0;
+    cursor: pointer;
+}
+
+.uploadContainer{
+    display: flex;
+    justify-content: center;
+}
+
 .divBtnsRemove{
     display: flex;
     gap: 2rem;

@@ -135,15 +135,15 @@ function CreateServModal(props) {
 
                 </Modal.Header>
                 <Modal.Header  style={{border:'none'}}>
-                    <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter' }}>
+                    <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter', border:"none" }}>
                         Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={classes.containerOptsModal}>
                     <div className={classes.uploadContainer}>
-                        <div className={classes.divUploadPhoto}>
-                            <p>UPLOAD</p>
-                        </div>
+                        <input type='file' name='file' className={classes.divUploadPhoto}>
+                         
+                        </input>
                     </div>
 
 
@@ -172,14 +172,14 @@ function CreateServModal(props) {
                     <section className={classes.sectionCreate}>
 
                     
-                    <Modal.Header closeButton>
+                    <Modal.Header style={{border:"none"}} closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
                             Personaliza tu servidor
                         </Modal.Title>
 
                     </Modal.Header>
-                    <Modal.Header>
-                        <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter' }}>
+                    <Modal.Header style={{border:"none"}}>
+                        <Modal.Title style={{ fontSize: '15px',border:"none", fontWeight: 'lighter' }}>
                             Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
                         </Modal.Title>
                     </Modal.Header>
