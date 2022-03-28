@@ -54,7 +54,7 @@ function FollowUser(props) {
             window.location.reload()
      
         }catch(err){
-            console.log(err)
+            alert('No puedes iniciar una conversación contigo mismo')
         }
     }
 

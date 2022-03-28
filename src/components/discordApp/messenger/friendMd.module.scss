@@ -564,6 +564,11 @@
     flex-direction: column;
     border-radius: 0 0 10px 10px;
     padding: 10px;
+    transition: .3s ease all;
+    body.dark &{
+        background-color: $LightTerciary;
+        color: black;
+    }
     @include breakpoint(s){
         height: 7rem;
  }
@@ -591,6 +596,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+   
 }
 
 .headerPostTitle{
@@ -622,6 +628,10 @@
 .cardPost{
     width: 16rem;
     height: 18rem;
+    @include breakpoint(md){
+        width: 12rem;
+        height: 14rem;
+    }
     @include breakpoint(s){
         width: 8rem;
         height: 8rem;   
@@ -638,6 +648,12 @@
     width: 350px;
     position: fixed;
     gap: 1rem;
+    @include breakpoint(md){
+        height: 80%;
+        gap: 1.5rem;
+        width: 250px;
+        overflow-y: scroll;
+    }
     @include breakpoint(s){
         display: none;
  }
