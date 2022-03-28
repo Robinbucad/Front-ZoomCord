@@ -9,7 +9,7 @@ import HeaderApp from "../headerApp";
 import FollowUser from "../../modal/addFriend";
 import { UserContext } from "../../../context/user/user.contex";
 import Posts from "../posts";
-
+import defaultPicture from '../../../assets/img/default.jpg'
 
 
 
@@ -25,6 +25,13 @@ function Messenger() {
     const [conversationsId,setConversationsId] = useState([])
     const [filter,setFilter] = useState([])
  
+    useEffect(() => {
+        if(Notification.permission === 'default' || 'denied'){
+            Notification.requestPermission().then(permission => {
+                console.log(permission)
+            })
+        }
+    },[])
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -32,7 +39,14 @@ function Messenger() {
 
     useEffect(() => {
         socket?.on("getMessage", (data) => {
+            console.log(data)
             setMessages([...messages, data])
+            if(Notification.permission === 'granted'){
+                new Notification(data.username,{
+                    body: data.text,
+                    icon:`${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
+                })
+            }
         })
     }, [messages])
 
@@ -86,6 +100,8 @@ function Messenger() {
     const date = new Date()
     
     const handleSubmit = async (e) => {
+    
+      
 
         if (e.key === 'Enter') {
             e.preventDefault()
@@ -113,11 +129,16 @@ function Messenger() {
                 const dat = await res.json()
                 setMessages([...messages, dat])
                 setNewMessage('')
+
+               
             } catch (err) {
                 console.log(err)
             }
         }
     }
+
+  
+
 
     const handleFilter = e => {
         
