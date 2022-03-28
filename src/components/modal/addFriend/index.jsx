@@ -72,6 +72,7 @@ function FollowUser(props) {
                                 <div className={classes.divInfoUserAdd}>
 
                                     <img className={classes.addUserImg} src={e.file === '' ? defaultProfile : `http://localhost:3001/${e.file}` }></img>
+
                                     <p>{e.username}</p>
                                 </div>
                                 <div>

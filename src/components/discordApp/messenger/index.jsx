@@ -9,7 +9,7 @@ import HeaderApp from "../headerApp";
 import FollowUser from "../../modal/addFriend";
 import { UserContext } from "../../../context/user/user.contex";
 import Posts from "../posts";
-
+import defaultPicture from '../../../assets/img/default.jpg'
 
 
 
@@ -27,13 +27,30 @@ function Messenger() {
  
 
 
+
+    useEffect(() => {
+        if(Notification.permission === 'default' || 'denied'){
+            Notification.requestPermission().then(permission => {
+                console.log(permission)
+            })
+        }
+    },[])
+
+
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
     }, [])
 
     useEffect(() => {
         socket?.on("getMessage", (data) => {
+            console.log(data)
             setMessages([...messages, data])
+            if(Notification.permission === 'granted'){
+                new Notification(data.username,{
+                    body: data.text,
+                    icon:`${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
+                })
+            }
         })
     }, [messages])
 
@@ -87,6 +104,8 @@ function Messenger() {
     const date = new Date()
     
     const handleSubmit = async (e) => {
+    
+      
 
         if (e.key === 'Enter') {
    
@@ -114,30 +133,14 @@ function Messenger() {
                 const dat = await res.json()
                 setMessages([...messages, dat])
                 setNewMessage('')
+
+               
             } catch (err) {
                 console.log(err)
             }
         }
     }
 
-
-   useEffect(() => {
-    if(Notification.permission === 'denied' || 'default'){
-        Notification.requestPermission().then(r => {
-            if(r === 'granted'){
-                console.log('Hola')
-                new Notification('Title')
-                new Notification('Title',{body:"Hola notificacion"})
-            }
-        })
-    }else if(Notification.permission==='granted'){
-        new Notification('Title',{body:"hola title"})
-    }
-   },[])
-  
-  
-
-  
 
 
     const handleFilter = e => {

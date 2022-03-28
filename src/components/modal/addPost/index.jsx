@@ -14,7 +14,7 @@ function ModalPost(props) {
         e.preventDefault()
         const userFormData = new FormData(e.target);
         userFormData.append('username', user.username);
-        userFormData.append('userId',user._id)
+        userFormData.append('userId', user._id)
 
         const res = await fetch('http://localhost:3001/publications/', {
 
@@ -38,7 +38,11 @@ function ModalPost(props) {
                     <Modal.Title>{user.username}</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={handleSubmit} className={classes.modalPostDivInput}>
-                    <input  type='file' name='file' placeholder='Pon url imagen'></input>
+                    <div className={classes.uploadContainer}>
+                        <input type='file' name='file' className={classes.divUploadPhoto}>
+
+                        </input>
+                    </div>
                     <textarea className={classes.descriptionModal} onChange={(e) => setDescription(e.target.value)} type='text' name='description' placeholder='Description' />
                     <button className={classes.btnPost} type='submit'>
                         Subir

@@ -10,16 +10,22 @@
     background-color: $SecondaryOscuro;
     border-color: gray;
     color: white;
+    align-items: center;
 }
 
 .divModal:hover{
-    background-color: #F4F5F6;
+    background-color: $PrimaryClaro;
+}
+
+.arrowRight{
+    font-size: 25px;
 }
 
 .containerOptsModal{
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    border:none;
 }
 
 .optModal{
@@ -47,6 +53,7 @@
     display: flex;
     justify-content: space-between;
     background-color:$PrimaryClaro;
+    border:"none";
 }
 
 .uploadContainer{
@@ -62,7 +69,7 @@
 .inputNameServ{
     width: 100%;
     padding: 10px;
-    background-color:#FCFCFC;
+    background-color:$SecondaryOscuro;
     border: 0.5px solid lightgray;
     border-radius: 8px;
 }

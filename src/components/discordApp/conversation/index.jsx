@@ -12,8 +12,7 @@ function Conversation({ conversation }) {
 
     useEffect(() => {
         const filter = conversation?.members.find(e => e !== user._id)
-      
-
+    
         const getUser = async () => {
             try {
                 const res = await fetch(`http://localhost:3001/users/${filter}`, {
