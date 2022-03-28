@@ -145,9 +145,12 @@
             transition: 0.3s ease all;
             color: black
         }
+
+        @include breakpoint(md){
+            padding: 10px;
+        }
         @include breakpoint(s){
             width: 100%;
-          
      }
     }
     
@@ -157,7 +160,9 @@
         body.dark &{
             color: black
         }
-
+        @include breakpoint(md){
+            gap: 1.5rem;
+        }
         @include breakpoint(s){
             gap: 1rem
      }
@@ -226,6 +231,13 @@
     .imgServ{
         @include servLog(55px, 50%,$HoverListFrMd,green);
         height: 55px;
+
+    }
+
+    .imgServ > h1 {
+        @include breakpoint(md){
+            font-size: 3rem;
+        }
     }
     
     .imgServ:hover{
@@ -246,7 +258,7 @@
     
         background-color:$MDColor;
         border-radius: 50px;
-        width: 7px;
+        width: 14px;
         color: black;
         display: flex;
         justify-content: center;
@@ -302,6 +314,10 @@
     height: 55px;
 }
 
+.btnAddServ{
+    font-size: 3rem;
+}
+
 .sectionsServer{
     padding: 10px;
     @include flexBox(flex,'','','','',10px);
@@ -350,6 +366,9 @@
     }
     @include flexBox(flex, center, space-between,65px,'','');
 
+    @include breakpoint(md){
+        padding-left: 5px;
+    }
 }
 
 .userInfoSetts{
@@ -527,9 +546,7 @@
     gap: 1rem;
     flex-direction: column;
 }
-.conver:hover{
-    background-color: $PrimaryClaro;
-}
+
 
 //POSTS
 
@@ -548,6 +565,11 @@
     flex-direction: column;
     border-radius: 0 0 10px 10px;
     padding: 10px;
+    transition: .3s ease all;
+    body.dark &{
+        background-color: $LightTerciary;
+        color: black;
+    }
     @include breakpoint(s){
         height: 7rem;
  }
@@ -575,6 +597,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+   
 }
 
 .headerPostTitle{
@@ -594,6 +617,10 @@
     width: 100%;
     height: 8rem;
     border-radius: 10px 10px 0 0;
+
+    @include breakpoint(md){
+        border-radius: 10px 10px 0 0;
+    }
     @include breakpoint(s){
         height: 5rem;
  }
@@ -602,6 +629,10 @@
 .cardPost{
     width: 16rem;
     height: 18rem;
+    @include breakpoint(md){
+        width: 12rem;
+        height: 14rem;
+    }
     @include breakpoint(s){
         width: 8rem;
         height: 8rem;   
@@ -618,6 +649,12 @@
     width: 350px;
     position: fixed;
     gap: 1rem;
+    @include breakpoint(md){
+        height: 80%;
+        gap: 1.5rem;
+        width: 250px;
+        overflow-y: scroll;
+    }
     @include breakpoint(s){
         display: none;
  }
@@ -786,4 +823,13 @@
     background-color: $PrimaryClaro;
     color: white;
     border-radius: 8px;
+}
+
+.divOpenConv{
+    padding: 20px;
+}
+
+.divOpenConv > p{
+    font-size: 1rem;
+    font-weight: bold;
 }

@@ -11,7 +11,7 @@ import { IoMdNotifications } from 'react-icons/io'
 
 
 
-function UserSettingsFooter({ socket}) {
+function UserSettingsFooter() {
 
     const token = sessionStorage.getItem('token')
     const [fullscreen] = useState(true);
@@ -62,7 +62,7 @@ function UserSettingsFooter({ socket}) {
         }
        
         getNotifications()
-    }, [user, socket])
+    }, [user])
 
     return (
 

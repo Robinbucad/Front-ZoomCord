@@ -57,7 +57,7 @@ function DivServs() {
             ))}
 
             <button onClick={() => setServModalShow(true)} className={classes.imgServ}>
-                <h1>+</h1>
+                <h1 className={classes.btnAddServ}>+</h1>
             </button>
 
             <CreateServModal show={modalServShow} onHide={() => setServModalShow(false)} ></CreateServModal>

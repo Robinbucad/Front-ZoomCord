@@ -25,6 +25,7 @@ function Messenger() {
     const [conversationsId,setConversationsId] = useState([])
     const [filter,setFilter] = useState([])
  
+    console.log(conversations)
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -120,7 +121,8 @@ function Messenger() {
     }
 
     const handleFilter = e => {
-        const convFiltered = conversations.filter(u => u.receiverName.toLowerCase().includes(e.target.value.toLowerCase()))
+        
+        const convFiltered = conversations.filter(u => u.receiverName.toLowerCase().includes(e.target.value))
         setFilter(convFiltered)
     }
 
@@ -151,7 +153,9 @@ function Messenger() {
                     </header>
 
                     <section className={classes.containerConversations}>
-                        {filter.map((e, i) => (
+                        {conversations.length  === 0 ? <p>¿Sin amigos?</p> :
+                        
+                        filter.map((e, i) => (
                             <div className={classes.divFriend} key={i} onClick={() => setCurrentChat(e)}>
                              
                                 <Conversation key={i} conversation={e} currentUser={user}></Conversation>
@@ -162,7 +166,7 @@ function Messenger() {
                 </section>
                 <div className={classes.userSetts} >
 
-                    <UserSettingsFooter  socket={socket} ></UserSettingsFooter>
+                    <UserSettingsFooter ></UserSettingsFooter>
 
 
                 </div>
@@ -186,7 +190,11 @@ function Messenger() {
                             <div className={classes.divInputChat}>
                                 <input type='text' onChange={(e) => setNewMessage(e.target.value)} value={newMessage} onKeyPress={handleSubmit} className={classes.inputChat} placeholder="Escriba algo"></input>
                             </div>
-                        </div> : <p>Abre una conversaion</p>
+                        </div> : 
+                        
+                        <div className={classes.divOpenConv}>
+                            <p>Abre una conversaion</p>
+                        </div>
                 }
 
             </div>
