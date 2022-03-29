@@ -25,7 +25,7 @@ function Messenger() {
     const [conversationsId, setConversationsId] = useState([])
     const [filter, setFilter] = useState([]) // PROBLEMACON KEY UNICA, no puedo hacer un filtrado con una key unica, tengo pasar un valor unico 
     const scrollRef = useRef()
-    console.log(conversations)
+
 
 
     useEffect(() => {
@@ -43,7 +43,7 @@ function Messenger() {
 
     useEffect(() => {
         socket?.on("getMessage", (data) => {
-            console.log(data)
+    
             setMessages([...messages, data])
             if (Notification.permission === 'granted') {
                 new Notification(data.username, {
@@ -104,7 +104,7 @@ function Messenger() {
     const date = new Date()
 
     const handleSubmit = async (e) => {
-
+      
 
 
         if (e.key === 'Enter') {

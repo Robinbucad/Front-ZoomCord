@@ -267,8 +267,8 @@ function ServerMessenger() {
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
                         {msgFiltered?.map((m, i) => (
-                            <div ref={scrollRef}>
-                            <MessageServer key={i} message={m}></MessageServer>
+                            <div key={i} ref={scrollRef}>
+                            <MessageServer  message={m}></MessageServer>
                             </div>
                         ))}
                     </div>
