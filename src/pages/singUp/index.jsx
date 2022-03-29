@@ -7,7 +7,7 @@ import classes from './signUp.module.scss'
 
 function SignUp() {
 
-    
+    const date = new Date()
 
     const [t] = useTranslation("registerLogin")
  
@@ -81,7 +81,7 @@ function SignUp() {
                         <div >
                             <div className={classes.divSelects}>
                                 <label className={classes.fontCardSign} htmlFor='date'>{t("registerLogin.date")}</label>
-                               <input className={classes.inputSignup} type='date' name='date'></input>
+                               <input className={classes.inputSignup} type='date' name='date'  min="1950-01-01" max='2022-01-01'></input>
                             </div>
                         </div>
 
