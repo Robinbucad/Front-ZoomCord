@@ -266,9 +266,6 @@
         align-items: center;
         cursor: pointer;
         
-        @include breakpoint(md){
-            width: 8px;
-        }
     }       
     
     
