@@ -1,8 +1,12 @@
 @import '../../sass/global.scss';
+@import '../../sass/mediaquery.scss';
 
 .sectionContainer{
     height: 100%;
     @include flexBox(flex,center,center,'','',50px);
+    @include breakpoint(s){
+        gap: 10px;
+    }
 }
 
 
@@ -13,6 +17,7 @@
     height: 100vh;
     @include flexBox(flex,center,center,'','',50px);
     flex-direction: column;
+
 }
 
 .inputsCall{
@@ -33,10 +38,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @include breakpoint(s){
+        width: 325px;
+        height: 250px;
+    }
 }
 
 .videoImg{
     width: 500px;
+    @include breakpoint(s){
+        width: 300px
+    }
 }
 
 .inputCallSearch{

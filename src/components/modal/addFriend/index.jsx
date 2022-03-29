@@ -88,7 +88,7 @@ function FollowUser(props) {
 
 
                 <footer>
-                    <button onClick={props.onHide}>Close</button>
+                    <button className={classes.btnCloseModal} onClick={props.onHide}>Close</button>
                 </footer>
             </section>
         </Modal>
