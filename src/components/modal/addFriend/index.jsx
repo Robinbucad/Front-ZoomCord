@@ -37,7 +37,7 @@ function FollowUser(props) {
       
         const members = {    
             receiverName:userSearch,      
-             senderId:user._id,
+            senderId:user._id,
             receiverId:idUserFind
         }
    

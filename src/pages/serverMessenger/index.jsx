@@ -34,6 +34,8 @@ function ServerMessenger() {
     const [nameServ, setNameServ] = useState('')
     const [smChangeShow,setSmChangeShow]= useState(false)
     const [newServName,setNewServName] = useState('')
+    const [msgFiltered,setMsgFiltered] = useState([])
+    const scrollRef = useRef()
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -53,6 +55,7 @@ function ServerMessenger() {
     useEffect(() => {
         socket?.on("getServMsg", (data) => {
             setMessages([...messages, data])
+            setMsgFiltered([...msgFiltered,data])
         })
     }, [messages])
 
@@ -94,6 +97,7 @@ function ServerMessenger() {
                 })
                 const dat = await res.json()
                 setMessages(dat)
+                setMsgFiltered(dat)
             } catch (err) {
                 console.log(err)
             }
@@ -104,16 +108,12 @@ function ServerMessenger() {
     }, [currentServId])
 
     const date = new Date()
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-
-    const takeDate = `${hours}:${minutes}`
 
     const handleSubmit = async (e) => {
 
         if (e.key === 'Enter') {
             const message = {
-                date: takeDate,
+                date: date,
                 file: user.file,
                 username: user.username,
                 senderId: user._id,
@@ -136,7 +136,7 @@ function ServerMessenger() {
                 const dat = await res.json()
                 setNewMessage('')
                 setMessages([...messages, dat])
-
+                setMsgFiltered([...msgFiltered,dat])
             } catch (err) {
                 console.log(err)
             }
@@ -197,7 +197,14 @@ function ServerMessenger() {
         }
     }
 
- 
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({behavior:"smooth"})
+    },[messages])
+
+    const filterMsg = e => {
+        const msgFiltered = messages.filter(m => m.text.toLowerCase().includes(e.target.value))
+        setMsgFiltered(msgFiltered)
+    }
 
 
     return (
@@ -248,19 +255,21 @@ function ServerMessenger() {
             </div>
             <div className={classes.chatContainer}>
                 <header className={classes.headerChat}>
-                    <p>NAME CHANNEL</p>
+                    <p></p>
                     <div className={classes.settingsChat}>
-                        <p>Call</p>
-                        <p>Videocall</p>
-                        <input placeholder="Buscar" className={classes.inputSearchMsgChat} type='text'></input>
+                        <p></p>
+                        <p></p>
+                        <input placeholder="Buscar" onChange={filterMsg} className={classes.inputSearchMsgChat} type='text'></input>
 
                     </div>
                 </header>
 
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
-                        {messages?.map((m, i) => (
+                        {msgFiltered?.map((m, i) => (
+                            <div ref={scrollRef}>
                             <MessageServer key={i} message={m}></MessageServer>
+                            </div>
                         ))}
                     </div>
                     <div className={classes.divInputChat}>

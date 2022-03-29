@@ -23,9 +23,9 @@ function Messenger() {
     const [user, setUser] = useContext(UserContext)
     const [socket, setSocket] = useState(null)
     const [conversationsId, setConversationsId] = useState([])
-    const [filter, setFilter] = useState([])
+    const [filter, setFilter] = useState([]) // PROBLEMACON KEY UNICA, no puedo hacer un filtrado con una key unica, tengo pasar un valor unico 
     const scrollRef = useRef()
-
+    console.log(conversations)
 
 
     useEffect(() => {
@@ -145,9 +145,8 @@ function Messenger() {
         scrollRef.current?.scrollIntoView({behavior:"smooth"})
     },[messages])
 
-
+    console.log(filter)
     const handleFilter = e => {
-
         const convFiltered = conversations.filter(u => u.receiverName.toLowerCase().includes(e.target.value))
         setFilter(convFiltered)
     }
@@ -182,9 +181,9 @@ function Messenger() {
                         {conversations.length === 0 ? <p>¿Sin amigos?</p> :
 
                             filter.map((e, i) => (
-                                <div className={classes.divFriend} key={i} onClick={() => setCurrentChat(e)}>
+                                <div className={classes.divFriend} key={e.receiverName} onClick={() => setCurrentChat(e)}>
 
-                                    <Conversation key={i} conversation={e} currentUser={user}></Conversation>
+                                    <Conversation conversation={e} currentUser={user}></Conversation>
                                 </div>
                             ))}
 

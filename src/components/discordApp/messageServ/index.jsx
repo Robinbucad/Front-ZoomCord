@@ -1,4 +1,4 @@
-
+import {format} from 'timeago.js'
 import classes from '../messenger/friendMd.module.scss';
 
 function MessageServer({message}) {
@@ -11,7 +11,7 @@ function MessageServer({message}) {
             <div>
                 <div className={classes.usernameMsg}>
                     <p>{message.username}</p>
-                    <p className={classes.dateMsg}>{message.date}</p>                 
+                    <p className={classes.dateMsg}>{format(message.date)}</p>                 
                 </div>
 
                 <p className={classes.msgText}>{message.text}</p>
