@@ -37,8 +37,10 @@ function ServerMessenger() {
     const [smChangeShow,setSmChangeShow]= useState(false)
     const [newServName,setNewServName] = useState('')
     const [msgFiltered,setMsgFiltered] = useState([])
+    const [imgServ,setImgServ] = useState('')
     const scrollRef = useRef()
     const [d] = useTranslation("discordApp")
+
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -60,10 +62,10 @@ function ServerMessenger() {
         socket?.on("getServMsg", (data) => {
             setMsgFiltered([...msgFiltered,data])
             setMessages([...messages, data])  
-            if (Notification.permission === 'granted') {
-                new Notification(data.username, {
-                    body: data.text,
-                    icon: `${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
+            if (Notification.permission === 'granted' && user.username !== data.username) {
+                new Notification(currentServ, {
+                    body: data.username,
+                    icon: `http://localhost:3001/${imgServ}`
                 })
             }
         })
@@ -85,6 +87,7 @@ function ServerMessenger() {
                 setMembers(dat.members)
                 updateCurrentServ(dat.name)
                 updateCurrentServId(dat._id)
+                setImgServ(dat.file)
                 setListMembers(dat.members)
             } catch (err) {
                 console.log(err)
@@ -277,8 +280,8 @@ function ServerMessenger() {
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
                         {msgFiltered?.map((m, i) => (
-                            <div key={i} ref={scrollRef}>
-                            <MessageServer  message={m}></MessageServer>
+                            <div  ref={scrollRef}>
+                            <MessageServer key={i}  message={m}></MessageServer>
                             </div>
                         ))}
                     </div>

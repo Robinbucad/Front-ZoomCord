@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import ES from '../../../assets/img/ES.svg'
 import { useState } from 'react'
 import KY from '../../../assets/img/KY.svg'
+import zoomLogo from '../../../assets/img/zoomcordLogo.png'
+
 
 import {BsLinkedin,BsInstagram} from 'react-icons/bs'
 
@@ -57,7 +59,7 @@ function HomeFooter() {
                 </div>
             </div>
             <div className={classes.part2Footer}>
-                <h1>Foto discord</h1>
+                <img className={classes.imgLogoFooter} src={zoomLogo}></img>
                 <Link to='/signUp'> <button className={classes.btnLoginFooter}>{h("home.signup")}</button></Link>
             </div>
         </footer>
