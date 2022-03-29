@@ -11,6 +11,8 @@ import InvitationPage from './pages/inviteServ/indes';
 import ServerMessenger from './pages/serverMessenger';
 import PageNotFound from './pages/not Found';
 import VideoCall from './pages/videocall';
+import PrivacyPolicy from './pages/policy';
+import Terms from './pages/terms';
 
 
 function App() {
@@ -33,7 +35,10 @@ function App() {
             <Route path='/discord/:id' element={<PrivateRoute><ServerMessenger></ServerMessenger></PrivateRoute>}></Route>
             <Route path='/invite/:id' element={<InvitationPage></InvitationPage>}></Route>
             <Route path='/videocall' element={<PrivateRoute><VideoCall></VideoCall></PrivateRoute>}></Route>
+            <Route path='/privacy' element={<PrivacyPolicy></PrivacyPolicy>}></Route>
+            <Route path='/terms' element={<Terms></Terms>}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
+           
 
           </Routes>
 
