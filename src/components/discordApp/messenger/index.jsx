@@ -45,7 +45,7 @@ function Messenger() {
         socket?.off("getMessage")
         socket?.on("getMessage", (data) => {
             setMessages([...messages, data])
-            if (Notification.permission === 'granted') {
+            if (Notification.permission === 'granted' && user.username !== data.username ) {
                 new Notification(data.username, {
                     body: data.text,
                     icon: `${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
