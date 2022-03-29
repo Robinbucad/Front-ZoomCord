@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { UserContext } from "../../../context/user/user.contex"
 import classes from './modal.module.scss'
 import {RiArrowRightSLine} from 'react-icons/ri'
+import { useTranslation } from "react-i18next"
 
 function CreateServModal(props) {
 
@@ -15,6 +16,7 @@ function CreateServModal(props) {
     const [servName, updateServName] = useState('')
     const [servImg, updateImg] = useState('')
     const [user, setUser] = useContext(UserContext)
+    const [d] = useTranslation("discordApp")
     let navigate = useNavigate()
 
     const onSubmit = async e => {
@@ -54,24 +56,24 @@ function CreateServModal(props) {
           
                 <Modal.Header style={{border:'none'}} closeButton>
                     <Modal.Title  id="contained-modal-title-vcenter">
-                        Crear un servidor
+                        {d("discordApp.createServ")}
                     </Modal.Title>
 
                 </Modal.Header>
                 <Modal.Header style={{border:'none'}}>
                     <Modal.Title style={{ fontSize: '20px', fontWeight: 'lighter' }}>
-                        Tu servidor es donde te reúnes con tus amigos. Crea el tuyo y empieza a hablar
+                        {d("discordApp.descServInfo")}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{border:'none'}}>
                     <button onClick={() => updateChangeModal(true)} className={classes.divModal}>
-                        <h4 className={classes.optModal}>Crear mi plantilla</h4>
+                        <h4 className={classes.optModal}>{d("discordApp.createTemplate")}</h4>
                         <RiArrowRightSLine className={classes.arrowRight}></RiArrowRightSLine>
                     </button>
 
                 </Modal.Body>
                 <Modal.Footer style={{border:'none'}}>
-                    <Button onClick={props.onHide}>Close</Button>
+                    <Button onClick={props.onHide}>{d("discordApp.close")}</Button>
 
                 </Modal.Footer>
 
@@ -89,30 +91,29 @@ function CreateServModal(props) {
            
                 <Modal.Header closeButton style={{border:'none'}}>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Háblanos un poco de tu servidor
+                        {d("discordApp.infoServer")}
                     </Modal.Title>
 
                 </Modal.Header>
                 <Modal.Header style={{border:'none'}}>
                     <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter' }}>
-                        Para poder ayudarte con la configuración, nos gustaria saber si tu servidor
-                        es solo para unos cuantos amigos o para una comunidad más amplia
+                        {d("discordApp.descModal2")}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={classes.containerOptsModal}>
                     <button onClick={() => updateChangeModalClub(true)} className={classes.divModal}>
-                        <h4 className={classes.optModal}>Para un club o una comunidad</h4>
+                        <h4 className={classes.optModal}>{d("discordApp.club")}</h4>
                         <RiArrowRightSLine className={classes.arrowRight}></RiArrowRightSLine>
                     </button>
 
                     <button onClick={() => updateChangeModalFriend(true)} className={classes.divModal}>
-                        <h4 className="opt-modal">Para mis amigos y yo</h4>
+                        <h4 className="opt-modal">{d("discordApp.friendsServ")}</h4>
                         <RiArrowRightSLine className={classes.arrowRight}></RiArrowRightSLine>
                     </button>
 
                 </Modal.Body>
                 <Modal.Footer style={{border:'none'}} className={classes.footerModal}>
-                    <button className={classes.btnBackModal} onClick={() => updateChangeModal(false)}>Atras</button>
+                    <button className={classes.btnBackModal} onClick={() => updateChangeModal(false)}>{d("discordApp.back")}</button>
                     <Button onClick={props.onHide}>Close</Button>
                 </Modal.Footer>
 
@@ -130,13 +131,13 @@ function CreateServModal(props) {
              
                 <Modal.Header  style={{border:'none'}} closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Personaliza tu servidor
+                        {d("discordApp.infoServerM3")}
                     </Modal.Title>
 
                 </Modal.Header>
                 <Modal.Header  style={{border:'none'}}>
                     <Modal.Title style={{ fontSize: '15px', fontWeight: 'lighter', border:"none" }}>
-                        Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
+                    {d("discordApp.descModal3")}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={classes.containerOptsModal}>
@@ -148,15 +149,15 @@ function CreateServModal(props) {
 
 
                     <div>
-                        <p className="name-serv">NOMBRE DEL SERVIDOR</p>
-                        <input className={classes.inputNameServ} onChange={(e) => updateServName(e.target.value)} type='text' placeholder='El servidor de user'></input>
-                        <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de ZoomCord</p>
+                        <p className="name-serv">{d("discordApp.nameServ")}</p>
+                        <input className={classes.inputNameServ} onChange={(e) => updateServName(e.target.value)} type='text' placeholder={`${d("discordApp.inputName")} ${user.username}`}></input>
+                        <p className="text-conditions-serv">{d("discordApp.pol")}</p>
                     </div>
 
                 </Modal.Body>
                 <Modal.Footer className="footer-modal">
-                    <button className={classes.btnBackModal} onClick={() => updateChangeModalClub(false)}>Atras</button>
-                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>Crear</Button>
+                    <button className={classes.btnBackModal} onClick={() => updateChangeModalClub(false)}>{d("discordApp.back")}</button>
+                    <Button className="btn-modal-create" disabled={servName === '' ? true : false} onClick={onSubmit}>{d("discordApp.create")}</Button>
                 </Modal.Footer>
 
                 </section>
@@ -174,13 +175,13 @@ function CreateServModal(props) {
                     
                     <Modal.Header style={{border:"none"}} closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            Personaliza tu servidor
+                        {d("discordApp.infoServerM3")}
                         </Modal.Title>
 
                     </Modal.Header>
                     <Modal.Header style={{border:"none"}}>
                         <Modal.Title style={{ fontSize: '15px',border:"none", fontWeight: 'lighter' }}>
-                            Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde
+                        {d("discordApp.descModal3")}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={classes.containerOptsModal}>
@@ -195,13 +196,13 @@ function CreateServModal(props) {
 
 
                             <div >
-                                <p className={classes.nameServ}>NOMBRE DEL SERVIDOR</p>
-                                <input className={classes.inputNameServ} name='name' type='text' placeholder='El servidor de user'></input>
-                                <p className="text-conditions-serv">Al crear un servidor, aceptas las Directivas de la Comunidad de ZoomCord</p>
+                                <p className={classes.nameServ}>{d("discordApp.nameServ")}</p>
+                                <input className={classes.inputNameServ} name='name' type='text' placeholder={`${d("discordApp.inputName")} ${user.username}`} required></input>
+                                <p className="text-conditions-serv">{d("discordApp.pol")}</p>
                             </div>
                             <Modal.Footer className={classes.footerModal}>
-                                <button className={classes.btnBackModal} onClick={() => updateChangeModalFriend(false)}>Atras</button>
-                                <Button className={classes.btnModalCreate} type='submit' required>Crear</Button>
+                                <button className={classes.btnBackModal} onClick={() => updateChangeModalFriend(false)}>{d("discordApp.back")}</button>
+                                <Button className={classes.btnModalCreate} type='submit' required>{d("discordApp.create")}</Button>
                             </Modal.Footer>
                         </form>
 

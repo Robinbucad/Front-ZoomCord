@@ -9,6 +9,7 @@ import defaultImg from '../../../assets/img/default.jpg'
 import UserSettings from '../../modal/settings'
 import { IoMdNotifications } from 'react-icons/io'
 import defaultProfile from '../../../assets/img/default.jpg'
+import { useTranslation } from 'react-i18next'
 
 
 function UserSettingsFooter() {
@@ -20,6 +21,7 @@ function UserSettingsFooter() {
     const [show, setShow] = useState(false);
     const [openNots, setOpenNots] = useState(false)
     const handleShow = () => setShow(!show)
+    const [d] = useTranslation("discordApp")
 
     const handleClick = () => {
         window.open('/videocall', '_blank')
@@ -80,14 +82,14 @@ function UserSettingsFooter() {
                 <div className={classes.spanShowNot}>
                     {notifications.map((e, i) => (
                         <div key={i} className={classes.divShowNot}>
-                             <p>{e.senderName} Le ha dado like</p>
+                             <p>{e.senderName} {d("discordApp.footerNot")}</p>
                              <img className={classes.imgLikeNot} src={e.file === '' ? defaultProfile : `http://localhost:3001/${e.file}` }></img>
                         </div>    
                        
                     ))}
                     <div className={classes.btnDivRead}>
 
-                        <button onClick={handleRead} className={classes.btnReaded}>Marcar como leido</button>
+                        <button onClick={handleRead} className={classes.btnReaded}>{d("discordApp.btnNot")}</button>
                     </div>
                 </div>
                 : ''}

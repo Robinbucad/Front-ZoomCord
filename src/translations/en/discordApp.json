@@ -1,0 +1,58 @@
+{
+    "discordApp":{
+        "inputSearchConv":"Search for a conversation",
+        "friends":"Friends",
+        "openConv":"Open a conversation",
+
+        "createServ":"Create a server",
+        "descServInfo":"Your server is where you meet your friends. Create yours and start talking",
+        "createTemplate":"Create my template",
+
+        "back":"Back",
+        "create":"Create",
+
+        "infoServer":"Tell us a little about your server",
+        "descModal2":"In order to help you with the configuration, we would like to know if your server is only for a few friends or for a larger community.",
+        "club":"For a club or community",
+        "friendsServ":"For my friends and me",
+
+        "infoServerM3":"Customize your server",
+        "descModal3":"Give your new server a personality of its own with a name and an icon. You can always change it later",
+        "nameServ":"SERVER NAME",
+        "inputName":"The server of the",
+        "pol":"By creating a server, you agree to the ZoomCord Community Guidelines.",
+
+        "searchUser":"Search for a user",
+        "close":"Close",
+
+        "server":"Invite a friend",
+        "deleteServ":"Delete server",
+        "settings":"Settings",
+        "searchMsg":"Search for a message",
+        "usersServ":"Users on the server",
+        "inviteServ":"Send this link to your friend!!",
+        "inviteTo":"Invite to",
+
+        "modalDelServQuestion":"Are you sure you want to eliminate",
+        "putNameServDel":"ENTER THE SERVER NAME",
+        "btnDel":"Delete server",
+
+        "changeNameModal":"Change server name",
+        "questionNameModal":"Do you want to change the server name",
+        "newName":"INTRODUCE THE NEW NAME",
+        "btnChangeName":"Change name",
+
+        "footerNot":"Liked it",
+        "btnNot":"Mark as read",
+
+        "settingsModal":"Settings",
+        "nameSettings":"USER NAME",
+        "email":"E-MAIL",
+        "btnEdit":"Edit",
+        "closeSesion":"Log out",
+        "deleteAcc":"Delete account",
+        "btnMyAcc":"My account",
+        "btnUserProfile":"User profile",
+        "settingsApp":"Application settings"
+    }
+}

@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { UserContext } from '../../../context/user/user.contex'
 import classes from './addUser.module.scss'
 import defaultProfile from '../../../assets/img/default.jpg'
-
+import { useTranslation } from "react-i18next"
 
 function FollowUser(props) {
     const token = sessionStorage.getItem('token')
@@ -11,6 +11,7 @@ function FollowUser(props) {
     const [userFind, setUserFind] = useState([])
     const [idUserFind,setUserIdFriend] = useState('')
     const [user,setUser] = useContext(UserContext)
+    const [d] = useTranslation("discordApp")
 
 
     
@@ -65,7 +66,7 @@ function FollowUser(props) {
 
             <section className={classes.modalContainer}>
                 <div className={classes.inputDiv}>
-                    <input onChange={(e) => setUserSearch(e.target.value)} onKeyPress={handleSubmit} className={classes.inputAdduser} type='text' placeholder='Busca usuario'></input>
+                    <input onChange={(e) => setUserSearch(e.target.value)} onKeyPress={handleSubmit} className={classes.inputAdduser} type='text' placeholder={d("discordApp.searchUser")}></input>
                     <div>
                         {userFind.map((e, i) => (
                             <div className={classes.divAddUser} key={i}>
@@ -88,7 +89,7 @@ function FollowUser(props) {
 
 
                 <footer>
-                    <button className={classes.btnCloseModal} onClick={props.onHide}>Close</button>
+                    <button className={classes.btnCloseModal} onClick={props.onHide}>{d("discordApp.close")}</button>
                 </footer>
             </section>
         </Modal>

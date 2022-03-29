@@ -10,6 +10,7 @@ import FollowUser from "../../modal/addFriend";
 import { UserContext } from "../../../context/user/user.contex";
 import Posts from "../posts";
 import defaultPicture from '../../../assets/img/default.jpg'
+import { useTranslation } from "react-i18next";
 
 
 
@@ -25,7 +26,8 @@ function Messenger() {
     const [conversationsId, setConversationsId] = useState([])
     const [filter, setFilter] = useState([]) // PROBLEMACON KEY UNICA, no puedo hacer un filtrado con una key unica, tengo pasar un valor unico 
     const scrollRef = useRef()
-
+    const [d] = useTranslation("discordApp")
+  
 
 
     useEffect(() => {
@@ -168,12 +170,12 @@ function Messenger() {
 
 
                 <div className={classes.inputDivMd}>
-                    <input className={classes.inputSearch} onChange={handleFilter} type='text' placeholder='Busca una conversación'></input>
+                    <input className={classes.inputSearch} onChange={handleFilter} type='text' placeholder={d("discordApp.inputSearchConv")}></input>
                 </div>
 
                 <section className={classes.secFriends}>
                     <header className={classes.headerMdList}>
-                        <p>Amigos</p>
+                        <p>{d("discordApp.friends")}</p>
                         <button onClick={() => setModalShow(true)} className={classes.btnMd} >+</button>
                     </header>
 
@@ -220,7 +222,7 @@ function Messenger() {
                         </div> :
 
                         <div className={classes.divOpenConv}>
-                            <p>Abre una conversaion</p>
+                            <p>{d("discordApp.openConv")}</p>
                         </div>
                 }
 

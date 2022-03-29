@@ -11,6 +11,7 @@ import { useUsername } from '../../../hooks/hook-name-user';
 import EditUsername from './editUsername';
 import EditImage from './editImg.modal';
 import defaultImg from '../../../assets/img/default.jpg'
+import { useTranslation } from 'react-i18next';
 
 function UserSettings(props) {
     let navigate = useNavigate()
@@ -21,6 +22,7 @@ function UserSettings(props) {
     const [modalEmailShow, setModalEmailShow] = useState(false);
     const [userModalShow,setModalUserShow] = useState(false)
     const [imgModalShow,setModalImgShow] = useState(false)
+    const [d] = useTranslation("discordApp")
 
 
     const handleClickAcc = e => {
@@ -66,14 +68,14 @@ function UserSettings(props) {
 
                  <section className={classes.listSettings} >
                      <div className={classes.divBtnSetts}>
-                         <Button variant='primary' onClick={handleClickAcc}>Mi cuenta</Button>
-                         <Button variant='primary' onClick={handleClickUser}>Perfil de usuario</Button>
+                         <Button variant='primary' onClick={handleClickAcc}>{d("discordApp.btnMyAcc")}</Button>
+                         <Button variant='primary' onClick={handleClickUser}>{d("discordApp.btnUserProfile")}</Button>
                      </div>
 
                  </section>
 
                  <section className={classes.settingChanges}>
-                     <Modal.Header style={{ border: 'none' }} closeButton><p>Ajustes</p></Modal.Header>
+                     <Modal.Header style={{ border: 'none' }} closeButton><p>{d("discordApp.settingsModal")}</p></Modal.Header>
 
                      <article className='card-user'>
                          <header className={classes.headerUserSettings}>
@@ -85,22 +87,22 @@ function UserSettings(props) {
                              <div className={classes.bodyUserSettings}>
 
                                  <div className={classes.usernSettings}>
-                                     <p >NOMBRE DE USUARIO</p>
+                                     <p >{d("discordApp.nameSettings")}</p>
                                      <p>{user.username}</p>
                                  </div>
                                  <div>
-                                     <Button onClick={() => setModalUserShow(true)} variant="info">Editar</Button>
+                                     <Button onClick={() => setModalUserShow(true)} variant="info">{d("discordApp.btnEdit")}</Button>
                                  </div>
                              </div>
 
                              <div className={classes.bodyUserSettings}>
 
                                  <div >
-                                     <p >CORREO ELECTRONICO</p>
+                                     <p >{d("discordApp.email")}</p>
                                      <p>{user.email}</p>
                                  </div>
                                  <div>
-                                     <Button onClick={() => setModalEmailShow(true)} variant="info">Editar</Button>
+                                     <Button onClick={() => setModalEmailShow(true)} variant="info">{d("discordApp.btnEdit")}</Button>
                                  </div>
                              </div>
 
@@ -109,7 +111,7 @@ function UserSettings(props) {
                                     <img className={classes.imgModalChange} src={user.file === '' ? defaultImg : `http://localhost:3001/${user.file}` }></img>
                                  </div>
                                  <div>
-                                     <Button onClick={() =>  setModalImgShow(true)} variant="info">Editar</Button>
+                                     <Button onClick={() =>  setModalImgShow(true)} variant="info">{d("discordApp.btnEdit")}</Button>
                                  </div>
                              </div>
 
@@ -120,8 +122,8 @@ function UserSettings(props) {
                      <hr />
                      <section>
                          <div className={classes.divBtnsRemove}>
-                             <Button onClick={handleCloseSession} variant="danger">Cerrar Sesion</Button>
-                             <Button onClick={() => setModalShow(true)} variant="outline-danger">Eliminar cuenta</Button>
+                             <Button onClick={handleCloseSession} variant="danger">{d("discordApp.closeSesion")}</Button>
+                             <Button onClick={() => setModalShow(true)} variant="outline-danger">{d("discordApp.deleteAcc")}</Button>
                          </div>
 
                      </section>

@@ -13,6 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../../context/user/user.contex';
 import Posts from '../../components/discordApp/posts';
 import defaultPicture from '../../assets/img/default.jpg'
+import { useTranslation } from "react-i18next"
 
 
 function ServerMessenger() {
@@ -37,6 +38,7 @@ function ServerMessenger() {
     const [newServName,setNewServName] = useState('')
     const [msgFiltered,setMsgFiltered] = useState([])
     const scrollRef = useRef()
+    const [d] = useTranslation("discordApp")
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -232,9 +234,9 @@ function ServerMessenger() {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu style={{ background: 'black', border: 'none' }}>
-                            <Dropdown.Item onClick={handleShowLink} style={{ color: 'gray' }} >Invite Friend</Dropdown.Item>
-                            <Dropdown.Item style={{ color: 'gray' }} onClick={() => setSmShow(true)} >Delete Server</Dropdown.Item>
-                            <Dropdown.Item onClick={() => setSmChangeShow(true)} style={{ color: 'gray' }}>Ajustes</Dropdown.Item>
+                            <Dropdown.Item onClick={handleShowLink} style={{ color: 'gray' }} > {d("discordApp.server")}</Dropdown.Item>
+                            <Dropdown.Item style={{ color: 'gray' }} onClick={() => setSmShow(true)} >{d("discordApp.deleteServ")}</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSmChangeShow(true)} style={{ color: 'gray' }}>{d("discordApp.settings")}</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
@@ -244,7 +246,7 @@ function ServerMessenger() {
                 <div className={classes.sectionsServer}>
                     <section>
                         <header className={classes.headerMdList}>
-                            <p >Usuarios Servidor</p>
+                            <p >{d("discordApp.usersServ")}</p>
                             <p>{listMembers.length}</p>
                         </header>
                 
@@ -267,7 +269,7 @@ function ServerMessenger() {
                     <div className={classes.settingsChat}>
                         <p></p>
                         <p></p>
-                        <input placeholder="Buscar" onChange={filterMsg} className={classes.inputSearchMsgChat} type='text'></input>
+                        <input placeholder={d("discordApp.searchMsg")} onChange={filterMsg} className={classes.inputSearchMsgChat} type='text'></input>
 
                     </div>
                 </header>
@@ -295,10 +297,10 @@ function ServerMessenger() {
 
                 <section className={classes.bodyModal}>
                     <Modal.Header style={{ border: 'none' }}>
-                        <Modal.Title>{`Invitar a ${currentServ}`}</Modal.Title>
+                        <Modal.Title>{`${d("discordApp.inviteTo")} ${currentServ}`}</Modal.Title>
                     </Modal.Header>
                     <div className={classes.divInviteFriend}>
-                        <p>Mándale este enlace a tu amigo!!</p>
+                        <p>{d("discordApp.inviteServ")}</p>
                         <input className={classes.inputInviteFriend} value={`http://localhost:3000/invite/${currentServId}`}></input>
 
                     </div>
@@ -307,11 +309,9 @@ function ServerMessenger() {
 
                     <Modal.Footer style={{ border: 'none' }}>
                         <Button variant="secondary" onClick={handleCloseLink}>
-                            Close
+                            {d("discordApp.close")}
                         </Button>
-                        <Button variant="primary" onClick={handleCloseLink}>
-                            Save Changes
-                        </Button>
+                     
                     </Modal.Footer>
                 </section>
 
@@ -321,22 +321,22 @@ function ServerMessenger() {
                 <section className={classes.modalDeleteServer}>
                     <Modal.Header className={classes.headerDeleteServer} closeButton>
                         <h4>
-                            Eliminar el servidor {currentServ}
+                            {d("discordApp.deleteServ")} {currentServ}
                         </h4>
                     </Modal.Header>
                     <section className={classes.bodyModalDel}>
                         <div className={classes.divAskDelServ}>
-                            <p className={classes.askDelServ}>¿Seguro que quieres eliminar {currentServ}? Esta acción sera irreversible</p>
+                            <p className={classes.askDelServ}>{d("discordApp.modalDelServQuestion")} {currentServ}?</p>
                         </div>
 
 
                         <div className={classes.inputDivDelServ}>
-                            <p>INTRODUCE EL NOMBRE DEL SERVIDOR</p>
+                            <p>{d("discordApp.putNameServDel")}</p>
                             <input onChange={(e) => setNameServ(e.target.value)} className={classes.inputDel} type='text'></input>
                         </div>
                         <footer className={classes.footerDel}>
 
-                            <Button onClick={handleDelServ} variant="danger">Eliminar servidor</Button>
+                            <Button onClick={handleDelServ} variant="danger">{d("discordApp.btnDel")}</Button>
 
                         </footer>
                     </section>
@@ -347,21 +347,21 @@ function ServerMessenger() {
                 <section className={classes.modalChangeServer}>
                     <Modal.Header className={classes.headerDeleteServer} closeButton>
                         <h4>
-                            Cambiar nombre del servidor {currentServ}
+                             {d("discordApp.changeNameModal")} {currentServ}
                         </h4>
                     </Modal.Header>
                     <section className={classes.bodyModalDel}>
                         <div className={classes.divAskDelServ}>
-                            <p className={classes.askDelServ}>¿Quieres cambiar el nombre del servidor {currentServ}?</p>
+                            <p className={classes.askDelServ}> {d("discordApp.questionNameModal")} {currentServ}?</p>
                         </div>
 
                         <div className={classes.inputDivDelServ}>
-                            <p>INTRODUCE EL NUEVO NOMBRE</p>
+                            <p>{d("discordApp.newName")}</p>
                             <input onChange={(e) => setNewServName(e.target.value)}  className={classes.inputDel} type='text'></input>
                         </div>
                         <footer className={classes.footerDel}>
 
-                            <Button onClick={handleNewServName} variant="primary">Cambiar nombre</Button>
+                            <Button onClick={handleNewServName} variant="primary">{d("discordApp.btnChangeName")}</Button>
 
                         </footer>
                     </section>
