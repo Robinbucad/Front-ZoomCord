@@ -1,0 +1,59 @@
+{
+    "discordApp":{
+        "inputSearchConv":"Busca una conversación",
+        "friends":"Amigos",
+        "openConv":"Abre una conversación",
+
+        "createServ":"Crear un servidor",
+        "descServInfo":"Tu servidor es donde te reúnes con tus amigos. Crea el tuyo y empieza a hablar",
+        "createTemplate":"Crear mi plantilla",
+
+        "back":"Atrás",
+        "create":"Crear",
+
+        "infoServer":"Háblanos un poco de tu servidor",
+        "descModal2":"Para poder ayudarte con la configuración, nos gustaria saber si tu servidor es solo para unos cuantos amigos o para una comunidad más amplia",
+        "club":"Para un club o una comunidad",
+        "friendsServ":"Para mis amigos y yo",
+
+        "infoServerM3":"Personaliza tu servidor",
+        "descModal3":"Dale una personalidad propia a tu nuevo servidor con un nombre y un icono. Siempre puedes cambiarlo más tarde",
+        "nameServ":"NOMBRE DEL SERVIDOR",
+        "inputName":"El servidor de",
+        "pol":"Al crear un servidor, aceptas las Directivas de la Comunidad de ZoomCord",
+
+        "searchUser":"Busca un usuario",
+        "close":"Cerrar",
+
+        "server":"Invitar a un amigo",
+        "deleteServ":"Borrar servidor",
+        "settings":"Ajustes",
+        "searchMsg":"Busca un mensaje",
+        "usersServ":"Usuarios en el servidor",
+        "inviteServ":"Mándale este enlace a tu amigo!!",
+        "inviteTo":"Invitar a",
+
+        "modalDelServQuestion":"¿Seguro que quieres eliminar",
+        "putNameServDel":"INTRODUCE EL NOMBRE DEL SERVIDOR",
+        "btnDel":"Eliminar servidor",
+
+        "changeNameModal":"Cambiar nombre del servidor",
+        "questionNameModal":"¿Quieres cambiar el nombre del servidor",
+        "newName":"INTRODUCE EL NUEVO NOMBRE",
+        "btnChangeName":"Cambiar nombre",
+
+        "footerNot":"Le ha dado me gusta",
+        "btnNot":"Marcar como leido",
+
+        "settingsModal":"Ajustes",
+        "nameSettings":"NOMBRE DE USUARIO",
+        "email":"CORREO ELECTRÓNICO",
+        "btnEdit":"Editar",
+        "closeSesion":"Cerrar sesión",
+        "deleteAcc":"Eliminar cuenta",
+        "btnMyAcc":"Mi cuenta",
+        "btnUserProfile":"Perfil de usuario",
+        "settingsApp":"Ajustes de la aplicación"
+
+    }
+}

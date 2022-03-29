@@ -12,22 +12,27 @@ import home_en from './translations/en/home.json'
 import home_es from './translations/es/home.json'
 import registerLogin_es from './translations/es/register.login.json'
 import registerLogin_en from './translations/en/register.login.json'
+import discrodApp_es from './translations/es/discordApp.json'
+import discrodApp_en from './translations/en/discordApp.json'
 import UserProvider from './context/user/user.provider.jsx'
 
+const lng = localStorage.getItem("LNG")
 
 i18next.init({
   interpolation: { escapeValue: false },
-  lng: "es",
+  lng: lng || "es",
   resources: {
     es: {
       header: header_es,
       home: home_es,
       registerLogin: registerLogin_es,
+      discordApp:discrodApp_es
     },
     en: {
       header: header_en,
       home: home_en,
       registerLogin: registerLogin_en,
+      discordApp:discrodApp_en
     },
   },
 })
