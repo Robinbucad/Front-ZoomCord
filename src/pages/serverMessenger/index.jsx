@@ -12,6 +12,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../../context/user/user.contex';
 import Posts from '../../components/discordApp/posts';
+import defaultPicture from '../../assets/img/default.jpg'
 
 
 function ServerMessenger() {
@@ -53,9 +54,16 @@ function ServerMessenger() {
     }
 
     useEffect(() => {
+        socket?.off("getServMsg")
         socket?.on("getServMsg", (data) => {
-            setMessages([...messages, data])
             setMsgFiltered([...msgFiltered,data])
+            setMessages([...messages, data])  
+            if (Notification.permission === 'granted') {
+                new Notification(data.username, {
+                    body: data.text,
+                    icon: `${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
+                })
+            }
         })
     }, [messages])
 

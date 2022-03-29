@@ -42,7 +42,7 @@ function Messenger() {
     }, [])
 
     useEffect(() => {
-        socket?.off("getMessage")
+        socket?.off("getMessage") 
         socket?.on("getMessage", (data) => {
             setMessages([...messages, data])
             if (Notification.permission === 'granted') {
