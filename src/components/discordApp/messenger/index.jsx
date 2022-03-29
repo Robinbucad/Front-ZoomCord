@@ -145,7 +145,6 @@ function Messenger() {
         scrollRef.current?.scrollIntoView({behavior:"smooth"})
     },[messages])
 
-    
     const handleFilter = e => {
         const convFiltered = conversations.filter(u => u.receiverName.toLowerCase().includes(e.target.value))
         setFilter(convFiltered)
