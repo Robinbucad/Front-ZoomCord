@@ -38,8 +38,8 @@
     }
 
     @include breakpoint(s){
-        height: 79%;
-        width:45%;
+        height: 55%;
+        width:60%;
     }
 }
 
@@ -126,7 +126,7 @@
         width: 35% ;
     }
     @include breakpoint(s){
-        height:45%;
+        height:35%;
         width: 45%;
     }
 }

@@ -5,7 +5,10 @@ import { useTranslation } from 'react-i18next'
 import ES from '../../../assets/img/ES.svg'
 import { useState } from 'react'
 import KY from '../../../assets/img/KY.svg'
+import zoomLogo from '../../../assets/img/zoomcordLogo.png'
 
+
+import {BsLinkedin,BsInstagram} from 'react-icons/bs'
 
 function HomeFooter() {
 
@@ -35,7 +38,7 @@ function HomeFooter() {
     return (
         <footer className={classes.footerHome}>
             <div className={classes.part1Footer}>
-                <div>
+                <div className={classes.divFooterOpts}>
                     
                     <h2 className={classes.titleFooter}>{h("home.footerTitle")}</h2>
                     <div>
@@ -46,8 +49,9 @@ function HomeFooter() {
                         </select>
                     </div>
 
-                    <div>
-                        <p>Redes sociales</p>
+                    <div className={classes.iconsSection}>
+                       <a href='https://www.linkedin.com/in/robin-bucad-villanueva-66a583231/?trk=public-profile-join-page' target='_blank'><BsLinkedin></BsLinkedin></a> 
+                        <a href='https://www.instagram.com/RobinBucad/' target='_blank'><BsInstagram></BsInstagram></a>
                     </div>
                 </div>
                 <div>
@@ -55,7 +59,7 @@ function HomeFooter() {
                 </div>
             </div>
             <div className={classes.part2Footer}>
-                <h1>Foto discord</h1>
+                <img className={classes.imgLogoFooter} src={zoomLogo}></img>
                 <Link to='/signUp'> <button className={classes.btnLoginFooter}>{h("home.signup")}</button></Link>
             </div>
         </footer>

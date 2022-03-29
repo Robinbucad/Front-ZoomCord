@@ -122,6 +122,7 @@
         background-color:$PrimaryClaro;
         width:65%;
         color: white;
+        height: 100vh;
     
         body.dark &{
             background-color: $LightSecondary;
@@ -150,7 +151,7 @@
             padding: 10px;
         }
         @include breakpoint(s){
-            width: 100%;
+            width: 97%;
      }
     }
     
@@ -265,9 +266,6 @@
         align-items: center;
         cursor: pointer;
         
-        @include breakpoint(md){
-            width: 14px;
-        }
     }       
     
     
@@ -693,6 +691,9 @@
     color: gray;
     border: none;
     background:none;
+    @include breakpoint(s){
+        display: none;
+    }
 }
 
 .heartShapeRed{

@@ -7,7 +7,7 @@ import classes from './signUp.module.scss'
 
 function SignUp() {
 
-    
+    const date = new Date()
 
     const [t] = useTranslation("registerLogin")
  
@@ -81,14 +81,14 @@ function SignUp() {
                         <div >
                             <div className={classes.divSelects}>
                                 <label className={classes.fontCardSign} htmlFor='date'>{t("registerLogin.date")}</label>
-                               <input className={classes.inputSignup} type='date' name='date'></input>
+                               <input className={classes.inputSignup} type='date' name='date'  min="1950-01-01" max='2022-01-01'></input>
                             </div>
                         </div>
 
                         <div className={classes.divCheckPrivacy}>
                             <Form.Check onChange={onChange} value={value} Enabled style={{ fontSize: '30px' }} />
                             <div className={classes.divPrivacyLogin}>
-                                <p className={classes.privacyLogin}>I have read and accept Discord's <a target="_blank" href="https://www.freeprivacypolicy.com/live/88ec6c33-3565-4885-b114-8ebe3c025b03">Terms of Service</a> and <a target="_blank" href="https://www.freeprivacypolicy.com/live/ccb548b4-7a2b-43c4-b682-3a4a885794fc">Privacy Policy.</a></p>
+                                <p className={classes.privacyLogin}>I have read and accept Discord's <Link to='/terms' target="_blank"> Terms of Service</Link>  and   <Link to='/privacy' target="_blank"> Privacy Policy.</Link></p>
                             </div>
 
                         </div>

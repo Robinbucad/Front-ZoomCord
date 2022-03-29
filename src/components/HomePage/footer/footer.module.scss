@@ -16,6 +16,10 @@
     justify-content: space-between;
 }
 
+.imgLogoFooter{
+    width: 60px;
+}
+
 .titleFooter{
     color: #5865F2;
     font-weight: bold;
@@ -48,4 +52,15 @@
 
 .imgFlag{
     width: 20px;
+}
+
+.iconsSection{
+    display: flex;
+    gap: 10px;
+}
+
+.divFooterOpts{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

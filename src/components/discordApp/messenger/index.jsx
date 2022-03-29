@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Message from "../message";
 import Conversation from "../conversation";
 import DivServs from "../DCdivServ";
@@ -21,20 +21,20 @@ function Messenger() {
     const [newMessage, setNewMessage] = useState('')
     const [modalShow, setModalShow] = useState(false);
     const [user, setUser] = useContext(UserContext)
-    const [socket,setSocket] = useState(null)
-    const [conversationsId,setConversationsId] = useState([])
-    const [filter,setFilter] = useState([])
- 
+    const [socket, setSocket] = useState(null)
+    const [conversationsId, setConversationsId] = useState([])
+    const [filter, setFilter] = useState([]) // PROBLEMACON KEY UNICA, no puedo hacer un filtrado con una key unica, tengo pasar un valor unico 
+    const scrollRef = useRef()
 
 
 
     useEffect(() => {
-        if(Notification.permission === 'default' || 'denied'){
+        if (Notification.permission === 'default' || 'denied') {
             Notification.requestPermission().then(permission => {
                 console.log(permission)
             })
         }
-    },[])
+    }, [])
 
 
     useEffect(() => {
@@ -42,13 +42,13 @@ function Messenger() {
     }, [])
 
     useEffect(() => {
+        socket?.off("getMessage") 
         socket?.on("getMessage", (data) => {
-            console.log(data)
             setMessages([...messages, data])
-            if(Notification.permission === 'granted'){
-                new Notification(data.username,{
+            if (Notification.permission === 'granted' && user.username !== data.username ) {
+                new Notification(data.username, {
                     body: data.text,
-                    icon:`${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
+                    icon: `${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
                 })
             }
         })
@@ -68,7 +68,7 @@ function Messenger() {
                 setFilter(dat)
                 setConversations(dat)
                 dat.map(e => setConversationsId(e._id))
-                
+
             } catch (err) {
                 console.log(err)
             }
@@ -92,7 +92,7 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setMessages(dat)
-                
+
             } catch (err) {
                 console.log('error')
             }
@@ -102,13 +102,13 @@ function Messenger() {
     }, [currentChat])
 
     const date = new Date()
-    
+
     const handleSubmit = async (e) => {
-    
       
 
+
         if (e.key === 'Enter') {
-   
+
             const message = {
                 date: date,
                 file: user.file,
@@ -119,7 +119,7 @@ function Messenger() {
             };
 
             socket?.emit("sendMessage", message)
-            
+
             try {
                 const res = await fetch('http://localhost:3001/message/', {
                     method: 'post',
@@ -134,17 +134,18 @@ function Messenger() {
                 setMessages([...messages, dat])
                 setNewMessage('')
 
-               
+
             } catch (err) {
                 console.log(err)
             }
         }
     }
 
-
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({behavior:"smooth"})
+    },[messages])
 
     const handleFilter = e => {
-        
         const convFiltered = conversations.filter(u => u.receiverName.toLowerCase().includes(e.target.value))
         setFilter(convFiltered)
     }
@@ -160,7 +161,7 @@ function Messenger() {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
-           
+
             <DivServs handleCurrentServ={handleConv}></DivServs>
             <div className={classes.containerMd}>
 
@@ -176,14 +177,14 @@ function Messenger() {
                     </header>
 
                     <section className={classes.containerConversations}>
-                        {conversations.length  === 0 ? <p>¿Sin amigos?</p> :
-                        
-                        filter.map((e, i) => (
-                            <div className={classes.divFriend} key={i} onClick={() => setCurrentChat(e)}>
-                             
-                                <Conversation key={i} conversation={e} currentUser={user}></Conversation>
-                            </div>
-                        ))}
+                        {conversations.length === 0 ? <p>¿Sin amigos?</p> :
+
+                            filter.map((e, i) => (
+                                <div className={classes.divFriend} key={e.receiverName} onClick={() => setCurrentChat(e)}>
+
+                                    <Conversation conversation={e} currentUser={user}></Conversation>
+                                </div>
+                            ))}
 
                     </section>
                 </section>
@@ -205,29 +206,31 @@ function Messenger() {
 
                             <div className={classes.chatBox}>
                                 {messages.map((m, i) => (
+                                    <div ref={scrollRef}>
+                                        <Message key={i} message={m} currentChat={currentChat} conversation={conversations} ></Message>
+                                    </div>
 
-                                    <Message key={i} message={m} currentChat={currentChat} conversation={conversations} ></Message>
 
                                 ))}
                             </div>
                             <div className={classes.divInputChat}>
                                 <input type='text' onChange={(e) => setNewMessage(e.target.value)} value={newMessage} onKeyPress={handleSubmit} className={classes.inputChat} placeholder="Escriba algo"></input>
                             </div>
-                        </div> : 
-                        
+                        </div> :
+
                         <div className={classes.divOpenConv}>
                             <p>Abre una conversaion</p>
                         </div>
                 }
 
             </div>
-            
-                <div className={classes.activeUsersDiv}>
 
-                    <Posts socket={socket}></Posts>
-             
-                </div>
-    
+            <div className={classes.activeUsersDiv}>
+
+                <Posts socket={socket}></Posts>
+
+            </div>
+
         </div>
     )
 }

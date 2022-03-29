@@ -32,3 +32,10 @@
 .divAddUser{
    @include flexBox(flex,center, space-between,'','',10px)
 }
+
+.btnCloseModal{
+    @include btn(60px,'',$SecondaryOscuro,none);
+    color: gray;
+    border-radius: 5px;
+    padding: 4px;
+}

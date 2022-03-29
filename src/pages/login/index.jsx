@@ -34,37 +34,43 @@ function LoginPage() {
     const handleSubmit = async e => {
         e.preventDefault()
         const userFormData = new FormData(e.target);
-        const d = await fetch('http://localhost:3001/auth/login', {
-            method: 'POST',
+        try{
+            const d = await fetch('http://localhost:3001/auth/login', {
+                method: 'POST',
+                
+                body: JSON.stringify(Object.fromEntries(userFormData)), 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            const r = await d.json()
+            if(r.access_token){
+    
+                localStorage.setItem('token',r.access_token)
+                sessionStorage.setItem('token', r.access_token)
+                fetch(`http://localhost:3001/users`,{
+                    method:'get',
+                    headers:{
+                        Authorization: `Bearer ${r.access_token}`
+                    }
+                })
+                .then(r => r.json())
+                .then(d => {
+                    setUser(d)
+        
+                    localStorage.setItem('user',JSON.stringify(d))
+                     navigate(`/discord/@me/${d._id}`)
+                })
+      
+            }else{
+                console.log('mal')
+            }
             
-            body: JSON.stringify(Object.fromEntries(userFormData)), // From entries es todos los value de los inputs
-            headers: {
-                "Content-Type": "application/json"
-            },
-        })
-        const r = await d.json()
-
-        if(r.access_token){
-    
-            localStorage.setItem('token',r.access_token)
-            sessionStorage.setItem('token', r.access_token)
-            fetch(`http://localhost:3001/users`,{
-                method:'get',
-                headers:{
-                    Authorization: `Bearer ${r.access_token}`
-                }
-            })
-            .then(r => r.json())
-            .then(d => {
-                setUser(d)
-    
-                localStorage.setItem('user',JSON.stringify(d))
-                 navigate(`/discord/@me/${d._id}`)
-            })
-  
-        }else{
-            console.log('mal')
+        }catch(err){
+            alert('Datos incorrectos')
         }
+       
+       
 
     }
 

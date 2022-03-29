@@ -37,7 +37,7 @@ function FollowUser(props) {
       
         const members = {    
             receiverName:userSearch,      
-             senderId:user._id,
+            senderId:user._id,
             receiverId:idUserFind
         }
    
@@ -88,7 +88,7 @@ function FollowUser(props) {
 
 
                 <footer>
-                    <button onClick={props.onHide}>Close</button>
+                    <button className={classes.btnCloseModal} onClick={props.onHide}>Close</button>
                 </footer>
             </section>
         </Modal>

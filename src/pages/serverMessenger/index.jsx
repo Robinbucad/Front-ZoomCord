@@ -12,6 +12,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../../context/user/user.contex';
 import Posts from '../../components/discordApp/posts';
+import defaultPicture from '../../assets/img/default.jpg'
 
 
 function ServerMessenger() {
@@ -34,6 +35,10 @@ function ServerMessenger() {
     const [nameServ, setNameServ] = useState('')
     const [smChangeShow,setSmChangeShow]= useState(false)
     const [newServName,setNewServName] = useState('')
+    const [msgFiltered,setMsgFiltered] = useState([])
+    const [imgServ,setImgServ] = useState('')
+    const scrollRef = useRef()
+
 
     useEffect(() => {
         setSocket(io("http://localhost:4000"))
@@ -51,8 +56,16 @@ function ServerMessenger() {
     }
 
     useEffect(() => {
+        socket?.off("getServMsg")
         socket?.on("getServMsg", (data) => {
-            setMessages([...messages, data])
+            setMsgFiltered([...msgFiltered,data])
+            setMessages([...messages, data])  
+            if (Notification.permission === 'granted' && user.username !== data.username) {
+                new Notification(currentServ, {
+                    body: data.username,
+                    icon: `http://localhost:3001/${imgServ}`
+                })
+            }
         })
     }, [messages])
 
@@ -72,6 +85,7 @@ function ServerMessenger() {
                 setMembers(dat.members)
                 updateCurrentServ(dat.name)
                 updateCurrentServId(dat._id)
+                setImgServ(dat.file)
                 setListMembers(dat.members)
             } catch (err) {
                 console.log(err)
@@ -94,6 +108,7 @@ function ServerMessenger() {
                 })
                 const dat = await res.json()
                 setMessages(dat)
+                setMsgFiltered(dat)
             } catch (err) {
                 console.log(err)
             }
@@ -104,16 +119,12 @@ function ServerMessenger() {
     }, [currentServId])
 
     const date = new Date()
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-
-    const takeDate = `${hours}:${minutes}`
 
     const handleSubmit = async (e) => {
 
         if (e.key === 'Enter') {
             const message = {
-                date: takeDate,
+                date: date,
                 file: user.file,
                 username: user.username,
                 senderId: user._id,
@@ -136,7 +147,7 @@ function ServerMessenger() {
                 const dat = await res.json()
                 setNewMessage('')
                 setMessages([...messages, dat])
-
+                setMsgFiltered([...msgFiltered,dat])
             } catch (err) {
                 console.log(err)
             }
@@ -197,7 +208,14 @@ function ServerMessenger() {
         }
     }
 
- 
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({behavior:"smooth"})
+    },[messages])
+
+    const filterMsg = e => {
+        const msgFiltered = messages.filter(m => m.text.toLowerCase().includes(e.target.value))
+        setMsgFiltered(msgFiltered)
+    }
 
 
     return (
@@ -248,19 +266,21 @@ function ServerMessenger() {
             </div>
             <div className={classes.chatContainer}>
                 <header className={classes.headerChat}>
-                    <p>NAME CHANNEL</p>
+                    <p></p>
                     <div className={classes.settingsChat}>
-                        <p>Call</p>
-                        <p>Videocall</p>
-                        <input placeholder="Buscar" className={classes.inputSearchMsgChat} type='text'></input>
+                        <p></p>
+                        <p></p>
+                        <input placeholder="Buscar" onChange={filterMsg} className={classes.inputSearchMsgChat} type='text'></input>
 
                     </div>
                 </header>
 
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
-                        {messages?.map((m, i) => (
-                            <MessageServer key={i} message={m}></MessageServer>
+                        {msgFiltered?.map((m, i) => (
+                            <div  ref={scrollRef}>
+                            <MessageServer key={i}  message={m}></MessageServer>
+                            </div>
                         ))}
                     </div>
                     <div className={classes.divInputChat}>
