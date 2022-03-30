@@ -35,7 +35,7 @@ function LoginPage() {
         e.preventDefault()
         const userFormData = new FormData(e.target);
         try{
-            const d = await fetch('http://localhost:5000/auth/login', {
+            const d = await fetch('http://localhost:3001/auth/login', {
                 method: 'POST',
                 
                 body: JSON.stringify(Object.fromEntries(userFormData)), 
