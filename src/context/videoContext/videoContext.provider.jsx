@@ -6,7 +6,7 @@ import { UserContext } from "../user/user.contex";
 import { HourglassBottom } from "react-bootstrap-icons";
 
 
-const socket = io('http://localhost:4000');
+const socket = io('http://localhost:3001');
 const ContextProvider = ({ children }) => {
 
   const [callAccepted, setCallAccepted] = useState(false);
