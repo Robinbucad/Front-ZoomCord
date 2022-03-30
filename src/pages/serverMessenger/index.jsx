@@ -125,6 +125,7 @@ function ServerMessenger() {
     const handleSubmit = async (e) => {
 
         if (e.key === 'Enter') {
+            setNewMessage('')
             const message = {
                 date: date,
                 file: user.file,
@@ -147,7 +148,7 @@ function ServerMessenger() {
                     },
                 })
                 const dat = await res.json()
-                setNewMessage('')
+                
                 setMessages([...messages, dat])
                 setMsgFiltered([...msgFiltered,dat])
             } catch (err) {
