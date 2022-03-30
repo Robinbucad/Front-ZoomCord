@@ -43,7 +43,7 @@ function ServerMessenger() {
 
 
     useEffect(() => {
-        setSocket(io("http://localhost:4000"))
+        setSocket(io("http://localhost:3001"))
     }, [])
 
     let navigate = useNavigate()
