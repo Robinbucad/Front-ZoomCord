@@ -35,7 +35,7 @@ function LoginPage() {
         e.preventDefault()
         const userFormData = new FormData(e.target);
         try{
-            const d = await fetch('https://salty-escarpment-22835.herokuapp.com/auth/login', {
+            const d = await fetch('http://localhost:5000/auth/login', {
                 method: 'POST',
                 
                 body: JSON.stringify(Object.fromEntries(userFormData)), 
