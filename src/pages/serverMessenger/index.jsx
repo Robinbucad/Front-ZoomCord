@@ -36,14 +36,13 @@ function ServerMessenger() {
     const [nameServ, setNameServ] = useState('')
     const [smChangeShow,setSmChangeShow]= useState(false)
     const [newServName,setNewServName] = useState('')
-    const [msgFiltered,setMsgFiltered] = useState([])
     const [imgServ,setImgServ] = useState('')
     const scrollRef = useRef()
     const [d] = useTranslation("discordApp")
 
 
     useEffect(() => {
-        setSocket(io("http://localhost:4000"))
+        setSocket(io("http://localhost:3001"))
     }, [])
 
     let navigate = useNavigate()
@@ -60,7 +59,6 @@ function ServerMessenger() {
     useEffect(() => {
         socket?.off("getServMsg")
         socket?.on("getServMsg", (data) => {
-            setMsgFiltered([...msgFiltered,data])
             setMessages([...messages, data])  
             if (Notification.permission === 'granted' && user.username !== data.username) {
                 new Notification(currentServ, {
@@ -110,7 +108,7 @@ function ServerMessenger() {
                 })
                 const dat = await res.json()
                 setMessages(dat)
-                setMsgFiltered(dat)
+                
             } catch (err) {
                 console.log(err)
             }
@@ -125,6 +123,7 @@ function ServerMessenger() {
     const handleSubmit = async (e) => {
 
         if (e.key === 'Enter') {
+            setNewMessage('')
             const message = {
                 date: date,
                 file: user.file,
@@ -147,9 +146,8 @@ function ServerMessenger() {
                     },
                 })
                 const dat = await res.json()
-                setNewMessage('')
+                
                 setMessages([...messages, dat])
-                setMsgFiltered([...msgFiltered,dat])
             } catch (err) {
                 console.log(err)
             }
@@ -214,10 +212,6 @@ function ServerMessenger() {
         scrollRef.current?.scrollIntoView({behavior:"smooth"})
     },[messages])
 
-    const filterMsg = e => {
-        const msgFiltered = messages.filter(m => m.text.toLowerCase().includes(e.target.value))
-        setMsgFiltered(msgFiltered)
-    }
 
 
     return (
@@ -272,16 +266,16 @@ function ServerMessenger() {
                     <div className={classes.settingsChat}>
                         <p></p>
                         <p></p>
-                        <input placeholder={d("discordApp.searchMsg")} onChange={filterMsg} className={classes.inputSearchMsgChat} type='text'></input>
+                        <input placeholder={d("discordApp.searchMsg")} className={classes.inputSearchMsgChat} type='text'></input>
 
                     </div>
                 </header>
 
                 <div className={classes.conversation}>
                     <div className={classes.chatBox}>
-                        {msgFiltered?.map((m, i) => (
-                            <div  ref={scrollRef}>
-                            <MessageServer key={i}  message={m}></MessageServer>
+                        {messages?.map((m, i) => (
+                            <div key={i}  ref={scrollRef}>
+                            <MessageServer   message={m}></MessageServer>
                             </div>
                         ))}
                     </div>

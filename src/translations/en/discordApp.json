@@ -10,6 +10,7 @@
 
         "back":"Back",
         "create":"Create",
+        "add":"Add",
 
         "infoServer":"Tell us a little about your server",
         "descModal2":"In order to help you with the configuration, we would like to know if your server is only for a few friends or for a larger community.",

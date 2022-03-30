@@ -28,7 +28,7 @@ function Messenger() {
     const scrollRef = useRef()
     const [d] = useTranslation("discordApp")
   
-
+    console.log(currentChat)
 
     useEffect(() => {
         if (Notification.permission === 'default' || 'denied') {
@@ -40,14 +40,14 @@ function Messenger() {
 
 
     useEffect(() => {
-        setSocket(io("http://localhost:4000"))
+        setSocket(io("http://localhost:3001"))
     }, [])
 
     useEffect(() => {
         socket?.off("getMessage") 
         socket?.on("getMessage", (data) => {
             setMessages([...messages, data])
-            if (Notification.permission === 'granted' && user.username !== data.username ) {
+            if (Notification.permission === 'granted' && user.username !== data.username) {
                 new Notification(data.username, {
                     body: data.text,
                     icon: `${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
@@ -110,7 +110,7 @@ function Messenger() {
 
 
         if (e.key === 'Enter') {
-
+            setNewMessage('')
             const message = {
                 date: date,
                 file: user.file,
@@ -134,7 +134,7 @@ function Messenger() {
                 })
                 const dat = await res.json()
                 setMessages([...messages, dat])
-                setNewMessage('')
+                
 
 
             } catch (err) {
