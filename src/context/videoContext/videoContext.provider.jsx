@@ -6,7 +6,7 @@ import { UserContext } from "../user/user.contex";
 import { HourglassBottom } from "react-bootstrap-icons";
 
 
-const socket = io('http://localhost:3001');
+const socket = io('https://zoomcord.netlify.app/');
 const ContextProvider = ({ children }) => {
 
   const [callAccepted, setCallAccepted] = useState(false);
