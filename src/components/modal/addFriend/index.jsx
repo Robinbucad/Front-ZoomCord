@@ -77,7 +77,7 @@ function FollowUser(props) {
                                     <p>{e.username}</p>
                                 </div>
                                 <div>
-                                    <button value={userSearch} onClick={handleAddUser}>Add</button>
+                                    <button value={userSearch} className={classes.btnCloseModal} onClick={handleAddUser}>{d("discordApp.add")}</button>
                                 </div>
                             </div>
                         ))}
