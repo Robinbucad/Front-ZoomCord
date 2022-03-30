@@ -59,7 +59,6 @@ function HomeFooter() {
                 </div>
             </div>
             <div className={classes.part2Footer}>
-                <img className={classes.imgLogoFooter} src={zoomLogo}></img>
                 <Link to='/signUp'> <button className={classes.btnLoginFooter}>{h("home.signup")}</button></Link>
             </div>
         </footer>

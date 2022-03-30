@@ -27,7 +27,7 @@
 .signUpCard{
     gap: 1rem;
     background-color:#36393F;
-    height: 65%;
+    height: 58%;
     width: 25%;
     padding: 1.5rem;
     border-radius: 5px;
@@ -38,7 +38,7 @@
     }
 
     @include breakpoint(s){
-        height: 55%;
+        height: 50%;
         width:60%;
     }
 }
@@ -126,7 +126,7 @@
         width: 35% ;
     }
     @include breakpoint(s){
-        height:35%;
+        height:30%;
         width: 45%;
     }
 }

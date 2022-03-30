@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { Card, Button } from 'react-bootstrap'
 import { useEffect } from "react"
 import { useState } from "react"
@@ -12,7 +12,7 @@ function ValidateEmail() {
     const [query] = useSearchParams()
 
     const param = query.get('token')
-
+    let navigate = useNavigate()
 
 
    
@@ -32,6 +32,7 @@ function ValidateEmail() {
     function vuelta() {
         setTimeout(() => {
            fetchValidate()
+           navigate('/login')
         }, 5500)
 
     }
