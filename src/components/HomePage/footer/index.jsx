@@ -44,8 +44,8 @@ function HomeFooter() {
                     <div>
                     {flag === ES ? <img className={classes.imgFlag} src={ES}></img> :  <img className={classes.imgFlag} src={KY}></img>}
                         <select className='select-lng' onChange={handleChange}>
-                            <option className={classes.optSelect} value='es'> Español</option>
-                            <option className={classes.optSelect} value='en'> English</option>
+                            <option className={classes.optSelect} value='es'> Es</option>
+                            <option className={classes.optSelect} value='en'> En</option>
                         </select>
                     </div>
 
@@ -59,7 +59,6 @@ function HomeFooter() {
                 </div>
             </div>
             <div className={classes.part2Footer}>
-                <img className={classes.imgLogoFooter} src={zoomLogo}></img>
                 <Link to='/signUp'> <button className={classes.btnLoginFooter}>{h("home.signup")}</button></Link>
             </div>
         </footer>

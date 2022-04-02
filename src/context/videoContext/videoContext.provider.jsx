@@ -3,7 +3,7 @@ import {io} from 'socket.io-client';
 import Peer from 'simple-peer'
 import { useState,useEffect, useRef, useContext } from "react";
 import { UserContext } from "../user/user.contex";
-import { HourglassBottom } from "react-bootstrap-icons";
+
 
 
 const socket = io('http://localhost:3001');
@@ -38,24 +38,6 @@ const ContextProvider = ({ children }) => {
     });
   }, []);
 
-  
-  // const shareScreen = (id) => {
-  //     navigator.mediaDevices.getDisplayMedia({
-  //       video:{mediaSource:'screen'}
-  //     })
-  //     .then((screen) => {
-    
-  //       myStream.current.srcObject = screen
-  //     }) 
-  //     const peer = new Peer({ initiator: true, trickle: false, stream });
-  //     console.log(stream)
-  //     socket.on('me',(id) => setMe(id))
-      
-  //     peer.on('signal', (data) => {
-  //       socket.emit("shareScreen", {signal:data, to: call.from});
-  //     });
-  
-  // }
 
   const answerCall = () => { // EL USUARIO ACEPTA LA LLAMADA Y RECOGE LOS DATOS ANTERIORES
     setCallAccepted(true);
@@ -117,9 +99,7 @@ const ContextProvider = ({ children }) => {
       me,
       callUser,
       leaveCall,
-      answerCall,
-     // shareScreen,
-      // myStream
+      answerCall
     }}
     >
       {children}

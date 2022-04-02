@@ -28,7 +28,6 @@ function Messenger() {
     const scrollRef = useRef()
     const [d] = useTranslation("discordApp")
   
-    console.log(currentChat)
 
     useEffect(() => {
         if (Notification.permission === 'default' || 'denied') {

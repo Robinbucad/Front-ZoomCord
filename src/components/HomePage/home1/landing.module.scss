@@ -42,7 +42,7 @@ body{
     width: 32%;
     @include breakpoint(md){
         @include flexBox(flex,'',space-around,'','','');
-        width: 100%;     
+        width: 45%;     
     }
    
 }
@@ -90,6 +90,9 @@ body{
 .containerP1{
     @include flexBox(flex,'',center,'','','');
     padding: 6rem;
+    @include breakpoint(md){
+        padding: 0;
+    }
 }
 
 .textHomepage{
