@@ -31,7 +31,7 @@ function CreateServModal(props) {
             userId: user._id,
             ADMIN: user._id
         }
-        const res = await fetch('http://localhost:3001/servers', {
+        const res = await fetch('https://aqueous-ocean-87434.herokuapp.com/servers', {
             method: 'post',
             headers: {
                 Authorization: `Bearer ${token}`

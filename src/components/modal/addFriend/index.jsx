@@ -18,7 +18,7 @@ function FollowUser(props) {
     const handleSubmit = async e => {
         if (e.key === 'Enter') {
             try {
-                const res = await fetch(`http://localhost:3001/users/friends/add/${userSearch}`, {
+                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/users/friends/add/${userSearch}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -45,7 +45,7 @@ function FollowUser(props) {
      
         e.preventDefault()
         try{
-            const res = await fetch(`http://localhost:3001/conversation/`,{
+            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/conversation/`,{
                 method: 'post',
                 headers: {
                     "Content-Type": "application/json",
@@ -72,7 +72,7 @@ function FollowUser(props) {
                             <div className={classes.divAddUser} key={i}>
                                 <div className={classes.divInfoUserAdd}>
 
-                                    <img className={classes.addUserImg} src={e.file === '' ? defaultProfile : `http://localhost:3001/${e.file}` }></img>
+                                    <img className={classes.addUserImg} src={e.file === '' ? defaultProfile : `https://aqueous-ocean-87434.herokuapp.com/${e.file}` }></img>
 
                                     <p>{e.username}</p>
                                 </div>

@@ -16,7 +16,7 @@ function ModalPost(props) {
         userFormData.append('username', user.username);
         userFormData.append('userId', user._id)
 
-        const res = await fetch('http://localhost:3001/publications/', {
+        const res = await fetch('https://aqueous-ocean-87434.herokuapp.com/publications/', {
 
             method: 'post',
             body: userFormData,

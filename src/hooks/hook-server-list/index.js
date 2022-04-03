@@ -6,7 +6,7 @@ export const useServers = () => {
     useEffect(() => {
         const getServs = async () => {
             try {
-                const res = await fetch('http://localhost:3001/servers', {
+                const res = await fetch('https://aqueous-ocean-87434.herokuapp.com/servers', {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`

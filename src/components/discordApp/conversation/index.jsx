@@ -15,7 +15,7 @@ function Conversation({ conversation }) {
     
         const getUser = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/users/${filter}`, {
+                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/${filter}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -40,7 +40,7 @@ function Conversation({ conversation }) {
                 <Link style={{textDecoration:'none'}} className={classes.linkConv} key={i} to={`/@me/${e._id}`}>
                     <div onClick={handleDelNot} className={classes.divConvLength}>
                         <div className={classes.conver}>
-                            <img className={classes.profileDefault} src={e.file === '' ? defaultProf : `http://localhost:3001/${e.file}`} />
+                            <img className={classes.profileDefault} src={e.file === '' ? defaultProf : `https://aqueous-ocean-87434.herokuapp.com/${e.file}`} />
                             <p>{e.username}</p>
                         </div>
                    

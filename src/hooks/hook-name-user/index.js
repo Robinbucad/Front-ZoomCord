@@ -10,7 +10,7 @@ export function useUsername() {
     useEffect(() => {
         const fetchUsers = async () => {
      
-                const res = await fetch('http://localhost:3001/users',{
+                const res = await fetch('https://aqueous-ocean-87434.herokuapp.com/users',{
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`

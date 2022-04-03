@@ -35,7 +35,7 @@ function LoginPage() {
         e.preventDefault()
         const userFormData = new FormData(e.target);
         try{
-            const d = await fetch('http://localhost:3001/auth/login', {
+            const d = await fetch('https://aqueous-ocean-87434.herokuapp.com/auth/login', {
                 method: 'POST',
                 
                 body: JSON.stringify(Object.fromEntries(userFormData)), 
@@ -48,7 +48,7 @@ function LoginPage() {
     
                 localStorage.setItem('token',r.access_token)
                 sessionStorage.setItem('token', r.access_token)
-                fetch(`http://localhost:3001/users`,{
+                fetch(`https://aqueous-ocean-87434.herokuapp.com/users`,{
                     method:'get',
                     headers:{
                         Authorization: `Bearer ${r.access_token}`

@@ -19,7 +19,7 @@ function InvitationPage() {
     useEffect(() => {
         const fetchServers = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/servers/${id}`)
+                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/servers/${id}`)
                 const dat = await res.json()
                 setServName(dat.name)
                 setServImg(dat.file)
@@ -35,7 +35,7 @@ function InvitationPage() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         try{
-            const res = await fetch(`http://localhost:3001/servers/${id}`,{
+            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/servers/${id}`,{
                 method:'post',
                 headers: {
                     "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function InvitationPage() {
             <Card className={classes.cardInvitation} >
                 <div className={classes.divImgInv}>
 
-                    {servImg !== '' ? <img className={classes.imgServInv} variant="top" src={`http://localhost:3001/${servImg}`} /> : <p>Loading Img...</p> }
+                    {servImg !== '' ? <img className={classes.imgServInv} variant="top" src={`https://aqueous-ocean-87434.herokuapp.com/${servImg}`} /> : <p>Loading Img...</p> }
                 </div>
 
                 <Card.Body className={classes.bodyCardInv}>

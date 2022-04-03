@@ -49,7 +49,7 @@ function Messenger() {
             if (Notification.permission === 'granted' && user.username !== data.username) {
                 new Notification(data.username, {
                     body: data.text,
-                    icon: `${data.file === '' ? defaultPicture : `http://localhost:3001/${data.file}`}`
+                    icon: `${data.file === '' ? defaultPicture : `https://aqueous-ocean-87434.herokuapp.com/${data.file}`}`
                 })
             }
         })
@@ -59,7 +59,7 @@ function Messenger() {
     useEffect(() => {
         const getConversations = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/conversation/${user._id}`, {
+                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/conversation/${user._id}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -85,7 +85,7 @@ function Messenger() {
     useEffect(() => {
         const getMessages = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/message/${currentChat._id}`, {
+                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/message/${currentChat._id}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -122,7 +122,7 @@ function Messenger() {
             socket?.emit("sendMessage", message)
 
             try {
-                const res = await fetch('http://localhost:3001/message/', {
+                const res = await fetch('https://aqueous-ocean-87434.herokuapp.com/message/', {
                     method: 'post',
                     body: JSON.stringify(message),
                     headers: {
