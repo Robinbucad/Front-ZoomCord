@@ -17,7 +17,7 @@ function EditEmail(props) {
         e.preventDefault()
         if (validator.isEmail(newEmail)) {
             try {
-                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/users/email/${user._id}`, {
+                const res = await fetch(`http://localhost:3001/users/email/${user._id}`, {
                     method: 'PATCH',
                     body: JSON.stringify({
                         email:newEmail,

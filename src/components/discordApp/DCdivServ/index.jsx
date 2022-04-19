@@ -17,7 +17,7 @@ function DivServs() {
 
         const getServConversations = async () => {
             try {
-                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/servers/conversations/${user._id}`, {
+                const res = await fetch(`http://localhost:3001/servers/conversations/${user._id}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -50,7 +50,7 @@ function DivServs() {
             {conversations.map((e,i) => (
                 <Link key={i} to={`/discord/${e._id}`}>
                     <div>
-                        <img className={classes.imgServ} src={`https://aqueous-ocean-87434.herokuapp.com/${e.file}`}></img>
+                        <img className={classes.imgServ} src={`http://localhost:3001/${e.file}`}></img>
                     </div>
                 </Link>
             ))}

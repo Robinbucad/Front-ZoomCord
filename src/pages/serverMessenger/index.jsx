@@ -42,7 +42,7 @@ function ServerMessenger() {
 
 
     useEffect(() => {
-        setSocket(io("http://localhost:3001"))
+        setSocket(io("http://localhost:3001/"))
     }, [])
 
     let navigate = useNavigate()
@@ -63,7 +63,7 @@ function ServerMessenger() {
             if (Notification.permission === 'granted' && user.username !== data.username) {
                 new Notification(currentServ, {
                     body: data.username,
-                    icon: `https://aqueous-ocean-87434.herokuapp.com/${imgServ}`
+                    icon: `http://localhost:3001/${imgServ}`
                 })
             }
         })
@@ -75,7 +75,7 @@ function ServerMessenger() {
     useEffect(() => {
         const getCurrentServ = async () => {
             try {
-                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/servers/${id}`, {
+                const res = await fetch(`http://localhost:3001/${id}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -100,7 +100,7 @@ function ServerMessenger() {
 
         const getServMsg = async () => {
             try {
-                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/servMsg/${currentServId}`, {
+                const res = await fetch(`http://localhost:3001/servMsg/${currentServId}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -136,7 +136,7 @@ function ServerMessenger() {
             socket?.emit("sendServMsg", message)
 
             try {
-                const res = await fetch('https://aqueous-ocean-87434.herokuapp.com/servMsg/', {
+                const res = await fetch('http://localhost:3001/servMsg/', {
                     method: 'post',
                     body: JSON.stringify(message),
                     headers: {
@@ -159,7 +159,7 @@ function ServerMessenger() {
     const handleDelServ = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/servers/${currentServId}`, {
+            const res = await fetch(`http://localhost:3001/servers/${currentServId}`, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
@@ -185,7 +185,7 @@ function ServerMessenger() {
     const handleNewServName = async(e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/servers/${currentServId}`, {
+            const res = await fetch(`http://localhost:3001/servers/${currentServId}`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
@@ -298,7 +298,7 @@ function ServerMessenger() {
                     </Modal.Header>
                     <div className={classes.divInviteFriend}>
                         <p>{d("discordApp.inviteServ")}</p>
-                        <input className={classes.inputInviteFriend} value={`http://localhost:3000/invite/${currentServId}`}></input>
+                        <input className={classes.inputInviteFriend} value={`https://zoomcord.netlify.app/invite/${currentServId}`}></input>
 
                     </div>
 

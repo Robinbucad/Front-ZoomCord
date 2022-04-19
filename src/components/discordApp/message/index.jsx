@@ -7,7 +7,7 @@ function Message({ message}) {
     return (
         <div className={classes.msg}>
             <div>
-                <img className={classes.imgMsg} src={message.file === '' ? defaultProf : `https://aqueous-ocean-87434.herokuapp.com/${message.file}`}></img>
+                <img className={classes.imgMsg} src={message.file === '' ? defaultProf : `http://localhost:3001/${message.file}`}></img>
             </div>
 
             <div>

@@ -12,7 +12,7 @@ function Posts() {
 
     useEffect(() => {
         const fetchPublications = async () => {
-            const res = await fetch('https://aqueous-ocean-87434.herokuapp.com/publications/', {
+            const res = await fetch('http://localhost:3001/publications/', {
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -41,7 +41,7 @@ function Posts() {
         const liked = { _id: user._id, username: user.username, }
 
         try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/publications/${e._id}`, {
+            const res = await fetch(`http://localhost:3001/publications/${e._id}`, {
                 method: 'PATCH',
                 body: JSON.stringify(liked),
                 headers: {
@@ -58,7 +58,7 @@ function Posts() {
 
 
         try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/notifications`, {
+            const res = await fetch(`http://localhost:3001/notifications`, {
                 method: 'post',
                 body: JSON.stringify({
                     receiverId: e.id,
@@ -83,7 +83,7 @@ function Posts() {
     const deletePost = async (e) => {
 
         try{
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/publications/${e._id}`,{
+            const res = await fetch(`http://localhost:3001/${e._id}`,{
                 method:'DELETE',
                 body:JSON.stringify({
                     id:user._id
@@ -107,7 +107,7 @@ function Posts() {
                 {publications.map((e, i) => (
                     <section key={i} className={classes.cardPost}>
 
-                        <img className={classes.imgPost} src={`https://aqueous-ocean-87434.herokuapp.com/${e.file}`} />
+                        <img className={classes.imgPost} src={`http://localhost:3001/${e.file}`} />
                         <div className={classes.bodyPost}>
 
                             <div className={classes.headerPostTitle}>

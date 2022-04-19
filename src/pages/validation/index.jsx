@@ -18,7 +18,7 @@ function ValidateEmail() {
    
        const fetchValidate = async() => {
         try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/auth/validate?token=${param}`, {
+            const res = await fetch(`http://localhost:3001/auth/validate?token=${param}`, {
                 method: 'get',
             })
             const dat = await res.json()

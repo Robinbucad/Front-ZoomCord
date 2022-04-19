@@ -26,7 +26,7 @@ function HeaderApp() {
 
     useEffect(() => {
         const getCurrentUserChat = async() => {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/users/${id}`,{
+            const res = await fetch(`http://localhost:3001/users/${id}`,{
                 method:'get',
                 headers: {
                     Authorization: `Bearer ${token}`

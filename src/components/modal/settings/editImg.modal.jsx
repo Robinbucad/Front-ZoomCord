@@ -17,7 +17,7 @@ function EditImage(props) {
         const userFormData = new FormData(e.target);
   
         try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/users/img/${user._id}`, {
+            const res = await fetch(`http://localhost:3001/users/img/${user._id}`, {
                 method: 'PATCH',
                 body: userFormData,
                 headers: {

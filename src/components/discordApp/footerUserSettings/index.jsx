@@ -32,7 +32,7 @@ function UserSettingsFooter() {
          setNotifications([]);
          setOpenNots(false)    
          try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/notifications/${user._id}`, {
+            const res = await fetch(`http://localhost:3001/notifications/${user._id}`, {
                 method: 'delete',
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -49,7 +49,7 @@ function UserSettingsFooter() {
         const getNotifications = async () => {
            
             try {
-                const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/notifications/${user._id}`, {
+                const res = await fetch(`http://localhost:3001/notifications/${user._id}`, {
                     method: 'get',
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -71,7 +71,7 @@ function UserSettingsFooter() {
         <footer className={classes.userSetts}>
             <div className={classes.userInfoSetts}>
                 <div >
-                    <img className={classes.userSettingsFooterImg} src={user.file === '' ? defaultImg : `https://aqueous-ocean-87434.herokuapp.com/${user.file}`}></img>
+                    <img className={classes.userSettingsFooterImg} src={user.file === '' ? defaultImg : `http://localhost:3001/${user.file}`}></img>
                 </div>
                 <div className={classes.userNameSetts} >
                     <p>{user.username}</p>
@@ -83,7 +83,7 @@ function UserSettingsFooter() {
                     {notifications.map((e, i) => (
                         <div key={i} className={classes.divShowNot}>
                              <p>{e.senderName} {d("discordApp.footerNot")}</p>
-                             <img className={classes.imgLikeNot} src={e.file === '' ? defaultProfile : `https://aqueous-ocean-87434.herokuapp.com/${e.file}` }></img>
+                             <img className={classes.imgLikeNot} src={e.file === '' ? defaultProfile : `http://localhost:3001/${e.file}` }></img>
                         </div>    
                        
                     ))}

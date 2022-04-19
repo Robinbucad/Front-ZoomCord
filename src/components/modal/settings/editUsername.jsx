@@ -14,7 +14,7 @@ function EditUsername(props) {
     const handleEdit = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch(`https://aqueous-ocean-87434.herokuapp.com/users/username/${user._id}`, {
+            const res = await fetch(`http://localhost:3001/users/username/${user._id}`, {
                 method: 'PATCH',
                 body: JSON.stringify({
                     username: newUsername,

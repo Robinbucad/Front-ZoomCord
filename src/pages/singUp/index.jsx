@@ -31,7 +31,7 @@ function SignUp() {
     const onSubmit = e => {
         e.preventDefault()
         const userFormData = new FormData(e.target);
-        fetch('https://aqueous-ocean-87434.herokuapp.com/auth/register', {
+        fetch('http://localhost:3001/auth/register', {
                 method: 'POST',
                 body:JSON.stringify(Object.fromEntries(userFormData)), // From entries es todos los value de los inputs
                 headers: {

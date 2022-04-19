@@ -108,7 +108,7 @@ function UserSettings(props) {
 
                              <div className={classes.bodyUserSettings}>
                                  <div >
-                                    <img className={classes.imgModalChange} src={user.file === '' ? defaultImg : `https://aqueous-ocean-87434.herokuapp.com/${user.file}` }></img>
+                                    <img className={classes.imgModalChange} src={user.file === '' ? defaultImg : `http://localhost:3001/${user.file}` }></img>
                                  </div>
                                  <div>
                                      <Button onClick={() =>  setModalImgShow(true)} variant="info">{d("discordApp.btnEdit")}</Button>

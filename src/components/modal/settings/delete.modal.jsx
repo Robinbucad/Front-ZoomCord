@@ -12,7 +12,7 @@ function DeleteUser(props){
 
     const handleDeleteClick = async(e) => {
         e.preventDefault()
-        const res =await fetch(`https://aqueous-ocean-87434.herokuapp.com/users/${user._id}`,{
+        const res =await fetch(`http://localhost:3001/${user._id}`,{
             method:'delete',
             headers:{
                 Authorization: `Bearer ${token}`
